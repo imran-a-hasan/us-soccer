@@ -1,16 +1,18 @@
-const players = [
-'Christian Pulisic',
-'Weston McKennie',
-'Giovanni Reyna',
-'John Brooks',
-'Tyler Adams',
-'DeAndre Yedlin',
-'Tyler Boyd',
-'Timmy Chandler',
-'Tim Ream',
-'Reggie Cannon',
-'Sergino Dest',
-'Tim Weah',
-'Josh Sargent',
-'Antonee Robinson',
-]
+const PLAYER_NAME_TO_ID = {
+'Christian Pulisic': 688295,
+'Weston McKennie': 848266,
+'Giovanni Reyna': 1071179,
+'John Brooks': 278831,
+'Tyler Adams': 729769,
+'DeAndre Yedlin': 432040,
+'Timothy Chandler': 158234,
+'Tim Ream': 198444,
+'Reggie Cannon': 825603,
+'Sergino Dest': 892816,
+'Timothy Weah': 889536,
+'Josh Sargent': 848011,
+'Antonee Robinson': 662428,
+'Zack Steffen': 533127
+}
+
+module.exports = {PLAYER_NAME_TO_ID};

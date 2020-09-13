@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Accordion, Button, Card, ListGroup} from 'react-bootstrap';
+import {Card, Image, ListGroup, Navbar} from 'react-bootstrap';
 import './css/schedule.css';
 
 function Schedule() {
@@ -20,7 +20,13 @@ function Schedule() {
             if (!matchDays[date]) {
                 matchDays[date] = [];
             }
-            matchDays[date].push(<ListGroup.Item>{match.player}: {match.team} vs. {match.opponent} [{match.home ? 'H' : 'A'}], {match.time} ({match.competition})</ListGroup.Item>)
+            matchDays[date].push(
+                <ListGroup.Item> 
+                    <Image className='player-img' src={match.playerImage} fluid roundedCircle/>
+                    <span className='match-info'> 
+                        {match.team} vs. {match.opponent} [{match.home ? 'H' : 'A'}], {match.time} ({match.competition})
+                    </span>
+                </ListGroup.Item>)
           });
           
       }
@@ -32,7 +38,7 @@ function Schedule() {
                 <Card.Header className='date-header'>
                     {new Date(date).toLocaleDateString()}
                 </Card.Header>
-                <ListGroup variant='flush'>
+                <ListGroup className='matches-container'>
                     {matchDays[date]}
                 </ListGroup>
             </Card>
@@ -43,8 +49,13 @@ function Schedule() {
 
 
   return (
-      <div className='schedule-container'>
-          {apiResponse && generateMatchDays()}
+      <div>
+        <Navbar bg='dark' variant='dark'>
+            <Navbar.Brand>Americans Abroad</Navbar.Brand>
+        </Navbar>
+        <div className='schedule-container'>
+            {apiResponse && generateMatchDays()}
+        </div>
       </div>
   )
 }

@@ -10,6 +10,7 @@ const BOAVISTA_ID = '810';
 const AJAX_ID = '678';
 const LILLE_ID = '521';
 const WERDER_BREMEN_ID = '12';
+const MANCHESTER_CITY_ID = '65';
 
 const TEAMS = [
     CHELSEA_ID,
@@ -23,7 +24,8 @@ const TEAMS = [
     BOAVISTA_ID,
     AJAX_ID,
     LILLE_ID,
-    WERDER_BREMEN_ID
+    WERDER_BREMEN_ID,
+    MANCHESTER_CITY_ID
 ]
 
 const TEAM_ID_TO_NAME = {
@@ -38,7 +40,8 @@ const TEAM_ID_TO_NAME = {
     [BOAVISTA_ID]: 'Boavista',
     [AJAX_ID]: 'Ajax',
     [LILLE_ID]: 'Lille',
-    [WERDER_BREMEN_ID]: 'Werder Bremen'
+    [WERDER_BREMEN_ID]: 'Werder Bremen',
+    [MANCHESTER_CITY_ID]: 'Manchester City'
 }
 
 
@@ -54,7 +57,8 @@ const TEAM_ID_TO_PLAYERS = {
     [BOAVISTA_ID]: ['Reggie Cannon'],
     [AJAX_ID]: ['Sergino Dest'],
     [LILLE_ID]: ['Timothy Weah'],
-    [WERDER_BREMEN_ID]: ['Josh Sargent']
+    [WERDER_BREMEN_ID]: ['Josh Sargent'],
+    [MANCHESTER_CITY_ID]: ['Zack Steffen']
 }
 
 module.exports = {TEAMS, TEAM_ID_TO_NAME, TEAM_ID_TO_PLAYERS};

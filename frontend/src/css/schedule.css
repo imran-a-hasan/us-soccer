@@ -11,3 +11,19 @@
     margin-right: auto;
     width: fit-content;
 }
+
+.matches-container {
+    margin-top: 15px;
+}
+
+.player-img {
+    height: 5%;
+    width: 5%;
+}
+
+.match-info {
+    display: inline-flex;
+    justify-content: center;
+    text-align: center;
+    width: 95%
+}
