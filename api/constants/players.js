@@ -1,0 +1,16 @@
+const players = [
+'Christian Pulisic',
+'Weston McKennie',
+'Giovanni Reyna',
+'John Brooks',
+'Tyler Adams',
+'DeAndre Yedlin',
+'Tyler Boyd',
+'Timmy Chandler',
+'Tim Ream',
+'Reggie Cannon',
+'Sergino Dest',
+'Tim Weah',
+'Josh Sargent',
+'Antonee Robinson',
+]
