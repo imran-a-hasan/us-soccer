@@ -20,11 +20,15 @@ function Schedule() {
             if (!matchDays[date]) {
                 matchDays[date] = [];
             }
+            // TODO: style this better -- time to the right and competition in the top right somehow?
             matchDays[date].push(
                 <ListGroup.Item> 
                     <Image className='player-img' src={match.playerImage} fluid roundedCircle/>
                     <span className='match-info'> 
-                        {match.team} vs. {match.opponent} [{match.home ? 'H' : 'A'}], {match.time} ({match.competition})
+                        {match.homeTeam === match.team ? <b>{match.homeTeam}</b> : match.homeTeam}
+                        &nbsp;vs.&nbsp;     
+                        {match.awayTeam === match.team ? <b>{match.awayTeam}</b> : match.awayTeam}
+                        ,&nbsp;{match.time} ({match.competition})
                     </span>
                 </ListGroup.Item>)
           });

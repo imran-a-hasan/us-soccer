@@ -55,6 +55,8 @@ const createMatchObject = (time, team, player, playerImage, homeTeam, awayTeam, 
         player: player,
         playerImage: playerImage,
         team: team,
+        homeTeam: homeTeam,
+        awayTeam: awayTeam,
         opponent: home ? awayTeam : homeTeam,
         home: home,
         competition: competition
