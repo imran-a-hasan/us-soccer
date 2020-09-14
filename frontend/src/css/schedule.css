@@ -27,10 +27,6 @@
     margin-bottom: 1%;
 }
 
-.match-container {
-    display: flex;
-}
-
 .player-img {
     height: 5%;
     width: 5%;
@@ -60,24 +56,18 @@
     width: 25px;
 }
 
-.home-team-name {
-    vertical-align: center;
-}
-
-.away-team-name {
-}
-
 .match-info {
     position: relative;
     text-align: center;
     display: inline-block;
-    width: 80%;
+    width: 79%;
     margin-left: 5%;
 }
 
 
 .match-time {
-    width: 10%;
+    width: 11%;
+    vertical-align: text-bottom;
 }
 
 .match-vs {

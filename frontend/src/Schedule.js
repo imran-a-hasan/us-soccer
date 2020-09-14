@@ -44,7 +44,7 @@ function Schedule() {
             matchDays[date].push(
                 <ListGroup.Item> 
                     <div className='match-competition'><Badge pill variant='dark'>{match.competition}</Badge></div>
-                    <div className='match-container'>
+                    <div>
                         <Image className='player-img' src={`data:image/png;base64,${match.playerImage}`} roundedCircle />
                         <span className='match-info'> 
                             <span className='home-team'>
@@ -57,7 +57,7 @@ function Schedule() {
                                 <span className='away-team-name'>{match.awayTeam === match.team ? <b>{match.awayTeam}</b> : match.awayTeam}</span>                      
                             </span> 
                         </span>
-                        <Badge className='match-time'>{match.time}</Badge>
+                        <Badge className='match-time' pill variant='info'>{match.time}</Badge>
                     </div>
                 </ListGroup.Item>)
           });
