@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .date-header {
     width: fit-content;
     margin-left: auto;
@@ -9,21 +13,73 @@
 .schedule-container {
     margin-left: auto;
     margin-right: auto;
-    width: fit-content;
+    width: 50%;
 }
 
 .matches-container {
     margin-top: 15px;
 }
 
+.match-competition {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1%;
+}
+
+.match-container {
+    display: flex;
+}
+
 .player-img {
     height: 5%;
     width: 5%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.home-team-img {
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 25px;
+}
+
+.home-team {
+    position: absolute;
+    right: 52%;
+}
+
+.away-team {
+    position: absolute;
+    left: 52%;
+}
+
+.away-team-img {
+    margin-right: 5px;
+    margin-left: 5px;
+    width: 25px;
+}
+
+.home-team-name {
+    vertical-align: center;
+}
+
+.away-team-name {
 }
 
 .match-info {
-    display: inline-flex;
-    justify-content: center;
+    position: relative;
     text-align: center;
-    width: 95%
+    display: inline-block;
+    width: 80%;
+    margin-left: 5%;
+}
+
+
+.match-time {
+    width: 10%;
+}
+
+.match-vs {
+    display: inline-block;
 }

@@ -9,6 +9,8 @@
   "author": "Imran Hasan",
   "license": "ISC",
   "dependencies": {
-    "redis-server": "^1.2.2"
+    "react-redux": "^7.2.1",
+    "redis-server": "^1.2.2",
+    "redux": "^4.0.5"
   }
 }

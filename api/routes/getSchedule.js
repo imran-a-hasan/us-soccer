@@ -1,19 +1,17 @@
 var express = require('express');
 var fetch = require('node-fetch');
+var fs = require('fs');
+var path = require('path');
 const teamConstants = require('../constants/teams');
 const playerConstants = require('../constants/players');
 const redis = require('redis');
 const REDIS_PORT = process.env.PORT || 6379;
 const TEAMS = teamConstants.TEAMS;
 const TEAM_ID_TO_NAME = teamConstants.TEAM_ID_TO_NAME;
-const TEAM_ID_TO_PLAYER = teamConstants.TEAM_ID_TO_PLAYERS;
+const TEAM_ID_TO_PLAYERS = teamConstants.TEAM_ID_TO_PLAYERS;
 const PLAYER_NAME_TO_ID = playerConstants.PLAYER_NAME_TO_ID;
 
 const redisClient = redis.createClient(REDIS_PORT)
-
-const playerImageUrl = (playerId) => {
-    return `https://images.fotmob.com/image_resources/playerimages/${playerId}.png`
-}
 
 const redisPut = (key, value) => {
     redisClient.set(key, value);
@@ -45,30 +43,20 @@ const httpGet = (key, req, res, resolve) => {
     });
 }
 
-const createMatchObject = (time, team, player, playerImage, homeTeam, awayTeam, competition) => {
-    let home = true;
-    if (team !== homeTeam) {
-        home = false;
-    }
+const createMatchObject = (time, teamId, homeTeamId, awayTeamId, homeTeamName, awayTeamName, player, competition) => {
+
     return {
         time: time,
         player: player,
-        playerImage: playerImage,
-        team: team,
-        homeTeam: homeTeam,
-        awayTeam: awayTeam,
-        opponent: home ? awayTeam : homeTeam,
-        home: home,
+        imageId: PLAYER_NAME_TO_ID[player],
+        playerImage: fs.readFileSync(path.resolve(`images/players/${PLAYER_NAME_TO_ID[player]}.png`), 'base64'),
+        team: TEAM_ID_TO_NAME[teamId],
+        homeTeam: homeTeamName,
+        awayTeam: awayTeamName,
+        homeTeamImage: fs.readFileSync(path.resolve(`images/teams/${homeTeamId}.png`), 'base64'),
+        awayTeamImage: fs.readFileSync(path.resolve(`images/teams/${awayTeamId}.png`), 'base64'),
         competition: competition
     }
-}
-
-// timestamp: [{team, match}]
-
-function sortSchedule(sortedGames, schedule) {
-    schedule.forEach(matchJson => {
-
-    });
 }
 
 function getSchedule(req, res) {
@@ -98,18 +86,17 @@ function getSchedule(req, res) {
                 const dateTime = new Date(timestamp);
                 const date = dateTime.toISOString().slice(0, 10);
                 const time = dateTime.toLocaleTimeString();
-                const homeTeam = TEAM_ID_TO_NAME[matchJson.homeTeam.id] || matchJson.homeTeam.name;
-                const awayTeam = TEAM_ID_TO_NAME[matchJson.awayTeam.id] || matchJson.awayTeam.name;
+                const homeTeamId = matchJson.homeTeam.id;
+                const awayTeamId = matchJson.awayTeam.id;
+                const homeTeamName = TEAM_ID_TO_NAME[homeTeamId] || matchJson.homeTeam.name;
+                const awayTeamName = TEAM_ID_TO_NAME[awayTeamId] || matchJson.awayTeam.name;
                 const competition = matchJson.competition.name;
-                const teamName = TEAM_ID_TO_NAME[match[0]];
-                const players = TEAM_ID_TO_PLAYER[match[0]];
+                const players = TEAM_ID_TO_PLAYERS[match[0]];
                 players.forEach(player => {
-                    const playerId = PLAYER_NAME_TO_ID[player];
-                    const playerImage = playerImageUrl(playerId);
                     if (!allGames[date]) {
                         allGames[date] = [];
                     }
-                    allGames[date].push(createMatchObject(time, teamName, player, playerImage, homeTeam, awayTeam, competition));
+                    allGames[date].push(createMatchObject(time, match[0], homeTeamId, awayTeamId, homeTeamName, awayTeamName, player, competition));
                 });
             });
                 
