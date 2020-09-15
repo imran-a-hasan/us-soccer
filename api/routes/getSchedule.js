@@ -9,7 +9,10 @@ const REDIS_PORT = process.env.PORT || 6379;
 const TEAMS = teamConstants.TEAMS;
 const TEAM_ID_TO_NAME = teamConstants.TEAM_ID_TO_NAME;
 const TEAM_ID_TO_PLAYERS = teamConstants.TEAM_ID_TO_PLAYERS;
+const TEAM_ID_TO_REGION = teamConstants.TEAM_ID_TO_REGION;
+const REGION_TO_API_KEY = teamConstants.REGION_TO_API_KEY;
 const PLAYER_NAME_TO_ID = playerConstants.PLAYER_NAME_TO_ID;
+
 
 const redisClient = redis.createClient(REDIS_PORT)
 
@@ -17,29 +20,31 @@ const redisPut = (key, value) => {
     redisClient.set(key, value);
 }
 
-const redisGet = (key, req, res, next) => {
+const redisGet = (key, team, req, res, next) => {
     return new Promise(resolve => {
         redisClient.get(key, (error, data) => {     
             if (error) {
                 reject(error);
             } else if (data !== null) {
-                resolve([key, data]);
+                resolve([team, data]);
             } else {
-                httpGet(key, req, res, resolve);
+                httpGet(key, team, req, res, resolve);
             }
         })
     });
 }
 
-const httpGet = (key, req, res, resolve) => {
-    fetch('https://api.football-data.org/v2/teams/' + key+ '/matches?status=SCHEDULED', {
-        headers: {'X-Auth-Token': '81ef26d68a9c4931a12738e1143b3a63'}
-    })
+const httpGet = (key, team, req, res, resolve) => {
+    const regionCode = TEAM_ID_TO_REGION[team];
+    const apiKey = REGION_TO_API_KEY[regionCode];
+    
+    fetch(`https://api.sportradar.us/soccer-t3/${regionCode}/en/teams/sr:competitor:${team}/schedule.json?api_key=${apiKey}`)
     .then(res => res.json())
     .then(json => {
+        console.log(json);
         const jsonResponse = JSON.stringify(json);
         redisPut(key, jsonResponse);
-        resolve([key, jsonResponse])
+        resolve([team, jsonResponse])
     });
 }
 
@@ -61,20 +66,23 @@ const createMatchObject = (time, teamId, homeTeamId, awayTeamId, homeTeamName, a
 
 function getSchedule(req, res) {
     const promises = [];
-    TEAMS.forEach(team => { 
-        promises.push(redisGet(team, req, res));
-    });
+    for (let i = 0; i < TEAMS.length; i++) {
+        const team = TEAMS[i];
+        promises.push(redisGet(`team-schedule-${team}`, team, req, res));
+    }
     const unsortedGames = {};
     const allGames = {};
     Promise.all(promises).then((values) => {
         values.forEach(value => {
-            const schedule = JSON.parse(value[1]).matches;
-            schedule.forEach(matchJson => {
-                if (!unsortedGames[matchJson.utcDate]) {
-                    unsortedGames[matchJson.utcDate] = [];
-                }
-                unsortedGames[matchJson.utcDate].push([value[0], matchJson]);
-            });
+            const schedule = JSON.parse(value[1]).schedule;
+            if (schedule) {
+                schedule.forEach(matchJson => {
+                    if (!unsortedGames[matchJson.scheduled]) {
+                        unsortedGames[matchJson.scheduled] = [];
+                    }
+                    unsortedGames[matchJson.scheduled].push([value[0], matchJson]);
+                });
+            }
         });
         const sortedGames = {};
         Object.keys(unsortedGames).sort().forEach(timestamp => {
@@ -86,11 +94,11 @@ function getSchedule(req, res) {
                 const dateTime = new Date(timestamp);
                 const date = dateTime.toISOString().slice(0, 10);
                 const time = dateTime.toLocaleTimeString();
-                const homeTeamId = matchJson.homeTeam.id;
-                const awayTeamId = matchJson.awayTeam.id;
-                const homeTeamName = TEAM_ID_TO_NAME[homeTeamId] || matchJson.homeTeam.name;
-                const awayTeamName = TEAM_ID_TO_NAME[awayTeamId] || matchJson.awayTeam.name;
-                const competition = matchJson.competition.name;
+                const homeTeamId = matchJson.competitors[0].id.slice(14);
+                const awayTeamId = matchJson.competitors[1].id.slice(14);
+                const homeTeamName = TEAM_ID_TO_NAME[homeTeamId] || matchJson.competitors[0].name;
+                const awayTeamName = TEAM_ID_TO_NAME[awayTeamId] || matchJson.competitors[1].name;
+                const competition = matchJson.tournament.name;
                 const players = TEAM_ID_TO_PLAYERS[match[0]];
                 players.forEach(player => {
                     if (!allGames[date]) {

@@ -1,16 +1,25 @@
-const CHELSEA_ID = '61';
-const JUVENTUS_ID = '109';
-const BORUSSIA_DORTMUND_ID = '4';
-const WOLFSBURG_ID = '11';
-const RB_LEIPZIG_ID = '721';
-const NEWCASTLE_UNITED_ID = '67';
-const FRANKFURT_ID = '19';
-const FULHAM_ID = '63';
-const BOAVISTA_ID = '810';
-const AJAX_ID = '678';
-const LILLE_ID = '521';
-const WERDER_BREMEN_ID = '12';
-const MANCHESTER_CITY_ID = '65';
+const CHELSEA_ID = '38';
+const MANCHESTER_CITY_ID = '17';
+const NEWCASTLE_UNITED_ID = '39';
+const FULHAM_ID = '43';
+const JUVENTUS_ID = '2687';
+const BORUSSIA_DORTMUND_ID = '2673';
+const WOLFSBURG_ID = '2524';
+const RB_LEIPZIG_ID = '36360';
+const FRANKFURT_ID = '2674';
+const WERDER_BREMEN_ID = '2534';
+const BOAVISTA_ID = '2995';
+const AJAX_ID = '2953';
+const LILLE_ID = '1643';
+const BESIKTAS_ID = '3050';
+const CAEN_ID = '1667';
+const SUNDERLAND_ID = '41';
+const DERBY_COUNTY_ID = '27';
+const INTERNACIONAL_ID = '1996';
+
+const REGION_EU = 'eu';
+const REGION_AM = 'am';
+const REGION_OTHER = 'other';
 
 const TEAMS = [
     CHELSEA_ID,
@@ -25,7 +34,12 @@ const TEAMS = [
     AJAX_ID,
     LILLE_ID,
     WERDER_BREMEN_ID,
-    MANCHESTER_CITY_ID
+    MANCHESTER_CITY_ID,
+    BESIKTAS_ID,
+    CAEN_ID,
+    SUNDERLAND_ID,
+    DERBY_COUNTY_ID,
+    INTERNACIONAL_ID
 ]
 
 const TEAM_ID_TO_NAME = {
@@ -41,9 +55,34 @@ const TEAM_ID_TO_NAME = {
     [AJAX_ID]: 'Ajax',
     [LILLE_ID]: 'Lille',
     [WERDER_BREMEN_ID]: 'Werder Bremen',
-    [MANCHESTER_CITY_ID]: 'Manchester City'
+    [MANCHESTER_CITY_ID]: 'Manchester City',
+    [BESIKTAS_ID]: 'Besiktas',
+    [CAEN_ID]: 'SM Caen',
+    [SUNDERLAND_ID]: 'Sunderland',
+    [DERBY_COUNTY_ID]: 'Derby County',
+    [INTERNACIONAL_ID]: 'Internacional'
 }
 
+const TEAM_ID_TO_REGION = {
+    [CHELSEA_ID]: REGION_EU,
+    [JUVENTUS_ID]: REGION_EU,
+    [BORUSSIA_DORTMUND_ID]: REGION_EU,
+    [WOLFSBURG_ID]: REGION_EU,
+    [RB_LEIPZIG_ID]: REGION_EU,
+    [NEWCASTLE_UNITED_ID]: REGION_EU,
+    [FRANKFURT_ID]: REGION_EU,
+    [FULHAM_ID]: REGION_EU,
+    [BOAVISTA_ID]: REGION_EU,
+    [AJAX_ID]: REGION_EU,
+    [LILLE_ID]: REGION_EU,
+    [WERDER_BREMEN_ID]: REGION_EU,
+    [MANCHESTER_CITY_ID]: REGION_EU,
+    [BESIKTAS_ID]: REGION_EU,
+    [CAEN_ID]: REGION_OTHER,
+    [SUNDERLAND_ID]: REGION_OTHER,
+    [DERBY_COUNTY_ID]: REGION_OTHER,
+    [INTERNACIONAL_ID]: REGION_AM
+}
 
 const TEAM_ID_TO_PLAYERS = {
     [CHELSEA_ID]: ['Christian Pulisic'],
@@ -58,7 +97,18 @@ const TEAM_ID_TO_PLAYERS = {
     [AJAX_ID]: ['Sergino Dest'],
     [LILLE_ID]: ['Timothy Weah'],
     [WERDER_BREMEN_ID]: ['Josh Sargent'],
-    [MANCHESTER_CITY_ID]: ['Zack Steffen']
+    [MANCHESTER_CITY_ID]: ['Zack Steffen'],
+    [BESIKTAS_ID]: ['Tyler Boyd'],
+    [CAEN_ID]: ['Nicholas Gioacchini'],
+    [SUNDERLAND_ID]: ['Lynden Gooch'],
+    [DERBY_COUNTY_ID]: ['Duane Holmes'],
+    [INTERNACIONAL_ID]: ['Johnny Cardoso']
 }
 
-module.exports = {TEAMS, TEAM_ID_TO_NAME, TEAM_ID_TO_PLAYERS};
+const REGION_TO_API_KEY = {
+    [REGION_EU]: 'tmf92zuvmrr873zjfugugwfd',
+    [REGION_AM]: '8rycq5wra9sp4sdrbuchkh4g',
+    [REGION_OTHER]: 'a7agjcd3cy6nzzycpcydyhv3'
+}
+
+module.exports = {TEAMS, TEAM_ID_TO_NAME, TEAM_ID_TO_REGION, TEAM_ID_TO_PLAYERS, REGION_TO_API_KEY};

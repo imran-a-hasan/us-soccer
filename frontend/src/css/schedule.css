@@ -60,13 +60,13 @@
     position: relative;
     text-align: center;
     display: inline-block;
-    width: 79%;
-    margin-left: 5%;
+    width: 76%;
+    margin-left: 7%;
 }
 
 
 .match-time {
-    width: 11%;
+    width: 12%;
     vertical-align: text-bottom;
 }
 

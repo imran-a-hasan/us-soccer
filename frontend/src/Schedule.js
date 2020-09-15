@@ -38,9 +38,7 @@ function Schedule() {
             if (!matchDays[date]) {
                 matchDays[date] = [];
             }
-            // TODO: move match info to component
             // TODO: paginate by month
-            // TODO: style this better -- time to the right and competition in the top right somehow?
             matchDays[date].push(
                 <ListGroup.Item> 
                     <div className='match-competition'><Badge pill variant='dark'>{match.competition}</Badge></div>
