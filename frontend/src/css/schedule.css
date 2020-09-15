@@ -2,6 +2,31 @@
     box-sizing: border-box;
 }
 
+.month-container {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.month-nav {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    display: flex;
+}
+
+.month-button {
+    float: left;
+}
+
+.month-title {
+    height: fit-content;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 .date-header {
     width: fit-content;
     margin-left: auto;

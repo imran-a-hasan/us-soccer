@@ -1,35 +1,25 @@
-import React, {useState} from 'react';
-import {Badge, Card, Image, ListGroup, Navbar} from 'react-bootstrap';
+import React, {useEffect, useState} from 'react';
+import {Badge, Button, ButtonToolbar, Card, Carousel, Image, ListGroup, Navbar} from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
+import MONTHS from './constants/months';
 import './css/schedule.css';
 
 function Schedule() {
+
   const [schedule, setSchedule] = useState(null);
-  const [playerImages, setPlayerImages] = useState({});
-
-  if (!schedule) {
-    fetch("http://localhost:9000/schedule")
-      .then(res => res.json())
-      .then(res => {
-          setSchedule(res);
-      });
+  const [month, setMonth] = useState(useParams().month);
+  if (!month) {
+    setMonth(new Date().getMonth() + 1);
   }
 
-  const getPlayerImage = imageId => {
-    console.log(playerImages);
-    if (playerImages[imageId]) {
-        console.log(playerImages[imageId]);
-        return playerImages[imageId];
-    } else {
-        fetch(`http://localhost:9000/player-image/${imageId}`)
-            .then(res => res.blob())
-            .then(img => {
-                if (!playerImages[imageId]) {
-                    const imageObj = URL.createObjectURL(img);
-                    setPlayerImages({...playerImages, [imageId]: imageObj});
-                }
-      });
-    }
-  }
+
+    useEffect(() => {
+        fetch(`http://localhost:9000/schedule?month=${month}`)
+        .then(res => res.json())
+        .then(res => {
+            setSchedule(res);
+        });
+    }, [month]);
 
   function generateMatchDays() {
       const matchDays = {};
@@ -38,7 +28,6 @@ function Schedule() {
             if (!matchDays[date]) {
                 matchDays[date] = [];
             }
-            // TODO: paginate by month
             matchDays[date].push(
                 <ListGroup.Item> 
                     <div className='match-competition'><Badge pill variant='dark'>{match.competition}</Badge></div>
@@ -77,12 +66,34 @@ function Schedule() {
       return res;
   }
 
+  const prevMonth = month => {
+      if (month == 1) {
+          return 12;
+      } else {
+          return month - 1;
+      }
+  }
+
+  const nextMonth = month => {
+      if (month == 12) {
+          return 1;
+      } else {
+          return month + 1;
+      }
+  }
 
   return (
       <div>
         <Navbar bg='dark' variant='dark'>
             <Navbar.Brand>Americans Abroad</Navbar.Brand>
         </Navbar>
+        <ButtonToolbar className='month-container'>
+            <span className='month-nav'>
+                <Button className='month-button' variant='left' onClick={() => setMonth(prevMonth(month))} disabled={month === 9}>&lsaquo;</Button>
+                <span className='month-title'>{MONTHS[month]}</span>
+                <Button className='month-button' variant='right' onClick={() => setMonth(nextMonth(month))} disabled={month === 5}>&rsaquo;</Button>
+            </span>
+        </ButtonToolbar>
         <div className='schedule-container'>
             {schedule && generateMatchDays()}
         </div>

@@ -49,7 +49,6 @@ const httpGet = (key, team, req, res, resolve) => {
 }
 
 const createMatchObject = (time, teamId, homeTeamId, awayTeamId, homeTeamName, awayTeamName, player, competition) => {
-
     return {
         time: time,
         player: player,
@@ -65,6 +64,7 @@ const createMatchObject = (time, teamId, homeTeamId, awayTeamId, homeTeamName, a
 }
 
 function getSchedule(req, res) {
+    const month = Number(req.query.month);
     const promises = [];
     for (let i = 0; i < TEAMS.length; i++) {
         const team = TEAMS[i];
@@ -76,12 +76,18 @@ function getSchedule(req, res) {
         values.forEach(value => {
             const schedule = JSON.parse(value[1]).schedule;
             if (schedule) {
-                schedule.forEach(matchJson => {
-                    if (!unsortedGames[matchJson.scheduled]) {
-                        unsortedGames[matchJson.scheduled] = [];
+                for(let i = 0; i < schedule.length; i++) {
+                    const matchJson = schedule[i];
+                    const matchMonth = new Date(matchJson.scheduled).getMonth() + 1;
+                    if  (matchMonth === month) {
+                        if (!unsortedGames[matchJson.scheduled]) {
+                            unsortedGames[matchJson.scheduled] = [];
+                        }
+                        unsortedGames[matchJson.scheduled].push([value[0], matchJson]);
+                    } else if (matchMonth > month) {
+                        break;
                     }
-                    unsortedGames[matchJson.scheduled].push([value[0], matchJson]);
-                });
+                };
             }
         });
         const sortedGames = {};
