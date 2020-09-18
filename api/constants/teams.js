@@ -16,6 +16,9 @@ const CAEN_ID = '1667';
 const SUNDERLAND_ID = '41';
 const DERBY_COUNTY_ID = '27';
 const INTERNACIONAL_ID = '1996';
+const SC_HEERENVEEN_ID = '2964';
+const GREUTHER_FURTH_ID = '2551';
+const HERACLES_ID = '2977';
 
 const REGION_EU = 'eu';
 const REGION_AM = 'am';
@@ -39,7 +42,10 @@ const TEAMS = [
     CAEN_ID,
     SUNDERLAND_ID,
     DERBY_COUNTY_ID,
-    INTERNACIONAL_ID
+    INTERNACIONAL_ID,
+    SC_HEERENVEEN_ID,
+    GREUTHER_FURTH_ID,
+    HERACLES_ID
 ]
 
 const TEAM_ID_TO_NAME = {
@@ -60,7 +66,10 @@ const TEAM_ID_TO_NAME = {
     [CAEN_ID]: 'SM Caen',
     [SUNDERLAND_ID]: 'Sunderland',
     [DERBY_COUNTY_ID]: 'Derby County',
-    [INTERNACIONAL_ID]: 'Internacional'
+    [INTERNACIONAL_ID]: 'Internacional',
+    [SC_HEERENVEEN_ID]: 'SC Heerenveen',
+    [GREUTHER_FURTH_ID]: 'Greuther Fürth',
+    [HERACLES_ID]: 'Heracles'
 }
 
 const TEAM_ID_TO_REGION = {
@@ -81,7 +90,10 @@ const TEAM_ID_TO_REGION = {
     [CAEN_ID]: REGION_OTHER,
     [SUNDERLAND_ID]: REGION_OTHER,
     [DERBY_COUNTY_ID]: REGION_OTHER,
-    [INTERNACIONAL_ID]: REGION_AM
+    [INTERNACIONAL_ID]: REGION_AM,
+    [SC_HEERENVEEN_ID]: REGION_EU,
+    [GREUTHER_FURTH_ID]: REGION_OTHER,
+    [HERACLES_ID]: REGION_EU
 }
 
 const TEAM_ID_TO_PLAYERS = {
@@ -102,7 +114,10 @@ const TEAM_ID_TO_PLAYERS = {
     [CAEN_ID]: ['Nicholas Gioacchini'],
     [SUNDERLAND_ID]: ['Lynden Gooch'],
     [DERBY_COUNTY_ID]: ['Duane Holmes'],
-    [INTERNACIONAL_ID]: ['Johnny Cardoso']
+    [INTERNACIONAL_ID]: ['Johnny Cardoso'],
+    [SC_HEERENVEEN_ID]: ['Ulysses Llanez'],
+    [GREUTHER_FURTH_ID]: ['Julian Green'],
+    [HERACLES_ID]: ['Luca de la Torre']
 }
 
 const REGION_TO_API_KEY = {

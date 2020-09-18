@@ -1,10 +1,11 @@
-var express = require('express');
 var fetch = require('node-fetch');
 var fs = require('fs');
 var path = require('path');
+const redis = require('redis');
+
 const teamConstants = require('../constants/teams');
 const playerConstants = require('../constants/players');
-const redis = require('redis');
+const tournamentConstants = require('../constants/tournaments');
 const REDIS_PORT = process.env.PORT || 6379;
 const TEAMS = teamConstants.TEAMS;
 const TEAM_ID_TO_NAME = teamConstants.TEAM_ID_TO_NAME;
@@ -12,7 +13,7 @@ const TEAM_ID_TO_PLAYERS = teamConstants.TEAM_ID_TO_PLAYERS;
 const TEAM_ID_TO_REGION = teamConstants.TEAM_ID_TO_REGION;
 const REGION_TO_API_KEY = teamConstants.REGION_TO_API_KEY;
 const PLAYER_NAME_TO_ID = playerConstants.PLAYER_NAME_TO_ID;
-
+const TOURNAMENT_NAMES = tournamentConstants.TOURNAMENT_NAMES;
 
 const redisClient = redis.createClient(REDIS_PORT)
 
@@ -59,7 +60,7 @@ const createMatchObject = (time, teamId, homeTeamId, awayTeamId, homeTeamName, a
         awayTeam: awayTeamName,
         homeTeamImage: fs.readFileSync(path.resolve(`images/teams/${homeTeamId}.png`), 'base64'),
         awayTeamImage: fs.readFileSync(path.resolve(`images/teams/${awayTeamId}.png`), 'base64'),
-        competition: competition
+        competition: TOURNAMENT_NAMES[competition] || competition
     }
 }
 
@@ -84,8 +85,6 @@ function getSchedule(req, res) {
                             unsortedGames[matchJson.scheduled] = [];
                         }
                         unsortedGames[matchJson.scheduled].push([value[0], matchJson]);
-                    } else if (matchMonth > month) {
-                        break;
                     }
                 };
             }
@@ -95,10 +94,10 @@ function getSchedule(req, res) {
             sortedGames[timestamp] = unsortedGames[timestamp];
         });
         for (let [timestamp, matches] of Object.entries(sortedGames)) {
+            const dateTime = new Date(timestamp);
+            const date = dateTime.toISOString().slice(0, 10);
             matches.forEach(match => {
-                const matchJson = match[1];
-                const dateTime = new Date(timestamp);
-                const date = dateTime.toISOString().slice(0, 10);
+                const matchJson = match[1];    
                 const time = dateTime.toLocaleTimeString();
                 const homeTeamId = matchJson.competitors[0].id.slice(14);
                 const awayTeamId = matchJson.competitors[1].id.slice(14);
@@ -119,7 +118,4 @@ function getSchedule(req, res) {
     });
 }
 
-
 module.exports = getSchedule;
-
-// {date: {time, player, team, opponent, home/away, competition}}

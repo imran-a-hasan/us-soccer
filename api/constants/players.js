@@ -17,7 +17,35 @@ const PLAYER_NAME_TO_ID = {
 'Nicholas Gioacchini': 1099663,
 'Lynden Gooch': 620124,
 'Duane Holmes': 480787,
-'Johnny Cardoso': 1173678
+'Johnny Cardoso': 1173678,
+'Ulysses Llanez': 937938,
+'Julian Green': 461356,
+'Luca de la Torre': 780418
 }
 
-module.exports = {PLAYER_NAME_TO_ID};
+const PLAYER_MATCH_IDS = {
+    'sr:player:809758': 'Christian Pulisic',
+    'sr:player:1047121': 'Weston McKennie',
+    'sr:player:1832348': 'Giovanni Reyna',
+    'sr:player:132149': 'John Brooks',
+    'sr:player:809778': 'Tyler Adams',
+    'sr:player:314040': 'DeAndre Yedlin',
+    'sr:player:40239': 'Timothy Chandler',
+    'sr:player:118179': 'Tim Ream',
+    'sr:player:1087492': 'Reggie Cannon',
+    'sr:player:1322038': 'Sergino Dest',
+    'sr:player:1056851': 'Timothy Weah',
+    'sr:player:1134269': 'Josh Sargent',
+    'sr:player:867054': 'Antonee Robinson',
+    'sr:player:332995': 'Zack Steffen',
+    'sr:player:277437': 'Tyler Boyd',
+    'sr:player:1944232': 'Nicholas Gioacchini',
+    'sr:player:792037': 'Lynden Gooch',
+    'sr:player:309290': 'Duane Holmes',
+    '-1': 'Johnny Cardoso',
+    '-1': 'Ulysses Llanez',
+    'sr:player:254191':  'Julian Green',
+    'sr:player:809766': 'Luca de la Torre'
+}
+
+module.exports = {PLAYER_NAME_TO_ID, PLAYER_MATCH_IDS};
