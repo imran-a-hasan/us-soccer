@@ -2,12 +2,19 @@
     box-sizing: border-box;
 }
 
+.header-link {
+    color: white;
+}
+
 .month-container {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 1%;
     margin-bottom: 1%;
+    position: sticky;
+    top: 20px;
+    height: 100%;
 }
 
 .results-container {
