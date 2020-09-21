@@ -1,30 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Schedule from './Schedule/Schedule';
 import Results from './Results/Results';
 import {ButtonToolbar, Button} from 'react-bootstrap';
 import MONTHS from './constants/months';
+import useDate from './useDate';
 
 function Home() {
-    const prevMonth = month => {
-        if (month === 1) {
-            setYear(year - 1);
-            return 12;
-        } else {
-            return month - 1;
-        }
-    }
-  
-    const nextMonth = month => {
-        if (month === 12) {
-            setYear(year + 1);
-            return 1;
-        } else {
-            return month + 1;
-        }
-    }
-
-    const [month, setMonth] = useState(new Date().getMonth() + 1);
-    const[year, setYear] = useState(2020);
+    
+    const {month, setMonth, year, prevMonth, nextMonth } = useDate();
 
     return (
         <div>

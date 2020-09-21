@@ -1,32 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {ButtonToolbar, Button} from 'react-bootstrap';
 import Results from './Results';
 import MONTHS from '../constants/months';
+import useDate from '../useDate';
 
 function ResultsPage() {
-    const [month, setMonth] = useState(new Date().getMonth() + 1);
-    const[year, setYear] = useState(2020);
-    if (!month) {
-        setMonth(new Date().getMonth() + 1);
-    }
 
-    const prevMonth = month => {
-        if (month === 1) {
-            setYear(year - 1);
-            return 12;
-        } else {
-            return month - 1;
-        }
-    }
-
-    const nextMonth = month => {
-        if (month === 12) {
-            setYear(year + 1);
-            return 1;
-        } else {
-            return month + 1;
-        }
-    }
+    const {month, setMonth, year, prevMonth, nextMonth } = useDate();
 
     return (
         <div>
