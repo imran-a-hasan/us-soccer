@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import {ButtonToolbar, Button} from 'react-bootstrap';
 import Schedule from './Schedule';
 import MONTHS from '../constants/months';
-import { useParams } from 'react-router-dom';
 
 function SchedulePage() {
     
     const prevMonth = month => {
-        if (month == 1) {
+        if (month === 1) {
+            setYear(year - 1);
             return 12;
         } else {
             return month - 1;
@@ -15,20 +15,18 @@ function SchedulePage() {
     }
   
     const nextMonth = month => {
-        if (month == 12) {
+        if (month === 12) {
+            setYear(year + 1);
             return 1;
         } else {
             return month + 1;
         }
     }
 
-    const [month, setMonth] = useState(useParams().month);
+    const [month, setMonth] = useState(new Date().getMonth() + 1);
     const[year, setYear] = useState(2020);
     if (!month) {
         setMonth(new Date().getMonth() + 1);
-    }
-    if (month < 9) {
-        setYear(2021);
     }
 
     return (

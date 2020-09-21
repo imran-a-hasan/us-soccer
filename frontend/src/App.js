@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {Nav, Navbar} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
@@ -28,10 +28,10 @@ function App() {
           <Route exact path = '/'>
             <Home />
           </Route>
-          <Route exact path='/schedule/:month?'>
+          <Route exact path='/schedule'>
             <SchedulePage />
           </Route>
-          <Route exact path ='/results/:month?'>
+          <Route exact path ='/results'>
             <ResultsPage />
           </Route>
         </Switch>

@@ -9,7 +9,6 @@ function Results({month}) {
         fetch(`http://localhost:9000/results?month=${month}`)
         .then(res => res.json())
         .then(res => {
-            console.log(res);
             setResults(res);
         });
     }, [month]);

@@ -72,6 +72,12 @@ const httpGet = (key, team, req, res, resolve, url) => {
 
 function getResults(req, res) {
     const month = Number(req.query.month);
+    let year;
+    if (month >= 9) {
+        year = 2020;
+    } else {
+        year = 2021;
+    }
     const teamPromises = [];
     for (let i = 0; i < TEAMS.length; i++) {
         const team = TEAMS[i];
@@ -85,7 +91,8 @@ function getResults(req, res) {
             const results = JSON.parse(value[1]).results;
             results.forEach(result => {
                 const matchMonth = new Date(result.sport_event.scheduled).getMonth() + 1;
-                if (month === matchMonth && result.sport_event_status.status === 'closed') {
+                const matchYear = new Date(result.sport_event.scheduled).getFullYear();
+                if (month === matchMonth && year === matchYear && result.sport_event_status.status === 'closed') {
                     allResults.push([value[0], result.sport_event.id, result.sport_event.tournament.id]);
                 }
             })
