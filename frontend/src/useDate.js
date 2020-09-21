@@ -1,8 +1,9 @@
 import {useState} from 'react';
 
 function useDate() {
-    const [month, setMonth] = useState(new Date().getMonth() + 1);
-    const[year, setYear] = useState(new Date().getFullYear());
+    const date = new Date();
+    const [month, setMonth] = useState(date.getMonth() + 1);
+    const[year, setYear] = useState(date.getFullYear());
 
     const prevMonth = month => {
         if (month === 1) {
