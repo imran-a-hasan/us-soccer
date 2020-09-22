@@ -16,7 +16,7 @@ function Results({month}) {
     function getGoals(count) {
         let res = [];
         for (let i = 0; i < count; i++) {
-            res.push(<span>&#9917;</span>);
+            res.push(<span role='img'>&#9917;</span>);
         }
         return res;
     }
@@ -24,7 +24,7 @@ function Results({month}) {
     function getAssists(count) {
         let res = [];
         for (let i = 0; i < count; i++) {
-            res.push(<span>&#x1F170;</span>);
+            res.push(<span role='img'>&#x1F170;</span>);
         }
         return res;
     }

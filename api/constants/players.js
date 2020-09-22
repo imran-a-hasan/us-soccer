@@ -20,7 +20,9 @@ const PLAYER_NAME_TO_ID = {
 'Johnny Cardoso': 1173678,
 'Ulysses Llanez': 937938,
 'Julian Green': 461356,
-'Luca de la Torre': 780418
+'Luca de la Torre': 780418,
+'Erik Palmer-Brown': 525133,
+'Chris Durkin': 848424
 }
 
 const PLAYER_MATCH_IDS = {
@@ -45,7 +47,9 @@ const PLAYER_MATCH_IDS = {
     '-1': 'Johnny Cardoso',
     '-1': 'Ulysses Llanez',
     'sr:player:254191':  'Julian Green',
-    'sr:player:809766': 'Luca de la Torre'
+    'sr:player:809766': 'Luca de la Torre',
+    'sr:player:540112': 'Erik Palmer-Brown',
+    'sr:player:1005899': 'Chris Durkin'
 }
 
 module.exports = {PLAYER_NAME_TO_ID, PLAYER_MATCH_IDS};

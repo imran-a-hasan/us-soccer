@@ -60,7 +60,7 @@ const createMatchObject = (time, teamId, homeTeamId, awayTeamId, homeTeamName, a
         awayTeam: awayTeamName,
         homeTeamImage: fs.readFileSync(path.resolve(`images/teams/${homeTeamId}.png`), 'base64'),
         awayTeamImage: fs.readFileSync(path.resolve(`images/teams/${awayTeamId}.png`), 'base64'),
-        competition: TOURNAMENT_NAMES[competition] || competition
+        competition: competition
     }
 }
 
@@ -103,7 +103,7 @@ function getSchedule(req, res) {
                 const awayTeamId = matchJson.competitors[1].id.slice(14);
                 const homeTeamName = TEAM_ID_TO_NAME[homeTeamId] || matchJson.competitors[0].name;
                 const awayTeamName = TEAM_ID_TO_NAME[awayTeamId] || matchJson.competitors[1].name;
-                const competition = matchJson.tournament.name;
+                const competition = TOURNAMENT_NAMES[matchJson.tournament.id] || matchJson.tournament.name;
                 const players = TEAM_ID_TO_PLAYERS[match[0]];
                 players.forEach(player => {
                     if (!allGames[date]) {

@@ -19,6 +19,8 @@ const INTERNACIONAL_ID = '1996';
 const SC_HEERENVEEN_ID = '2964';
 const GREUTHER_FURTH_ID = '2551';
 const HERACLES_ID = '2977';
+const AUSTRIA_WIEN_ID = '2203';
+const ST_TRUIDEN_ID = '2895';
 
 const REGION_EU = 'eu';
 const REGION_AM = 'am';
@@ -45,7 +47,9 @@ const TEAMS = [
     INTERNACIONAL_ID,
     SC_HEERENVEEN_ID,
     GREUTHER_FURTH_ID,
-    HERACLES_ID
+    HERACLES_ID,
+    AUSTRIA_WIEN_ID,
+    ST_TRUIDEN_ID
 ]
 
 const TEAM_ID_TO_NAME = {
@@ -69,7 +73,9 @@ const TEAM_ID_TO_NAME = {
     [INTERNACIONAL_ID]: 'Internacional',
     [SC_HEERENVEEN_ID]: 'SC Heerenveen',
     [GREUTHER_FURTH_ID]: 'Greuther Fürth',
-    [HERACLES_ID]: 'Heracles'
+    [HERACLES_ID]: 'Heracles',
+    [AUSTRIA_WIEN_ID]: 'Austria Wien',
+    [ST_TRUIDEN_ID]: 'St. Truiden'
 }
 
 const TEAM_ID_TO_REGION = {
@@ -93,7 +99,9 @@ const TEAM_ID_TO_REGION = {
     [INTERNACIONAL_ID]: REGION_AM,
     [SC_HEERENVEEN_ID]: REGION_EU,
     [GREUTHER_FURTH_ID]: REGION_OTHER,
-    [HERACLES_ID]: REGION_EU
+    [HERACLES_ID]: REGION_EU,
+    [AUSTRIA_WIEN_ID]: REGION_OTHER,
+    [ST_TRUIDEN_ID]: REGION_EU
 }
 
 const TEAM_ID_TO_PLAYERS = {
@@ -117,7 +125,9 @@ const TEAM_ID_TO_PLAYERS = {
     [INTERNACIONAL_ID]: ['Johnny Cardoso'],
     [SC_HEERENVEEN_ID]: ['Ulysses Llanez'],
     [GREUTHER_FURTH_ID]: ['Julian Green'],
-    [HERACLES_ID]: ['Luca de la Torre']
+    [HERACLES_ID]: ['Luca de la Torre'],
+    [AUSTRIA_WIEN_ID]: ['Erik Palmer-Brown'],
+    [ST_TRUIDEN_ID]: ['Chris Durkin']
 }
 
 const REGION_TO_API_KEY = {

@@ -28,7 +28,7 @@ const createResultObject = (teamId, homeTeamId, awayTeamId, homeTeamName, awayTe
         awayTeam: awayTeamName,
         homeTeamImage: fs.readFileSync(path.resolve(`images/teams/${homeTeamId}.png`), 'base64'),
         awayTeamImage: fs.readFileSync(path.resolve(`images/teams/${awayTeamId}.png`), 'base64'),
-        competition: TOURNAMENT_NAMES[competition] || competition,
+        competition: competition,
         homeTeamScore: homeTeamScore,
         awayTeamScore: awayTeamScore,
         minutes: minutes,
@@ -78,6 +78,7 @@ function getResults(req, res) {
     } else {
         year = 2021;
     }
+
     const teamPromises = [];
     for (let i = 0; i < TEAMS.length; i++) {
         const team = TEAMS[i];
@@ -150,7 +151,7 @@ function getResults(req, res) {
                     const awayTeamName = match[5];
                     const homeTeamScore = match[6];
                     const awayTeamScore = match[7];
-                    const competition = match[8].name;
+                    const competition = TOURNAMENT_NAMES[match[8].id] || match[8].name;
                     const goals = playerJson.goals_scored;
                     const assists = playerJson.assists;
                     const minutes = 0;

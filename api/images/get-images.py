@@ -5,10 +5,10 @@ import cairosvg;
 import time;
 
 eu = [17, 23, 35, 37, 34, 52, 7, 679]
-other = [18, 21, 19, 24, 334, 328, 53, 217, 336, 330, 182, 335, 333, 96]
+other = [45, 135, 326, 38]
 am = [325]
 
-leagues = eu + other + am
+leagues = other
 
 euKey = 'tmf92zuvmrr873zjfugugwfd'
 amKey = '8rycq5wra9sp4sdrbuchkh4g'
