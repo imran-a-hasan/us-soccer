@@ -45,7 +45,7 @@ const PLAYER_MATCH_IDS = {
     'sr:player:792037': 'Lynden Gooch',
     'sr:player:309290': 'Duane Holmes',
     '-1': 'Johnny Cardoso',
-    '-1': 'Ulysses Llanez',
+    'sr:player:1736547': 'Ulysses Llanez',
     'sr:player:254191':  'Julian Green',
     'sr:player:809766': 'Luca de la Torre',
     'sr:player:540112': 'Erik Palmer-Brown',
