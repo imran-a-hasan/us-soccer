@@ -1,53 +1,20 @@
-var fetch = require('node-fetch');
 var fs = require('fs');
 var path = require('path');
-const redis = require('redis');
-
+const mysql = require('mysql');
+const moment = require('moment');
 const teamConstants = require('../constants/teams');
 const playerConstants = require('../constants/players');
-const tournamentConstants = require('../constants/tournaments');
-const REDIS_PORT = process.env.PORT || 6379;
-const TEAMS = teamConstants.TEAMS;
 const TEAM_ID_TO_NAME = teamConstants.TEAM_ID_TO_NAME;
-const TEAM_ID_TO_PLAYERS = teamConstants.TEAM_ID_TO_PLAYERS;
-const TEAM_ID_TO_REGION = teamConstants.TEAM_ID_TO_REGION;
-const REGION_TO_API_KEY = teamConstants.REGION_TO_API_KEY;
 const PLAYER_NAME_TO_ID = playerConstants.PLAYER_NAME_TO_ID;
-const TOURNAMENT_NAMES = tournamentConstants.TOURNAMENT_NAMES;
 
-const redisClient = redis.createClient(REDIS_PORT)
+var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'password',
+    database: 'us_soccer'
+});
 
-const redisPut = (key, value) => {
-    redisClient.set(key, value);
-}
-
-const redisGet = (key, team, req, res, next) => {
-    return new Promise(resolve => {
-        redisClient.get(key, (error, data) => {     
-            if (error) {
-                reject(error);
-            } else if (data !== null) {
-                resolve([team, data]);
-            } else {
-                httpGet(key, team, req, res, resolve);
-            }
-        })
-    });
-}
-
-const httpGet = (key, team, req, res, resolve) => {
-    const regionCode = TEAM_ID_TO_REGION[team];
-    const apiKey = REGION_TO_API_KEY[regionCode];
-    
-    fetch(`https://api.sportradar.us/soccer-t3/${regionCode}/en/teams/sr:competitor:${team}/schedule.json?api_key=${apiKey}`)
-    .then(res => res.json())
-    .then(json => {
-        console.log(json);
-        const jsonResponse = JSON.stringify(json);
-        redisPut(key, jsonResponse);
-        resolve([team, jsonResponse])
-    });
-}
+connection.connect();
 
 const createMatchObject = (time, teamId, homeTeamId, awayTeamId, homeTeamName, awayTeamName, player, competition) => {
     return {
@@ -66,56 +33,32 @@ const createMatchObject = (time, teamId, homeTeamId, awayTeamId, homeTeamName, a
 
 function getSchedule(req, res) {
     const month = Number(req.query.month);
-    const promises = [];
-    for (let i = 0; i < TEAMS.length; i++) {
-        const team = TEAMS[i];
-        promises.push(redisGet(`team-schedule-${team}`, team, req, res));
-    }
-    const unsortedGames = {};
     const allGames = {};
-    Promise.all(promises).then((values) => {
-        values.forEach(value => {
-            const schedule = JSON.parse(value[1]).schedule;
-            if (schedule) {
-                for(let i = 0; i < schedule.length; i++) {
-                    const matchJson = schedule[i];
-                    const matchMonth = new Date(matchJson.scheduled).getMonth() + 1;
-                    if  (matchMonth === month) {
-                        if (!unsortedGames[matchJson.scheduled]) {
-                            unsortedGames[matchJson.scheduled] = [];
-                        }
-                        unsortedGames[matchJson.scheduled].push([value[0], matchJson]);
-                    }
-                };
-            }
-        });
-        const sortedGames = {};
-        Object.keys(unsortedGames).sort().forEach(timestamp => {
-            sortedGames[timestamp] = unsortedGames[timestamp];
-        });
-        for (let [timestamp, matches] of Object.entries(sortedGames)) {
-            const dateTime = new Date(timestamp);
-            const date = dateTime.toISOString().slice(0, 10);
-            matches.forEach(match => {
-                const matchJson = match[1];    
+    const dateTime = moment().hour(moment().hour() - 2).format('YYYY-MM-DD HH:mm:ss');
+    if (month >= 1 && month <= 12) {
+        connection.query(`SELECT * FROM Schedule WHERE month=${month} AND date_time >= \"${dateTime}\"
+        ORDER BY date_time ASC`, function(err, results, fields) {
+            results.forEach(row => {
+                const dateTime = row.date_time;
+                const date = dateTime.toISOString().slice(0, 10);
                 const time = dateTime.toLocaleTimeString();
-                const homeTeamId = matchJson.competitors[0].id.slice(14);
-                const awayTeamId = matchJson.competitors[1].id.slice(14);
-                const homeTeamName = TEAM_ID_TO_NAME[homeTeamId] || matchJson.competitors[0].name;
-                const awayTeamName = TEAM_ID_TO_NAME[awayTeamId] || matchJson.competitors[1].name;
-                const competition = TOURNAMENT_NAMES[matchJson.tournament.id] || matchJson.tournament.name;
-                const players = TEAM_ID_TO_PLAYERS[match[0]];
-                players.forEach(player => {
-                    if (!allGames[date]) {
-                        allGames[date] = [];
-                    }
-                    allGames[date].push(createMatchObject(time, match[0], homeTeamId, awayTeamId, homeTeamName, awayTeamName, player, competition));
-                });
+                const teamId = row.team_id;
+                const homeTeamId = row.home_team_id.slice(14);
+                const awayTeamId = row.away_team_id.slice(14);
+                const homeTeamName = row.home_team_name;
+                const awayTeamName = row.away_team_name;
+                const competition = row.competition_name;
+                const player = row.player_name;
+                if (!allGames[date]) {
+                    allGames[date] = [];
+                }
+                allGames[date].push(createMatchObject(time, teamId, homeTeamId, awayTeamId, homeTeamName, awayTeamName, player, competition));
             });
-                
-        }
-        return res.status(200).send(JSON.stringify(allGames));
-    });
+            return res.status(200).send(JSON.stringify(allGames));
+        });
+    }
+    
+    
 }
 
 module.exports = getSchedule;
