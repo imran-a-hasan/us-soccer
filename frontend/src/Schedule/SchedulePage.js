@@ -2,7 +2,7 @@ import React from 'react';
 import {ButtonToolbar, Button} from 'react-bootstrap';
 import Schedule from './Schedule';
 import MONTHS from '../constants/months';
-import useDate from '../useDate';
+import useDate from '../hooks/useDate';
 
 function SchedulePage() {
     

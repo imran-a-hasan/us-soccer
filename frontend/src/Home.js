@@ -3,7 +3,7 @@ import Schedule from './Schedule/Schedule';
 import Results from './Results/Results';
 import {ButtonToolbar, Button} from 'react-bootstrap';
 import MONTHS from './constants/months';
-import useDate from './useDate';
+import useDate from './hooks/useDate';
 
 function Home() {
     
