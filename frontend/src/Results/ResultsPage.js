@@ -1,22 +1,18 @@
-import React from 'react';
-import {ButtonToolbar, Button} from 'react-bootstrap';
+import React, { useState } from 'react';
 import Results from './Results';
-import MONTHS from '../constants/months';
-import useDate from '../hooks/useDate';
+import MonthNav from '../MonthNav';
 
 function ResultsPage() {
-
-    const {month, setMonth, year, prevMonth, nextMonth } = useDate();
+    const[month, setMonth] = useState(null);
+    const onMonthChange = newMonth => {
+        setMonth(newMonth);
+    }
 
     return (
         <div>
-            <ButtonToolbar className='month-container'>
-                <span className='month-nav'>
-                    <Button className='month-button' variant='left' onClick={() => setMonth(prevMonth(month))} disabled={month === 9}>&lsaquo;</Button>
-                    <span className='month-title'>{MONTHS[month]} {year}</span>
-                    <Button className='month-button' variant='right' onClick={() => setMonth(nextMonth(month))} disabled={month === new Date().getMonth() + 1}>&rsaquo;</Button>
-                </span>
-            </ButtonToolbar>
+            <MonthNav onMonthChange={onMonthChange} 
+                nextDisabled={new Date().getMonth() + 1}
+                />
             <div className='content-container'>
                 <Results month={month}/>
             </div>            
