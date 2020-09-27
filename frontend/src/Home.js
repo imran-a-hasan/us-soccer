@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Schedule from './Schedule/Schedule';
 import Results from './Results/Results';
 import {ButtonToolbar, Button} from 'react-bootstrap';
@@ -8,6 +8,12 @@ import useDate from './useDate';
 function Home() {
     
     const {month, setMonth, year, prevMonth, nextMonth } = useDate();
+    const scheduleRef = useRef(null);
+    useEffect(() => {
+        setTimeout(() => {
+            scheduleRef.current.scrollIntoView({behavior: 'smooth'});
+        }, 500);
+    });
 
     return (
         <div>
@@ -19,7 +25,9 @@ function Home() {
                 </span>
             </ButtonToolbar>
             <Results month={month}/>
-            <Schedule month={month}/>
+            <div ref={scheduleRef}>
+                <Schedule month={month}/>
+            </div>
         </div>
     );
 }
