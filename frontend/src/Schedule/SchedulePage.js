@@ -17,7 +17,9 @@ function SchedulePage() {
                     <Button className='month-button' variant='right' onClick={() => setMonth(nextMonth(month))} disabled={month === 5}>&rsaquo;</Button>
                 </span>
             </ButtonToolbar>
-            <Schedule month={month}/>
+            <div className='content-container'>
+                <Schedule month={month}/>
+            </div>          
         </div>
     );
 }

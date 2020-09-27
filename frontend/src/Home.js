@@ -24,9 +24,11 @@ function Home() {
                     <Button className='month-button' variant='right' onClick={() => setMonth(nextMonth(month))} disabled={month === 5}>&rsaquo;</Button>
                 </span>
             </ButtonToolbar>
-            <Results month={month}/>
-            <div ref={scheduleRef}>
-                <Schedule month={month}/>
+            <div className='content-container'>
+                <Results month={month}/>
+                <div ref={scheduleRef}>
+                    <Schedule month={month}/>
+                </div>
             </div>
         </div>
     );

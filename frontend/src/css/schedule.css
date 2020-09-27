@@ -6,6 +6,12 @@
     color: white;
 }
 
+.content-container {
+    overflow: scroll;
+    height: 85vh;
+    padding-bottom: 2%;
+}
+
 .month-container {
     width: 50%;
     margin-left: auto;
