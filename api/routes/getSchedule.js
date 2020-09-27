@@ -4,6 +4,7 @@ const mysql = require('mysql');
 const moment = require('moment');
 const teamConstants = require('../constants/teams');
 const playerConstants = require('../constants/players');
+const { TOURNAMENT_NAMES } = require('../constants/tournaments');
 const TEAM_ID_TO_NAME = teamConstants.TEAM_ID_TO_NAME;
 const PLAYER_NAME_TO_ID = playerConstants.PLAYER_NAME_TO_ID;
 
@@ -47,7 +48,7 @@ function getSchedule(req, res) {
                 const awayTeamId = row.away_team_id.slice(14);
                 const homeTeamName = row.home_team_name;
                 const awayTeamName = row.away_team_name;
-                const competition = row.competition_name;
+                const competition = TOURNAMENT_NAMES[row.competition_id] || row.competition_name;
                 const player = row.player_name;
                 if (!allGames[date]) {
                     allGames[date] = [];

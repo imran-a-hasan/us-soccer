@@ -66,21 +66,12 @@ Promise.all(promises).then(values => {
                 const homeTeamName = TEAM_ID_TO_NAME[homeTeamId.slice(14)] || matchJson.competitors[0].name;
                 const awayTeamId = matchJson.competitors[1].id;
                 const awayTeamName = TEAM_ID_TO_NAME[awayTeamId.slice(14)] || matchJson.competitors[1].name;
+                const competitionId = matchJson.tournament.id;
                 const competition = matchJson.tournament.name;
                 const players = TEAM_ID_TO_PLAYERS[teamId];
                 players.forEach(player => {
                     connection.query(`INSERT INTO Schedule VALUES(\"${matchId}\", \"${dateTime}\", ${matchMonth}, \"${teamId}\", \"${homeTeamId}\",
-                        \"${awayTeamId}\", \"${homeTeamName}\", \"${awayTeamName}\", \"${competition}\", \"${player}\")`);
-
-                 /*   console.log(matchId);
-                    console.log(dateTime);
-                    console.log(matchMonth);
-                    console.log(homeTeamId);
-                    console.log(homeTeamName);
-                    console.log(awayTeamId);
-                    console.log(awayTeamName);
-                    console.log(competition);
-                    console.log(player);*/
+                        \"${awayTeamId}\", \"${homeTeamName}\", \"${awayTeamName}\", \"${competitionId}\", \"${competition}\", \"${player}\")`);
                 });
             }
         }
@@ -91,4 +82,4 @@ Promise.all(promises).then(values => {
 
 
 
-// match id, date time, month, team id, home team id, away team id, home team name, away team name, competition name, player id
+// match id, date time, month, team id, home team id, away team id, home team name, away team name, competition id, competition name, player id
