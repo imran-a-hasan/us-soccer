@@ -6,7 +6,7 @@ const teamConstants = require('../constants/teams');
 const playerConstants = require('../constants/players');
 const { TOURNAMENT_NAMES } = require('../constants/tournaments');
 const TEAM_ID_TO_NAME = teamConstants.TEAM_ID_TO_NAME;
-const PLAYER_NAME_TO_ID = playerConstants.PLAYER_NAME_TO_ID;
+const PLAYER_NAME_TO_IMAGE_ID = playerConstants.PLAYER_NAME_TO_IMAGE_ID;
 
 var connection = mysql.createConnection({
     host: 'localhost',
@@ -21,8 +21,8 @@ const createMatchObject = (time, teamId, homeTeamId, awayTeamId, homeTeamName, a
     return {
         time: time,
         player: player,
-        imageId: PLAYER_NAME_TO_ID[player],
-        playerImage: fs.readFileSync(path.resolve(`images/players/${PLAYER_NAME_TO_ID[player]}.png`), 'base64'),
+        imageId: PLAYER_NAME_TO_IMAGE_ID[player],
+        playerImage: fs.readFileSync(path.resolve(`images/players/${PLAYER_NAME_TO_IMAGE_ID[player]}.png`), 'base64'),
         team: TEAM_ID_TO_NAME[teamId],
         homeTeam: homeTeamName,
         awayTeam: awayTeamName,

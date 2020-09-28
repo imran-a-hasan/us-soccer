@@ -1,4 +1,3 @@
-const express = require('express');
 const redis = require('redis');
 const mysql = require('mysql');
 const REDIS_PORT = process.env.PORT || 6379;
