@@ -32,10 +32,10 @@ const createMatchObject = (time, teamId, homeTeamId, awayTeamId, homeTeamName, a
 }
 
 function getSchedule(req, res) {
-    const month = Number(req.query.month);
-    const allGames = {};
-    const dateTime = moment().hour(moment().hour() - 2).format('YYYY-MM-DD HH:mm:ss');
+    const month = Number(req.query.month);  
     if (month >= 1 && month <= 12) {
+        const allGames = {};
+        const dateTime = moment().hour(moment().hour() - 2).format('YYYY-MM-DD HH:mm:ss');
         connection.query(`SELECT * FROM Schedule WHERE month=${month} AND date_time >= \"${dateTime}\"
         ORDER BY date_time ASC`, function(err, results, fields) {
             results.forEach(row => {

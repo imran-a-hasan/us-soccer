@@ -39,8 +39,8 @@ const createResultObject = (teamId, homeTeamId, awayTeamId, homeTeamName, awayTe
 
 function getResults(req, res) {
     const month = Number(req.query.month);
-    const allGames = {};
     if (month >= 1 && month <= 12) {
+        const allGames = {};
         connection.query(`SELECT * FROM Results WHERE month=${month}
         ORDER BY date_time ASC`, function(err, results, fields) {
             results.forEach(row => {
