@@ -1,22 +1,9 @@
-var fetch = require('node-fetch');
-var fs = require('fs');
-var path = require('path');
-const redis = require('redis');
-const teamConstants = require('../constants/teams');
-const playerConstants = require('../constants/players');
-const tournamentConstants = require('../constants/tournaments');
-const REDIS_PORT = process.env.PORT || 6379;
-const TEAMS = teamConstants.TEAMS;
-const TEAM_ID_TO_NAME = teamConstants.TEAM_ID_TO_NAME;
-const TEAM_ID_TO_PLAYERS = teamConstants.TEAM_ID_TO_PLAYERS;
-const TEAM_ID_TO_REGION = teamConstants.TEAM_ID_TO_REGION;
-const REGION_TO_API_KEY = teamConstants.REGION_TO_API_KEY;
-const PLAYER_NAME_TO_IMAGE_ID = playerConstants.PLAYER_NAME_TO_IMAGE_ID;
-const TOURNAMENT_NAMES = tournamentConstants.TOURNAMENT_NAMES;
-const TOURNAMENT_TO_REGION_CODE = tournamentConstants.TOURNAMENT_TO_REGION_CODE;
-const PLAYER_MATCH_IDS = playerConstants.PLAYER_MATCH_IDS;
+const fs = require('fs');
+const path = require('path');
 const mysql = require('mysql');
-
+const { TOURNAMENT_NAMES } = require('../constants/tournaments');
+const { TEAM_ID_TO_NAME } = require('../constants/teams');
+const { PLAYER_NAME_TO_IMAGE_ID } = require('../constants/players');
 
 var connection = mysql.createConnection({
     host: 'localhost',
@@ -66,7 +53,7 @@ function getResults(req, res) {
                 const awayTeamName = row.away_team_name;
                 const homeTeamScore = row.home_team_goals;
                 const awayTeamScore = row.away_team_goals;
-                const competition = row.competition_name;
+                const competition = TOURNAMENT_NAMES[row.competition_id] || row.competition_name;
                 const minutes = row.player_minutes;
                 const goals = row.player_goals;
                 const assists = row.player_assists;

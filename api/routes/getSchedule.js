@@ -1,12 +1,11 @@
-var fs = require('fs');
-var path = require('path');
+const fs = require('fs');
+const path = require('path');
 const mysql = require('mysql');
 const moment = require('moment');
-const teamConstants = require('../constants/teams');
-const playerConstants = require('../constants/players');
 const { TOURNAMENT_NAMES } = require('../constants/tournaments');
-const TEAM_ID_TO_NAME = teamConstants.TEAM_ID_TO_NAME;
-const PLAYER_NAME_TO_IMAGE_ID = playerConstants.PLAYER_NAME_TO_IMAGE_ID;
+const { TEAM_ID_TO_NAME } = require('../constants/teams');
+const { PLAYER_NAME_TO_IMAGE_ID } = require('../constants/players');
+
 
 var connection = mysql.createConnection({
     host: 'localhost',
