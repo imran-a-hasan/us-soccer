@@ -36,16 +36,20 @@
     margin-right: auto;
     text-align: center;
     display: flex;
+    border: 1px solid gray;
+    border-radius: 25px;
+    width: 25%;
+    background-color: rgb(248, 249, 250)
 }
 
 .month-button {
-    float: left;
+    border: 1px solid black;
 }
 
 .month-title {
     height: fit-content;
-    margin-top: auto;
-    margin-bottom: auto;
+    width: fit-content;
+    margin: auto;
 }
 
 .date-header {
