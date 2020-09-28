@@ -4,7 +4,7 @@ const redis = require('redis');
 const moment = require('moment');
 const { REGION_TO_API_KEY, TEAM_ID_TO_NAME, TEAM_ID_TO_PLAYERS } = require('../constants/teams');
 const { TOURNAMENT_TO_REGION_CODE } = require('../constants/tournaments');
-const { PLAYER_MATCH_IDS, PLAYER_NAME_TO_MATCH_ID } = require('../constants/players');
+const { PLAYER_NAME_TO_MATCH_ID } = require('../constants/players');
 const REDIS_PORT = process.env.PORT || 6379;
 const redisClient = redis.createClient(REDIS_PORT)
 
