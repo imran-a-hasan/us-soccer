@@ -21,7 +21,7 @@ const redisPut = (key, value) => {
     redisClient.set(key, value);
 }
 
-const redisGet = (key, team, playerName, url) => {
+const redisGet = (key, team, playerName) => {
     return new Promise(resolve => {
         redisClient.get(key, (error, data) => {     
             if (error) {
@@ -29,7 +29,7 @@ const redisGet = (key, team, playerName, url) => {
             } else if (data !== null) {
                 resolve([team, data, playerName]);
             } else {
-                httpGet(key, team, playerName, resolve, url);
+                httpGet(key, team, playerName, resolve);
             }
         })
     });
@@ -63,12 +63,13 @@ connection.query(`SELECT * FROM Schedule WHERE date_time <= \"${dateTime}\"
         const playerName = matches[i][3];
         const regionCode = TOURNAMENT_TO_REGION_CODE[competitionId] || 'other';
         const apiKey = REGION_TO_API_KEY[regionCode];
+        const url = `https://api.sportradar.us/soccer-t3/${regionCode}/en/matches/${matchId}/summary.json?api_key=${apiKey}`;
         if (TIMEOUT) {
             setTimeout(() => {
-                promises.push(redisGet(`match-result-${matchId.slice(9)}`, teamId, playerName, `https://api.sportradar.us/soccer-t3/${regionCode}/en/matches/${matchId}/summary.json?api_key=${apiKey}`));
+                promises.push(redisGet(`match-result-${matchId.slice(9)}`, teamId, playerName, url));
             }, 1000 * i);
         } else {
-            promises.push(redisGet(`match-result-${matchId.slice(9)}`, teamId, playerName, `https://api.sportradar.us/soccer-t3/${regionCode}/en/matches/${matchId}/summary.json?api_key=${apiKey}`));
+            promises.push(redisGet(`match-result-${matchId.slice(9)}`, teamId, playerName, url));
         }
         
     }
