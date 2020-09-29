@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Badge, Card,  Image, ListGroup} from 'react-bootstrap';
 import '../css/schedule.css';
+const PST_OFFSET = 420;
 const moment = require('moment');
 
 function Schedule({month}) {
@@ -24,7 +25,7 @@ function Schedule({month}) {
             }
             var offset = new Date().getTimezoneOffset();
             const matchMoment = moment(match.time.toLowerCase(), 'hh:mm:ss a');
-            const matchTime = matchMoment.minutes(matchMoment.minutes() - offset + 420).format('h:mm A');
+            const matchTime = matchMoment.minutes(matchMoment.minutes() - offset + PST_OFFSET).format('h:mm A');
             matchDays[date].push(
                 <ListGroup.Item> 
                     <div className='match-competition'><Badge pill variant='dark'>{match.competition}</Badge></div>
