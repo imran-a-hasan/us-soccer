@@ -23,7 +23,8 @@ const PLAYER_NAME_TO_IMAGE_ID = {
     'Luca de la Torre': 780418,
     'Erik Palmer-Brown': 525133,
     'Chris Durkin': 848424,
-    'Sebastian Soto': 1037036
+    'Sebastian Soto': 1037036,
+    'Indiana Vassilev': 1101144
 };
 
 const PLAYER_NAME_TO_MATCH_ID = {
@@ -51,7 +52,8 @@ const PLAYER_NAME_TO_MATCH_ID = {
     'Luca de la Torre': 'sr:player:809766',
     'Erik Palmer-Brown': 'sr:player:540112',
     'Chris Durkin': 'sr:player:1005899',
-    'Sebastian Soto': 'sr:player:1572442'
+    'Sebastian Soto': 'sr:player:1572442',
+    'Indiana Vassilev': 'sr:player:1322050'
 };
 
 const PLAYER_MATCH_IDS = {
@@ -79,7 +81,8 @@ const PLAYER_MATCH_IDS = {
     'sr:player:809766': 'Luca de la Torre',
     'sr:player:540112': 'Erik Palmer-Brown',
     'sr:player:1005899': 'Chris Durkin',
-    'sr:player:1572442': 'Sebastian Soto'
+    'sr:player:1572442': 'Sebastian Soto',
+    'sr:player:1322050': 'Indiana Vassilev'
 };
 
 module.exports = {PLAYER_NAME_TO_IMAGE_ID, PLAYER_NAME_TO_MATCH_ID, PLAYER_MATCH_IDS};

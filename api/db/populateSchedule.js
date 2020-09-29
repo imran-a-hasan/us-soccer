@@ -46,10 +46,18 @@ const httpGet = (key, team, resolve) => {
     });
 }
 
+const TIMEOUT = false;
+
 const promises = [];
 for (let i = 0; i < TEAMS.length; i++) {
     const team = TEAMS[i];
-    promises.push(redisGet(`team-schedule-${team}`, team));
+    if (TIMEOUT) {
+        setTimeout(() => {
+            promises.push(redisGet(`team-schedule-${team}`, team));
+        }, 1000 * i);
+    } else {
+        promises.push(redisGet(`team-schedule-${team}`, team));
+    }
 }
 
 Promise.all(promises).then(values => {
@@ -58,6 +66,7 @@ Promise.all(promises).then(values => {
         const schedule = JSON.parse(value[1]).schedule;
         if (schedule) {
             for(let i = 0; i < schedule.length; i++) {
+                console.log(teamId);
                 const matchJson = schedule[i];
                 const matchId = matchJson.id;
                 const dateTime = matchJson.scheduled;
@@ -71,7 +80,7 @@ Promise.all(promises).then(values => {
                 const players = TEAM_ID_TO_PLAYERS[teamId];
                 players.forEach(player => {
                     connection.query(`INSERT INTO Schedule VALUES(\"${matchId}\", \"${dateTime}\", ${matchMonth}, \"${teamId}\", \"${homeTeamId}\",
-                        \"${awayTeamId}\", \"${homeTeamName}\", \"${awayTeamName}\", \"${competitionId}\", \"${competition}\", \"${player}\")`, () => {});
+                        \"${awayTeamId}\", \"${homeTeamName}\", \"${awayTeamName}\", \"${competitionId}\", \"${competition}\", \"${player}\")`, function(error, rorws, fields) {});
                 });
             }
         }

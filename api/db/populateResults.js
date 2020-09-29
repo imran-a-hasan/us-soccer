@@ -46,6 +46,8 @@ const httpGet = (key, team, playerName, resolve, url) => {
     });
 }
 
+const TIMEOUT = false;
+
 const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');
 matches = [];
 connection.query(`SELECT * FROM Schedule WHERE date_time <= \"${dateTime}\"
@@ -61,10 +63,16 @@ connection.query(`SELECT * FROM Schedule WHERE date_time <= \"${dateTime}\"
         const playerName = matches[i][3];
         const regionCode = TOURNAMENT_TO_REGION_CODE[competitionId] || 'other';
         const apiKey = REGION_TO_API_KEY[regionCode];
-        promises.push(redisGet(`match-result-${matchId.slice(9)}`, teamId, playerName, `https://api.sportradar.us/soccer-t3/${regionCode}/en/matches/${matchId}/summary.json?api_key=${apiKey}`));
+        if (TIMEOUT) {
+            setTimeout(() => {
+                promises.push(redisGet(`match-result-${matchId.slice(9)}`, teamId, playerName, `https://api.sportradar.us/soccer-t3/${regionCode}/en/matches/${matchId}/summary.json?api_key=${apiKey}`));
+            }, 1000 * i);
+        } else {
+            promises.push(redisGet(`match-result-${matchId.slice(9)}`, teamId, playerName, `https://api.sportradar.us/soccer-t3/${regionCode}/en/matches/${matchId}/summary.json?api_key=${apiKey}`));
+        }
+        
     }
     Promise.all(promises).then(values => {
-        console.log("here");
         values.forEach(value => {
             const teamId = value[0];
             const matchJson = JSON.parse(value[1]);
@@ -94,7 +102,7 @@ connection.query(`SELECT * FROM Schedule WHERE date_time <= \"${dateTime}\"
             }
             connection.query(`INSERT INTO Results VALUES(\"${matchId}\", \"${dateTime}\", ${matchMonth}, \"${teamId}\", \"${homeTeamId}\", \"${awayTeamId}\",
             \"${homeTeamName}\", \"${awayTeamName}\", ${homeTeamGoals}, ${awayTeamGoals}, \"${competitionId}\", \"${competitionName}\", \"${playerName}\",
-            ${playerMinutes}, ${playerGoals}, ${playerAssists})`, function(err, rows, fields) {console.log(err)});
+            ${playerMinutes}, ${playerGoals}, ${playerAssists})`, function(err, rows, fields) {});
         });
     });
 });

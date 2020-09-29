@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Badge, Card,  Image, ListGroup} from 'react-bootstrap';
 import '../css/schedule.css';
+const moment = require('moment');
 
 function Schedule({month}) {
   
@@ -21,6 +22,7 @@ function Schedule({month}) {
             if (!matchDays[date]) {
                 matchDays[date] = [];
             }
+            const matchTime = moment(match.time.toLowerCase(), 'hh:mm:ss a').format('h:mm A');
             matchDays[date].push(
                 <ListGroup.Item> 
                     <div className='match-competition'><Badge pill variant='dark'>{match.competition}</Badge></div>
@@ -37,7 +39,7 @@ function Schedule({month}) {
                                 <span className='away-team-name'>{match.awayTeam === match.team ? <b>{match.awayTeam}</b> : match.awayTeam}</span>                      
                             </span> 
                         </span>
-                        <Badge className='match-time' pill variant='info'>{match.time}</Badge>
+                        <Badge className='match-time' pill variant='info'>{matchTime}</Badge>
                     </div>
                 </ListGroup.Item>)
           });

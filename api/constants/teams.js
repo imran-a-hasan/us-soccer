@@ -22,6 +22,7 @@ const HERACLES_ID = '2977';
 const AUSTRIA_WIEN_ID = '2203';
 const ST_TRUIDEN_ID = '2895';
 const SC_TELSTAR_ID = '2972';
+const BURTON_ALBION_ID = 134;
 
 const REGION_EU = 'eu';
 const REGION_AM = 'am';
@@ -51,7 +52,8 @@ const TEAMS = [
     HERACLES_ID,
     AUSTRIA_WIEN_ID,
     ST_TRUIDEN_ID,
-    SC_TELSTAR_ID
+    SC_TELSTAR_ID,
+    BURTON_ALBION_ID
 ];
 
 const TEAM_ID_TO_NAME = {
@@ -78,7 +80,8 @@ const TEAM_ID_TO_NAME = {
     [HERACLES_ID]: 'Heracles',
     [AUSTRIA_WIEN_ID]: 'Austria Wien',
     [ST_TRUIDEN_ID]: 'St. Truiden',
-    [SC_TELSTAR_ID]: 'SC Telstar'
+    [SC_TELSTAR_ID]: 'SC Telstar',
+    [BURTON_ALBION_ID]: 'Burton Albion'
 };
 
 const TEAM_ID_TO_REGION = {
@@ -105,7 +108,8 @@ const TEAM_ID_TO_REGION = {
     [HERACLES_ID]: REGION_EU,
     [AUSTRIA_WIEN_ID]: REGION_OTHER,
     [ST_TRUIDEN_ID]: REGION_EU,
-    [SC_TELSTAR_ID]: REGION_OTHER
+    [SC_TELSTAR_ID]: REGION_OTHER,
+    [BURTON_ALBION_ID]: REGION_OTHER
 };
 
 const TEAM_ID_TO_PLAYERS = {
@@ -132,7 +136,8 @@ const TEAM_ID_TO_PLAYERS = {
     [HERACLES_ID]: ['Luca de la Torre'],
     [AUSTRIA_WIEN_ID]: ['Erik Palmer-Brown'],
     [ST_TRUIDEN_ID]: ['Chris Durkin'],
-    [SC_TELSTAR_ID]: ['Sebastian Soto']
+    [SC_TELSTAR_ID]: ['Sebastian Soto'],
+    [BURTON_ALBION_ID]: ['Indiana Vassilev']
 };
 
 const REGION_TO_API_KEY = {
