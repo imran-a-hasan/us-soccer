@@ -52,6 +52,7 @@ function Results({month}) {
                                     <span className='away-team-name'>{match.awayTeam === match.team ? <b>{match.awayTeam}</b> : match.awayTeam}</span>                      
                                 </span> 
                             </span>
+                            {match.minutes !== 0 ? <span className='minutes'>{match.minutes}'</span> : null}
                             <span className='goals'>{getGoals(match.goals)}</span>
                             <span className='assists'>{getAssists(match.assists)}</span>
                         </div>

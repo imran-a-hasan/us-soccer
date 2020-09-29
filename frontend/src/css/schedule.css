@@ -145,3 +145,8 @@ display: inline-block;;
 .assists {
     font-size: 25px;
 }
+
+.minutes {
+    font-size: 20px;
+    margin-right: 2%;
+}
