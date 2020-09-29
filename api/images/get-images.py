@@ -4,9 +4,9 @@ import urllib.request;
 import cairosvg;
 import time;
 
-eu = [17, 23, 35, 37, 34, 52, 7, 679]
-other = [45, 135, 326, 38]
-am = [325]
+eu = []
+other = [131]
+am = []
 
 leagues = other
 
@@ -15,8 +15,6 @@ amKey = '8rycq5wra9sp4sdrbuchkh4g'
 otherKey = 'a7agjcd3cy6nzzycpcydyhv3'
 
 seen = {}
-
-id = 3003
 
 for league in leagues:
     time.sleep(2)

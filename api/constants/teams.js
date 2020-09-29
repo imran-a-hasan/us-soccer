@@ -21,6 +21,7 @@ const GREUTHER_FURTH_ID = '2551';
 const HERACLES_ID = '2977';
 const AUSTRIA_WIEN_ID = '2203';
 const ST_TRUIDEN_ID = '2895';
+const SC_TELSTAR_ID = '2972';
 
 const REGION_EU = 'eu';
 const REGION_AM = 'am';
@@ -49,8 +50,9 @@ const TEAMS = [
     GREUTHER_FURTH_ID,
     HERACLES_ID,
     AUSTRIA_WIEN_ID,
-    ST_TRUIDEN_ID
-]
+    ST_TRUIDEN_ID,
+    SC_TELSTAR_ID
+];
 
 const TEAM_ID_TO_NAME = {
     [CHELSEA_ID]: 'Chelsea',
@@ -75,8 +77,9 @@ const TEAM_ID_TO_NAME = {
     [GREUTHER_FURTH_ID]: 'Greuther Fürth',
     [HERACLES_ID]: 'Heracles',
     [AUSTRIA_WIEN_ID]: 'Austria Wien',
-    [ST_TRUIDEN_ID]: 'St. Truiden'
-}
+    [ST_TRUIDEN_ID]: 'St. Truiden',
+    [SC_TELSTAR_ID]: 'SC Telstar'
+};
 
 const TEAM_ID_TO_REGION = {
     [CHELSEA_ID]: REGION_EU,
@@ -101,8 +104,9 @@ const TEAM_ID_TO_REGION = {
     [GREUTHER_FURTH_ID]: REGION_OTHER,
     [HERACLES_ID]: REGION_EU,
     [AUSTRIA_WIEN_ID]: REGION_OTHER,
-    [ST_TRUIDEN_ID]: REGION_EU
-}
+    [ST_TRUIDEN_ID]: REGION_EU,
+    [SC_TELSTAR_ID]: REGION_OTHER
+};
 
 const TEAM_ID_TO_PLAYERS = {
     [CHELSEA_ID]: ['Christian Pulisic'],
@@ -127,13 +131,14 @@ const TEAM_ID_TO_PLAYERS = {
     [GREUTHER_FURTH_ID]: ['Julian Green'],
     [HERACLES_ID]: ['Luca de la Torre'],
     [AUSTRIA_WIEN_ID]: ['Erik Palmer-Brown'],
-    [ST_TRUIDEN_ID]: ['Chris Durkin']
-}
+    [ST_TRUIDEN_ID]: ['Chris Durkin'],
+    [SC_TELSTAR_ID]: ['Sebastian Soto']
+};
 
 const REGION_TO_API_KEY = {
     [REGION_EU]: 'tmf92zuvmrr873zjfugugwfd',
     [REGION_AM]: '8rycq5wra9sp4sdrbuchkh4g',
     [REGION_OTHER]: 'a7agjcd3cy6nzzycpcydyhv3'
-}
+};
 
 module.exports = {TEAMS, TEAM_ID_TO_NAME, TEAM_ID_TO_REGION, TEAM_ID_TO_PLAYERS, REGION_TO_API_KEY};

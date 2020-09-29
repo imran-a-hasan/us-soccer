@@ -1,7 +1,8 @@
 const redis = require('redis');
 const mysql = require('mysql');
+const fetch = require('node-fetch');
 const REDIS_PORT = process.env.PORT || 6379;
-const { TEAMS, TEAM_ID_TO_REGION, TEAM_ID_TO_PLAYERS, TEAM_ID_TO_NAME } = require('../constants/teams');
+const { TEAMS, TEAM_ID_TO_REGION, TEAM_ID_TO_PLAYERS, TEAM_ID_TO_NAME, REGION_TO_API_KEY } = require('../constants/teams');
 const redisClient = redis.createClient(REDIS_PORT)
 
 var connection = mysql.createConnection({
@@ -70,7 +71,7 @@ Promise.all(promises).then(values => {
                 const players = TEAM_ID_TO_PLAYERS[teamId];
                 players.forEach(player => {
                     connection.query(`INSERT INTO Schedule VALUES(\"${matchId}\", \"${dateTime}\", ${matchMonth}, \"${teamId}\", \"${homeTeamId}\",
-                        \"${awayTeamId}\", \"${homeTeamName}\", \"${awayTeamName}\", \"${competitionId}\", \"${competition}\", \"${player}\")`);
+                        \"${awayTeamId}\", \"${homeTeamName}\", \"${awayTeamName}\", \"${competitionId}\", \"${competition}\", \"${player}\")`, () => {});
                 });
             }
         }

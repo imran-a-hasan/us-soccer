@@ -22,8 +22,9 @@ const PLAYER_NAME_TO_IMAGE_ID = {
     'Julian Green': 461356,
     'Luca de la Torre': 780418,
     'Erik Palmer-Brown': 525133,
-    'Chris Durkin': 848424
-}
+    'Chris Durkin': 848424,
+    'Sebastian Soto': 1037036
+};
 
 const PLAYER_NAME_TO_MATCH_ID = {
     'Christian Pulisic': 'sr:player:809758',
@@ -49,8 +50,9 @@ const PLAYER_NAME_TO_MATCH_ID = {
     'Julian Green': 'sr:player:254191',
     'Luca de la Torre': 'sr:player:809766',
     'Erik Palmer-Brown': 'sr:player:540112',
-    'Chris Durkin': 'sr:player:1005899'
-}
+    'Chris Durkin': 'sr:player:1005899',
+    'Sebastian Soto': 'sr:player:1572442'
+};
 
 const PLAYER_MATCH_IDS = {
     'sr:player:809758': 'Christian Pulisic',
@@ -76,7 +78,8 @@ const PLAYER_MATCH_IDS = {
     'sr:player:254191':  'Julian Green',
     'sr:player:809766': 'Luca de la Torre',
     'sr:player:540112': 'Erik Palmer-Brown',
-    'sr:player:1005899': 'Chris Durkin'
-}
+    'sr:player:1005899': 'Chris Durkin',
+    'sr:player:1572442': 'Sebastian Soto'
+};
 
 module.exports = {PLAYER_NAME_TO_IMAGE_ID, PLAYER_NAME_TO_MATCH_ID, PLAYER_MATCH_IDS};

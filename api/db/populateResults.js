@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 const mysql = require('mysql');
 const redis = require('redis');
 const moment = require('moment');
-const { REGION_TO_API_KEY, TEAM_ID_TO_NAME, TEAM_ID_TO_PLAYERS } = require('../constants/teams');
+const { REGION_TO_API_KEY, TEAM_ID_TO_NAME } = require('../constants/teams');
 const { TOURNAMENT_TO_REGION_CODE } = require('../constants/tournaments');
 const { PLAYER_NAME_TO_MATCH_ID } = require('../constants/players');
 const REDIS_PORT = process.env.PORT || 6379;
@@ -29,7 +29,7 @@ const redisGet = (key, team, playerName, url) => {
             } else if (data !== null) {
                 resolve([team, data, playerName]);
             } else {
-                httpGet(key, team, pleyerName, resolve, url);
+                httpGet(key, team, playerName, resolve, url);
             }
         })
     });
@@ -64,6 +64,7 @@ connection.query(`SELECT * FROM Schedule WHERE date_time <= \"${dateTime}\"
         promises.push(redisGet(`match-result-${matchId.slice(9)}`, teamId, playerName, `https://api.sportradar.us/soccer-t3/${regionCode}/en/matches/${matchId}/summary.json?api_key=${apiKey}`));
     }
     Promise.all(promises).then(values => {
+        console.log("here");
         values.forEach(value => {
             const teamId = value[0];
             const matchJson = JSON.parse(value[1]);
@@ -93,7 +94,7 @@ connection.query(`SELECT * FROM Schedule WHERE date_time <= \"${dateTime}\"
             }
             connection.query(`INSERT INTO Results VALUES(\"${matchId}\", \"${dateTime}\", ${matchMonth}, \"${teamId}\", \"${homeTeamId}\", \"${awayTeamId}\",
             \"${homeTeamName}\", \"${awayTeamName}\", ${homeTeamGoals}, ${awayTeamGoals}, \"${competitionId}\", \"${competitionName}\", \"${playerName}\",
-            ${playerMinutes}, ${playerGoals}, ${playerAssists})`);
+            ${playerMinutes}, ${playerGoals}, ${playerAssists})`, function(err, rows, fields) {console.log(err)});
         });
     });
 });
