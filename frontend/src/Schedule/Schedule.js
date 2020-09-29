@@ -22,7 +22,9 @@ function Schedule({month}) {
             if (!matchDays[date]) {
                 matchDays[date] = [];
             }
-            const matchTime = moment(match.time.toLowerCase(), 'hh:mm:ss a').format('h:mm A');
+            var offset = new Date().getTimezoneOffset();
+            const matchMoment = moment(match.time.toLowerCase(), 'hh:mm:ss a');
+            const matchTime = matchMoment.minutes(matchMoment.minutes() - offset + 420).format('h:mm A');
             matchDays[date].push(
                 <ListGroup.Item> 
                     <div className='match-competition'><Badge pill variant='dark'>{match.competition}</Badge></div>

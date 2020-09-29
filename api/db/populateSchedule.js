@@ -66,7 +66,6 @@ Promise.all(promises).then(values => {
         const schedule = JSON.parse(value[1]).schedule;
         if (schedule) {
             for(let i = 0; i < schedule.length; i++) {
-                console.log(teamId);
                 const matchJson = schedule[i];
                 const matchId = matchJson.id;
                 const dateTime = matchJson.scheduled;
