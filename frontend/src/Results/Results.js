@@ -44,11 +44,11 @@ function Results({month}) {
                             <span className='match-info'> 
                                 <span className='home-team'>
                                     <span className='home-team-name'>{match.homeTeam === match.team ? <b>{match.homeTeam}</b> : match.homeTeam}</span>
-                                    <Image className='home-team-img' src={`data:image/png;base64,${match.homeTeamImage}`} roundedCircle />
+                                    <Image className='home-team-img' src={`data:image/png;base64,${match.homeTeamImage}`} />
                                 </span>
                                 <span className='match-score'>{match.homeTeamScore} - {match.awayTeamScore}</span>
                                 <span className='away-team'>
-                                    <Image className='away-team-img' src={`data:image/png;base64,${match.awayTeamImage}`} roundedCircle />
+                                    <Image className='away-team-img' src={`data:image/png;base64,${match.awayTeamImage}`} />
                                     <span className='away-team-name'>{match.awayTeam === match.team ? <b>{match.awayTeam}</b> : match.awayTeam}</span>                      
                                 </span> 
                             </span>

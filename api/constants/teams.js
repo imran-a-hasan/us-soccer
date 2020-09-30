@@ -9,7 +9,7 @@ const RB_LEIPZIG_ID = '36360';
 const FRANKFURT_ID = '2674';
 const WERDER_BREMEN_ID = '2534';
 const BOAVISTA_ID = '2995';
-const AJAX_ID = '2953';
+const BARCELONA_ID = '2817';
 const LILLE_ID = '1643';
 const BESIKTAS_ID = '3050';
 const CAEN_ID = '1667';
@@ -38,7 +38,7 @@ const TEAMS = [
     FRANKFURT_ID,
     FULHAM_ID,
     BOAVISTA_ID,
-    AJAX_ID,
+    BARCELONA_ID,
     LILLE_ID,
     WERDER_BREMEN_ID,
     MANCHESTER_CITY_ID,
@@ -66,7 +66,7 @@ const TEAM_ID_TO_NAME = {
     [FRANKFURT_ID]: 'Frankfurt',
     [FULHAM_ID]: 'Fulham',
     [BOAVISTA_ID]: 'Boavista',
-    [AJAX_ID]: 'Ajax',
+    [BARCELONA_ID]: 'FC Barcelona',
     [LILLE_ID]: 'Lille',
     [WERDER_BREMEN_ID]: 'Werder Bremen',
     [MANCHESTER_CITY_ID]: 'Manchester City',
@@ -94,7 +94,7 @@ const TEAM_ID_TO_REGION = {
     [FRANKFURT_ID]: REGION_EU,
     [FULHAM_ID]: REGION_EU,
     [BOAVISTA_ID]: REGION_EU,
-    [AJAX_ID]: REGION_EU,
+    [BARCELONA_ID]: REGION_EU,
     [LILLE_ID]: REGION_EU,
     [WERDER_BREMEN_ID]: REGION_EU,
     [MANCHESTER_CITY_ID]: REGION_EU,
@@ -122,7 +122,7 @@ const TEAM_ID_TO_PLAYERS = {
     [FRANKFURT_ID]: ['Timothy Chandler'],
     [FULHAM_ID]: ['Tim Ream', 'Antonee Robinson'],
     [BOAVISTA_ID]: ['Reggie Cannon'],
-    [AJAX_ID]: ['Sergino Dest'],
+    [BARCELONA_ID]: ['Sergino Dest'],
     [LILLE_ID]: ['Timothy Weah'],
     [WERDER_BREMEN_ID]: ['Josh Sargent'],
     [MANCHESTER_CITY_ID]: ['Zack Steffen'],

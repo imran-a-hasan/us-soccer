@@ -4,11 +4,11 @@ import urllib.request;
 import cairosvg;
 import time;
 
-eu = []
-other = [131]
+eu = [8]
 am = []
+other = [329]
 
-leagues = other
+leagues = eu + am + other
 
 euKey = 'tmf92zuvmrr873zjfugugwfd'
 amKey = '8rycq5wra9sp4sdrbuchkh4g'
