@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Badge, Card,  Image, ListGroup} from 'react-bootstrap';
 import '../css/schedule.css';
-const PST_OFFSET = 420;
 const moment = require('moment');
 
 function Schedule({month}) {
@@ -23,10 +22,12 @@ function Schedule({month}) {
             if (!matchDays[date]) {
                 matchDays[date] = [];
             }
-            var offset = new Date().getTimezoneOffset();
+            var offset = new Date(date).getTimezoneOffset();
             const matchMoment = moment(match.time.toLowerCase(), 'hh:mm:ss a');
-            const matchTime = matchMoment.minutes(matchMoment.minutes() - offset + PST_OFFSET).format('h:mm A');
-            matchDays[date].push(
+            const matchTime = matchMoment.minutes(matchMoment.minutes() - offset).format('h:mm A');
+            const matchDateTimeZone = moment(date + " " + match.time).format('YYYY-MM-DD')
+            const matchDate = date === matchDateTimeZone ? date : matchDateTimeZone;
+            matchDays[matchDate].push(
                 <ListGroup.Item> 
                     <div className='match-competition'><Badge pill variant='dark'>{match.competition}</Badge></div>
                     <div>
@@ -34,11 +35,11 @@ function Schedule({month}) {
                         <span className='match-info'> 
                             <span className='home-team'>
                                 <span className='home-team-name'>{match.homeTeam === match.team ? <b>{match.homeTeam}</b> : match.homeTeam}</span>
-                                <Image className='home-team-img' src={`data:image/png;base64,${match.homeTeamImage}`} />
+                                <Image className='home-team-img' src={match.homeTeamImage} />
                             </span>
                             <span className='match-vs'>vs.</span>   
                             <span className='away-team'>
-                                <Image className='away-team-img' src={`data:image/png;base64,${match.awayTeamImage}`} />
+                                <Image className='away-team-img' src={match.awayTeamImage} />
                                 <span className='away-team-name'>{match.awayTeam === match.team ? <b>{match.awayTeam}</b> : match.awayTeam}</span>                      
                             </span> 
                         </span>

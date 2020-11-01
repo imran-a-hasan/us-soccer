@@ -14,16 +14,17 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-const createResultObject = (teamId, homeTeamId, awayTeamId, homeTeamName, awayTeamName, homeTeamScore, awayTeamScore, competition, minutes, goals, assists, player) => {
+const createResultObject = (time, teamId, homeTeamId, awayTeamId, homeTeamName, awayTeamName, homeTeamScore, awayTeamScore, competition, minutes, goals, assists, player, homeTeamLogo, awayTeamLogo) => {
     return {
+        time: time,
         player: player,
         imageId: PLAYER_NAME_TO_IMAGE_ID[player],
         playerImage: fs.readFileSync(path.resolve(`images/players/${PLAYER_NAME_TO_IMAGE_ID[player]}.png`), 'base64'),
         team: TEAM_ID_TO_NAME[teamId],
         homeTeam: homeTeamName,
         awayTeam: awayTeamName,
-        homeTeamImage: fs.readFileSync(path.resolve(`images/teams/${homeTeamId}.png`), 'base64'),
-        awayTeamImage: fs.readFileSync(path.resolve(`images/teams/${awayTeamId}.png`), 'base64'),
+        homeTeamImage: homeTeamLogo,
+        awayTeamImage: awayTeamLogo,
         competition: competition,
         homeTeamScore: homeTeamScore,
         awayTeamScore: awayTeamScore,
@@ -44,8 +45,9 @@ function getResults(req, res) {
         connection.query(`SELECT * FROM Results WHERE month=${month}
         ORDER BY date_time ASC`, function(err, results, fields) {
             results.forEach(row => {
-                const dateTime = row.date_time;
-                const date = dateTime.toISOString().slice(0, 10);
+                const dateTime = moment.utc(row.date_time);
+                const date = dateTime.format().slice(0, 10);
+                const time = dateTime.format('HH:mm:ssZ');
                 const teamId = row.team_id;
                 const homeTeamId = row.home_team_id.slice(14);
                 const awayTeamId = row.away_team_id.slice(14);
@@ -58,10 +60,12 @@ function getResults(req, res) {
                 const goals = row.player_goals;
                 const assists = row.player_assists;
                 const player = row.player_name;
+                const homeTeamLogo = row.home_team_logo;
+                const awayTeamLogo = row.away_team_logo;
                 if (!allGames[date]) {
                     allGames[date] = [];
                 }
-                allGames[date].push(createResultObject(teamId, homeTeamId, awayTeamId, homeTeamName, awayTeamName, homeTeamScore, awayTeamScore, competition, minutes, goals, assists, player));
+                allGames[date].push(createResultObject(time, teamId, homeTeamId, awayTeamId, homeTeamName, awayTeamName, homeTeamScore, awayTeamScore, competition, minutes, goals, assists, player, homeTeamLogo, awayTeamLogo));
             });
             return res.status(200).send(JSON.stringify(allGames));
         });

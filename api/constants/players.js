@@ -24,36 +24,38 @@ const PLAYER_NAME_TO_IMAGE_ID = {
     'Erik Palmer-Brown': 525133,
     'Chris Durkin': 848424,
     'Sebastian Soto': 1037036,
-    'Indiana Vassilev': 1101144
+    'Indiana Vassilev': 1101144,
+    'Matt Miazga': 458324,
 };
 
 const PLAYER_NAME_TO_MATCH_ID = {
-    'Christian Pulisic': 'sr:player:809758',
-    'Weston McKennie': 'sr:player:1047121',
-    'Giovanni Reyna': 'sr:player:1832348',
-    'John Brooks': 'sr:player:132149',
-    'Tyler Adams': 'sr:player:809778',
-    'DeAndre Yedlin': 'sr:player:314040',
-    'Timothy Chandler': 'sr:player:40239',
-    'Tim Ream': 'sr:player:118179',
-    'Reggie Cannon': 'sr:player:1087492',
-    'Sergino Dest': 'sr:player:1322038',
-    'Timothy Weah': 'sr:player:1056851',
-    'Josh Sargent': 'sr:player:1134269',
-    'Antonee Robinson': 'sr:player:867054',
-    'Zack Steffen': 'sr:player:332995',
-    'Tyler Boyd': 'sr:player:277437',
-    'Nicholas Gioacchini': 'sr:player:1944232',
-    'Lynden Gooch': 'sr:player:792037',
-    'Duane Holmes': 'sr:player:309290',
-    'Johnny Cardoso': '-1',
-    'Ulysses Llanez': 'sr:player:1736547',
-    'Julian Green': 'sr:player:254191',
-    'Luca de la Torre': 'sr:player:809766',
-    'Erik Palmer-Brown': 'sr:player:540112',
-    'Chris Durkin': 'sr:player:1005899',
-    'Sebastian Soto': 'sr:player:1572442',
-    'Indiana Vassilev': 'sr:player:1322050'
+    'Christian Pulisic': 32438,
+    'Weston McKennie': 608189,
+    'Giovanni Reyna': 34432365,
+    'John Brooks': 31759,
+    'Tyler Adams': 262324,
+    'DeAndre Yedlin': 4317,
+    'Timothy Chandler': 31254,
+    'Tim Ream': 2454,
+    'Reggie Cannon': 429918,
+    'Sergino Dest': 5640878,
+    'Timothy Weah': 537332,
+    'Josh Sargent': 5640884,
+    'Antonee Robinson': 581067,
+    'Zack Steffen': 47285,
+    'Tyler Boyd': 161258,
+    'Nicholas Gioacchini': 9964257,
+    'Lynden Gooch': 1778,
+    'Duane Holmes': 5829,
+    'Johnny Cardoso': 37261342,
+    'Ulysses Llanez': 785961,
+    'Julian Green': 32096,
+    'Luca de la Torre': 8333,
+    'Erik Palmer-Brown': 163109,
+    'Chris Durkin': 275565,
+    'Sebastian Soto': 18218556,
+    'Indiana Vassilev': 5640883,
+    'Matt Miazga': 4619
 };
 
 const PLAYER_MATCH_IDS = {
@@ -82,7 +84,8 @@ const PLAYER_MATCH_IDS = {
     'sr:player:540112': 'Erik Palmer-Brown',
     'sr:player:1005899': 'Chris Durkin',
     'sr:player:1572442': 'Sebastian Soto',
-    'sr:player:1322050': 'Indiana Vassilev'
+    'sr:player:1322050': 'Indiana Vassilev',
+    '-1': 'Matt Miazga'
 };
 
 module.exports = {PLAYER_NAME_TO_IMAGE_ID, PLAYER_NAME_TO_MATCH_ID, PLAYER_MATCH_IDS};
