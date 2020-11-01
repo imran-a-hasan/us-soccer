@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 const mysql = require('mysql');
 const redis = require('redis');
 const moment = require('moment');
-const { REGION_TO_API_KEY, TEAM_ID_TO_NAME, SM_API_KEY } = require('../constants/teams');
+const { REGION_TO_API_KEY, TEAM_ID_TO_NAME, SM_TEAM_ID_TO_NAME, SM_API_KEY } = require('../constants/teams');
 const { TOURNAMENT_TO_REGION_CODE } = require('../constants/tournaments');
 const { PLAYER_NAME_TO_MATCH_ID } = require('../constants/players');
 const REDIS_PORT = process.env.PORT || 6379;
@@ -21,7 +21,7 @@ const redisPut = (key, value) => {
     redisClient.set(key, value);
 }
 
-const redisGet = (key, team, playerName) => {
+const redisGet = (key, team, playerName, url) => {
     return new Promise(resolve => {
         redisClient.get(key, (error, data) => {     
             if (error) {
@@ -29,13 +29,13 @@ const redisGet = (key, team, playerName) => {
             } else if (data !== null) {
                 resolve([team, data, playerName]);
             } else {
-                httpGet(key, team, playerName, resolve);
+                httpGet(key, team, playerName, url, resolve);
             }
         })
     });
 }
 
-const httpGet = (key, team, playerName, resolve, url) => {
+const httpGet = (key, team, playerName, url, resolve) => {
     fetch(url)
     .then(res => res.json())
     .then(json => {
@@ -92,19 +92,19 @@ connection.query(`SELECT * FROM Schedule2 WHERE date_time <= \"${dateTime}\"
             let playerMinutes = 0;
             let playerGoals = 0;
             let playerAssists = 0;
-            const teamStats = homeTeamId === teamId ? matchJson.lineup.data[0] : matchJson.lineup.data[1];
-            if (teamStats) {           
+            const teamStats = homeTeamId === teamId ? matchJson.lineup.data : matchJson.lineup.data;
+            if (teamStats) {    
                 teamStats.forEach(playerJson => {
                     if(playerJson.player_id === PLAYER_NAME_TO_MATCH_ID[playerName]) {
-                        playerMinutes = playerJson.stats.other.minutes_played;
-                        playerGoals = playerJson.stats.goals.scored || 0;
-                        playerAssists = playerJson.stats.goals.assists || 0;
+                        playerMinutes = playerJson.stats.other.minutes_played ?? 0;
+                        playerGoals = playerJson.stats.goals.scored ?? 0;
+                        playerAssists = playerJson.stats.goals.assists ?? 0;
                     }
                 });
             }
             connection.query(`INSERT INTO Results2 VALUES(\"${matchId}\", \"${dateTime}\", ${matchMonth}, \"${teamId}\", \"${homeTeamId}\", \"${awayTeamId}\",
             \"${homeTeamName}\", \"${awayTeamName}\", ${homeTeamGoals}, ${awayTeamGoals}, \"${competitionId}\", \"${competitionName}\", \"${playerName}\",
-            ${playerMinutes}, ${playerGoals}, ${playerAssists}, \"${homeTeamLogo}\", \"${awayTeamLogo}\")`, function(err, rows, fields) {});
+            ${playerMinutes}, ${playerGoals}, ${playerAssists}, \"${homeTeamLogo}\", \"${awayTeamLogo}\")`, function(err, rows, fields) { });
         });
     });
 });

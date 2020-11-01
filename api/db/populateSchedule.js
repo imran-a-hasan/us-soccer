@@ -75,43 +75,47 @@ Promise.all(promises).then(values => {
         if (homeSchedule) {
             for(let i = 0; i < homeSchedule.length; i++) {
                 const matchJson = homeSchedule[i];
-                const matchId = matchJson.id;
-                const dateTime = matchJson.time.starting_at.date_time;
-                const matchMonth = new Date(dateTime).getMonth() + 1;
-                const homeTeamId = matchJson.localteam_id;
-                const homeTeamName = SM_TEAM_ID_TO_NAME[homeTeamId];
-                const awayTeamId = matchJson.visitorteam_id;
-                const awayTeamName = matchJson.visitorTeam.data.name;
-                const competitionId = matchJson.league.data.id;
-                const competition = matchJson.league.data.name;
-                const players = SM_TEAM_ID_TO_PLAYERS[teamId];
-                const homeTeamLogo = matchJson.localTeam.data.logo_path;
-                const awayTeamLogo = matchJson.visitorTeam.data.logo_path;
-                players.forEach(player => {
-                    connection.query(`INSERT INTO Schedule2 VALUES(\"${matchId}\", \"${dateTime}\", ${matchMonth}, \"${teamId}\", \"${homeTeamId}\",
-                        \"${awayTeamId}\", \"${homeTeamName}\", \"${awayTeamName}\", \"${competitionId}\", \"${competition}\", \"${player}\", \"${homeTeamLogo}\", \"${awayTeamLogo}\")`, function(error, rows, fields) {});
-                });
+                if (matchJson.time.status === "NS") {
+                    const matchId = matchJson.id;
+                    const dateTime = matchJson.time.starting_at.date_time;
+                    const matchMonth = new Date(dateTime).getMonth() + 1;
+                    const homeTeamId = matchJson.localteam_id;
+                    const homeTeamName = SM_TEAM_ID_TO_NAME[homeTeamId];
+                    const awayTeamId = matchJson.visitorteam_id;
+                    const awayTeamName = matchJson.visitorTeam.data.name;
+                    const competitionId = matchJson.league.data.id;
+                    const competition = matchJson.league.data.name;
+                    const players = SM_TEAM_ID_TO_PLAYERS[teamId];
+                    const homeTeamLogo = matchJson.localTeam.data.logo_path;
+                    const awayTeamLogo = matchJson.visitorTeam.data.logo_path;
+                    players.forEach(player => {
+                        connection.query(`INSERT INTO Schedule2 VALUES(\"${matchId}\", \"${dateTime}\", ${matchMonth}, \"${teamId}\", \"${homeTeamId}\",
+                            \"${awayTeamId}\", \"${homeTeamName}\", \"${awayTeamName}\", \"${competitionId}\", \"${competition}\", \"${player}\", \"${homeTeamLogo}\", \"${awayTeamLogo}\")`, function(error, rows, fields) {});
+                    });
+                }
             }
         }
         if (awaySchedule) {
             for(let i = 0; i < awaySchedule.length; i++) {
                 const matchJson = awaySchedule[i];
-                const matchId = matchJson.id;
-                const dateTime = matchJson.time.starting_at.date_time;
-                const matchMonth = new Date(dateTime).getMonth() + 1;
-                const homeTeamId = matchJson.localteam_id;
-                const homeTeamName = matchJson.localTeam.data.name; 
-                const awayTeamId = matchJson.visitorteam_id;
-                const awayTeamName = SM_TEAM_ID_TO_NAME[awayTeamId];
-                const competitionId = matchJson.league.data.id;
-                const competition = matchJson.league.data.name;
-                const players = SM_TEAM_ID_TO_PLAYERS[teamId];
-                const homeTeamLogo = matchJson.localTeam.data.logo_path;
-                const awayTeamLogo = matchJson.visitorTeam.data.logo_path;
-                players.forEach(player => {
-                    connection.query(`INSERT INTO Schedule2 VALUES(\"${matchId}\", \"${dateTime}\", ${matchMonth}, \"${teamId}\", \"${homeTeamId}\",
-                        \"${awayTeamId}\", \"${homeTeamName}\", \"${awayTeamName}\", \"${competitionId}\", \"${competition}\", \"${player}\", \"${homeTeamLogo}\", \"${awayTeamLogo}\")`, function(error, rows, fields) {});
-                });
+                if (matchJson.time.status === "NS") {
+                    const matchId = matchJson.id;
+                    const dateTime = matchJson.time.starting_at.date_time;
+                    const matchMonth = new Date(dateTime).getMonth() + 1;
+                    const homeTeamId = matchJson.localteam_id;
+                    const homeTeamName = matchJson.localTeam.data.name; 
+                    const awayTeamId = matchJson.visitorteam_id;
+                    const awayTeamName = SM_TEAM_ID_TO_NAME[awayTeamId];
+                    const competitionId = matchJson.league.data.id;
+                    const competition = matchJson.league.data.name;
+                    const players = SM_TEAM_ID_TO_PLAYERS[teamId];
+                    const homeTeamLogo = matchJson.localTeam.data.logo_path;
+                    const awayTeamLogo = matchJson.visitorTeam.data.logo_path;
+                    players.forEach(player => {
+                        connection.query(`INSERT INTO Schedule2 VALUES(\"${matchId}\", \"${dateTime}\", ${matchMonth}, \"${teamId}\", \"${homeTeamId}\",
+                            \"${awayTeamId}\", \"${homeTeamName}\", \"${awayTeamName}\", \"${competitionId}\", \"${competition}\", \"${player}\", \"${homeTeamLogo}\", \"${awayTeamLogo}\")`, function(error, rows, fields) {});
+                    });
+                }
             }
         }
     });

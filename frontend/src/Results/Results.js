@@ -66,16 +66,18 @@ function Results({month}) {
         const res = [];
         Object.keys(matchDays).forEach(date => {
             const dateObj = new Date(date);
-            res.push(
-                <Card>
-                    <Card.Header className='date-header'>
-                        {`${dateObj.getUTCMonth() + 1}/${dateObj.getUTCDate()}/${dateObj.getFullYear()}`}
-                    </Card.Header>
-                    <ListGroup className='matches-container'>
-                        {matchDays[date]}
-                    </ListGroup>
-                </Card>
-            );
+            if (matchDays[date].length != 0) {
+                res.push(
+                    <Card>
+                        <Card.Header className='date-header'>
+                            {`${dateObj.getUTCMonth() + 1}/${dateObj.getUTCDate()}/${dateObj.getFullYear()}`}
+                        </Card.Header>
+                        <ListGroup className='matches-container'>
+                            {matchDays[date]}
+                        </ListGroup>
+                    </Card>
+                );
+            }
         });
         return res;   
     
