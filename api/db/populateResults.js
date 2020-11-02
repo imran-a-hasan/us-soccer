@@ -47,10 +47,10 @@ const httpGet = (key, team, playerName, url, resolve) => {
 }
 
 const TIMEOUT = false;
-
-const dateTime = moment.utc().format('YYYY-MM-DD HH:mm:ss');
+const currUtc = moment.utc();
+const cutoff = currUtc.hour(currUtc.hour() - 2).format('YYYY-MM-DD HH:mm:ss');
 matches = [];
-connection.query(`SELECT * FROM Schedule2 WHERE date_time <= \"${dateTime}\"
+connection.query(`SELECT * FROM Schedule2 WHERE date_time <= \"${cutoff}\"
     ORDER BY date_time ASC`, function(err, results, fields) {
     results.forEach(row => {
         matches.push([row.match_id, row.team_id, row.competition_id, row.player_name]);
@@ -61,7 +61,7 @@ connection.query(`SELECT * FROM Schedule2 WHERE date_time <= \"${dateTime}\"
         const teamId = matches[i][1];
         const competitionId = matches[i][2];
         const playerName = matches[i][3];
-        const url = `https://soccer.sportmonks.com/api/v2.0/fixtures/${matchId}?api_token=${SM_API_KEY}&include=localTeam,visitorTeam,lineup,league,stats`;
+        const url = `https://soccer.sportmonks.com/api/v2.0/fixtures/${matchId}?api_token=${SM_API_KEY}&include=localTeam,visitorTeam,lineup,bench,league,stats`;
         if (TIMEOUT) {
             setTimeout(() => {
                 promises.push(redisGet(`match-result-${matchId}`, teamId, playerName, url));
@@ -92,19 +92,34 @@ connection.query(`SELECT * FROM Schedule2 WHERE date_time <= \"${dateTime}\"
             let playerMinutes = 0;
             let playerGoals = 0;
             let playerAssists = 0;
-            const teamStats = homeTeamId === teamId ? matchJson.lineup.data : matchJson.lineup.data;
-            if (teamStats) {    
-                teamStats.forEach(playerJson => {
+            let inSquad = false;
+            const startingLineupStats = matchJson.lineup.data;
+            if (startingLineupStats) {    
+                startingLineupStats.forEach(playerJson => {
                     if(playerJson.player_id === PLAYER_NAME_TO_MATCH_ID[playerName]) {
                         playerMinutes = playerJson.stats.other.minutes_played ?? 0;
                         playerGoals = playerJson.stats.goals.scored ?? 0;
                         playerAssists = playerJson.stats.goals.assists ?? 0;
+                        inSquad = true;
                     }
                 });
             }
+            if (!inSquad) {
+                const benchStats = matchJson.bench.data;
+                if (benchStats) {
+                    benchStats.forEach(playerJson => {
+                        if(playerJson.player_id === PLAYER_NAME_TO_MATCH_ID[playerName]) {
+                            playerMinutes = playerJson.stats.other.minutes_played ?? 0;
+                            playerGoals = playerJson.stats.goals.scored ?? 0;
+                            playerAssists = playerJson.stats.goals.assists ?? 0;
+                            inSquad = true;
+                        }
+                    });
+                }
+            }
             connection.query(`INSERT INTO Results2 VALUES(\"${matchId}\", \"${dateTime}\", ${matchMonth}, \"${teamId}\", \"${homeTeamId}\", \"${awayTeamId}\",
             \"${homeTeamName}\", \"${awayTeamName}\", ${homeTeamGoals}, ${awayTeamGoals}, \"${competitionId}\", \"${competitionName}\", \"${playerName}\",
-            ${playerMinutes}, ${playerGoals}, ${playerAssists}, \"${homeTeamLogo}\", \"${awayTeamLogo}\")`, function(err, rows, fields) { });
+            ${playerMinutes}, ${playerGoals}, ${playerAssists}, \"${homeTeamLogo}\", \"${awayTeamLogo}\", ${inSquad})`, function(err, rows, fields) { });
         });
     });
 });

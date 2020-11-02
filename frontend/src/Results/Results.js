@@ -55,7 +55,9 @@ function Results({month}) {
                                     <span className='away-team-name'>{match.awayTeam === match.team ? <b>{match.awayTeam}</b> : match.awayTeam}</span>                      
                                 </span> 
                             </span>
-                            {match.minutes !== 0 ? <span className='minutes'>{match.minutes}'</span> : null}
+                            {match.minutes !== 0 ? <span className='minutes'>{match.minutes}</span> : null}
+                            {match.minutes === 0 && match.inSquad ? <span className='bench'>&#x1FA91;</span> : null}
+                            {!match.inSquad ? <span className='not-in-squad'>&#x274C;</span> : null}
                             <span className='goals'>{getGoals(match.goals)}</span>
                             <span className='assists'>{getAssists(match.assists)}</span>
                         </div>

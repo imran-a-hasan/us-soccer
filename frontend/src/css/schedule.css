@@ -149,4 +149,16 @@ display: inline-block;;
 .minutes {
     font-size: 20px;
     margin-right: 2%;
+    background-color: #14a3b8;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+}
+
+.bench {
+    font-size: 30px;
+}
+
+.not-in-squad {
+    font-size: 25px;
 }

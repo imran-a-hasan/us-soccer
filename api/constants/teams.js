@@ -50,6 +50,7 @@ const SM_ST_TRUIDEN_ID = '355';
 const SM_SC_TELSTAR_ID = '1550';
 const SM_BURTON_ALBION_ID = '150';
 const SM_ANDERLECHT_ID = '2555';
+const SM_QPR_ID = '47';
 
 const REGION_EU = 'eu';
 const REGION_AM = 'am';
@@ -109,7 +110,8 @@ const SM_TEAMS = [
     SM_ST_TRUIDEN_ID,
     SM_SC_TELSTAR_ID,
     SM_BURTON_ALBION_ID,
-    SM_ANDERLECHT_ID
+    SM_ANDERLECHT_ID,
+    SM_QPR_ID
 ];
 
 const TEAM_ID_TO_NAME = {
@@ -166,7 +168,8 @@ const SM_TEAM_ID_TO_NAME = {
     [SM_ST_TRUIDEN_ID]: 'St. Truiden',
     [SM_SC_TELSTAR_ID]: 'SC Telstar',
     [SM_BURTON_ALBION_ID]: 'Burton Albion',
-    [SM_ANDERLECHT_ID]: 'Anderlecht'
+    [SM_ANDERLECHT_ID]: 'Anderlecht',
+    [SM_QPR_ID]: 'Queens Park Rangers'
 };
 
 const TEAM_ID_TO_REGION = {
@@ -251,7 +254,8 @@ const SM_TEAM_ID_TO_PLAYERS = {
     [SM_ST_TRUIDEN_ID]: ['Chris Durkin'],
     [SM_SC_TELSTAR_ID]: ['Sebastian Soto'],
     [SM_BURTON_ALBION_ID]: ['Indiana Vassilev'],
-    [SM_ANDERLECHT_ID]: ['Matt Miazga']
+    [SM_ANDERLECHT_ID]: ['Matt Miazga'],
+    [SM_QPR_ID]: ['Charlie Kelman']
 };
 
 const REGION_TO_API_KEY = {

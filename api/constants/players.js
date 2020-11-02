@@ -26,6 +26,7 @@ const PLAYER_NAME_TO_IMAGE_ID = {
     'Sebastian Soto': 1037036,
     'Indiana Vassilev': 1101144,
     'Matt Miazga': 458324,
+    'Charlie Kelman': 982745
 };
 
 const PLAYER_NAME_TO_MATCH_ID = {
@@ -55,7 +56,8 @@ const PLAYER_NAME_TO_MATCH_ID = {
     'Chris Durkin': 275565,
     'Sebastian Soto': 18218556,
     'Indiana Vassilev': 5640883,
-    'Matt Miazga': 4619
+    'Matt Miazga': 4619,
+    'Charlie Kelman': 25922177
 };
 
 const PLAYER_MATCH_IDS = {

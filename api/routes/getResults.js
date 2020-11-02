@@ -15,7 +15,7 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-const createResultObject = (time, teamId, homeTeamId, awayTeamId, homeTeamName, awayTeamName, homeTeamScore, awayTeamScore, competition, minutes, goals, assists, player, homeTeamLogo, awayTeamLogo) => {
+const createResultObject = (time, teamId, homeTeamId, awayTeamId, homeTeamName, awayTeamName, homeTeamScore, awayTeamScore, competition, minutes, goals, assists, player, homeTeamLogo, awayTeamLogo, inSquad) => {
     return {
         time: time,
         player: player,
@@ -31,7 +31,8 @@ const createResultObject = (time, teamId, homeTeamId, awayTeamId, homeTeamName, 
         awayTeamScore: awayTeamScore,
         minutes: minutes,
         goals: goals,
-        assists: assists
+        assists: assists,
+        inSquad: inSquad
     }
 }
 
@@ -63,10 +64,11 @@ function getResults(req, res) {
                 const player = row.player_name;
                 const homeTeamLogo = row.home_team_logo;
                 const awayTeamLogo = row.away_team_logo;
+                const inSquad = row.in_squad;
                 if (!allGames[date]) {
                     allGames[date] = [];
                 }
-                allGames[date].push(createResultObject(time, teamId, homeTeamId, awayTeamId, homeTeamName, awayTeamName, homeTeamScore, awayTeamScore, competition, minutes, goals, assists, player, homeTeamLogo, awayTeamLogo));
+                allGames[date].push(createResultObject(time, teamId, homeTeamId, awayTeamId, homeTeamName, awayTeamName, homeTeamScore, awayTeamScore, competition, minutes, goals, assists, player, homeTeamLogo, awayTeamLogo, inSquad));
             });
             return res.status(200).send(JSON.stringify(allGames));
         });

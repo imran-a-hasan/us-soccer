@@ -35,7 +35,8 @@ function getSchedule(req, res) {
     const month = Number(req.query.month);  
     if (month >= 1 && month <= 12) {
         const allGames = {};
-        const cutoff = moment.utc().format('YYYY-MM-DD HH:mm:ss');
+        const currUtc = moment.utc();
+        const cutoff = currUtc.hour(currUtc.hour() - 2).format('YYYY-MM-DD HH:mm:ss');
         connection.query(`SELECT * FROM Schedule2 WHERE month=${month} AND date_time >= \"${cutoff}\"
         ORDER BY date_time ASC`, function(err, results, fields) {
             results.forEach(row => {
