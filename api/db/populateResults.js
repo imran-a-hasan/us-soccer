@@ -2,8 +2,7 @@ const fetch = require('node-fetch');
 const mysql = require('mysql');
 const redis = require('redis');
 const moment = require('moment');
-const { REGION_TO_API_KEY, TEAM_ID_TO_NAME, SM_TEAM_ID_TO_NAME, SM_API_KEY } = require('../constants/teams');
-const { TOURNAMENT_TO_REGION_CODE } = require('../constants/tournaments');
+const { SM_TEAM_ID_TO_NAME, SM_API_KEY } = require('../constants/teams');
 const { PLAYER_NAME_TO_MATCH_ID } = require('../constants/players');
 const REDIS_PORT = process.env.PORT || 6379;
 const redisClient = redis.createClient(REDIS_PORT)
@@ -53,14 +52,13 @@ matches = [];
 connection.query(`SELECT * FROM Schedule2 WHERE date_time <= \"${cutoff}\"
     ORDER BY date_time ASC`, function(err, results, fields) {
     results.forEach(row => {
-        matches.push([row.match_id, row.team_id, row.competition_id, row.player_name]);
+        matches.push([row.match_id, row.team_id, row.player_name]);
     });
     const promises = [];
     for (let i = 0; i < matches.length; i++) {
         const matchId = matches[i][0];
         const teamId = matches[i][1];
-        const competitionId = matches[i][2];
-        const playerName = matches[i][3];
+        const playerName = matches[i][2];
         const url = `https://soccer.sportmonks.com/api/v2.0/fixtures/${matchId}?api_token=${SM_API_KEY}&include=localTeam,visitorTeam,lineup,bench,league,stats`;
         if (TIMEOUT) {
             setTimeout(() => {
@@ -123,6 +121,3 @@ connection.query(`SELECT * FROM Schedule2 WHERE date_time <= \"${cutoff}\"
         });
     });
 });
-
-
-// match id, date time, month, team id, home team id, away team id, home team name, away team name, home team goals, away team goals, competition id, competition name, player name, player minutes, player goals, player assists 

@@ -8,7 +8,7 @@ function MonthNav({onMonthChange, nextDisabled}) {
 
     useEffect(() => {
         onMonthChange(month);
-    }, [month]);
+    }, [month, onMonthChange]);
 
     return (
         <ButtonToolbar className='month-container'>

@@ -17,7 +17,7 @@ function Results({month}) {
     function getGoals(count) {
         let res = [];
         for (let i = 0; i < count; i++) {
-            res.push(<span role='img'>&#9917;</span>);
+            res.push(<span role='img' aria-label='goal'>&#9917;</span>);
         }
         return res;
     }
@@ -25,7 +25,7 @@ function Results({month}) {
     function getAssists(count) {
         let res = [];
         for (let i = 0; i < count; i++) {
-            res.push(<span role='img'>&#x1F170;</span>);
+            res.push(<span role='img' aria-label='assist'>&#x1F170;</span>);
         }
         return res;
     }
@@ -56,8 +56,8 @@ function Results({month}) {
                                 </span> 
                             </span>
                             {match.minutes !== 0 ? <span className='minutes'>{match.minutes}</span> : null}
-                            {match.minutes === 0 && match.inSquad ? <span className='bench'>&#x1FA91;</span> : null}
-                            {!match.inSquad ? <span className='not-in-squad'>&#x274C;</span> : null}
+                            {match.minutes === 0 && match.inSquad ? <span className='bench' role='img' aria-label='bench'>&#x1FA91;</span> : null}
+                            {!match.inSquad ? <span className='not-in-squad' role='img' aria-label='not in squad'>&#x274C;</span> : null}
                             <span className='goals'>{getGoals(match.goals)}</span>
                             <span className='assists'>{getAssists(match.assists)}</span>
                         </div>
@@ -68,7 +68,7 @@ function Results({month}) {
         const res = [];
         Object.keys(matchDays).forEach(date => {
             const dateObj = new Date(date);
-            if (matchDays[date].length != 0) {
+            if (matchDays[date].length !== 0) {
                 res.push(
                     <Card>
                         <Card.Header className='date-header'>

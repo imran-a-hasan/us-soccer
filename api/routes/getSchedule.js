@@ -3,7 +3,7 @@ const path = require('path');
 const mysql = require('mysql');
 const moment = require('moment');
 const { TOURNAMENT_NAMES } = require('../constants/tournaments');
-const { TEAM_ID_TO_NAME, SM_TEAM_ID_TO_NAME } = require('../constants/teams');
+const { SM_TEAM_ID_TO_NAME } = require('../constants/teams');
 const { PLAYER_NAME_TO_IMAGE_ID } = require('../constants/players');
 
 
@@ -16,7 +16,7 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-const createMatchObject = (time, teamId, homeTeamId, awayTeamId, homeTeamName, awayTeamName, player, competition, homeTeamLogo, awayTeamLogo) => {
+const createMatchObject = (time, teamId, homeTeamName, awayTeamName, player, competition, homeTeamLogo, awayTeamLogo) => {
     return {
         time: time,
         player: player,
@@ -44,8 +44,6 @@ function getSchedule(req, res) {
                 const date = dateTime.format().slice(0, 10);
                 const time = dateTime.format('HH:mm:ssZ');
                 const teamId = row.team_id;
-                const homeTeamId = row.home_team_id.slice(14);
-                const awayTeamId = row.away_team_id.slice(14);
                 const homeTeamName = row.home_team_name;
                 const awayTeamName = row.away_team_name;
                 const competition = TOURNAMENT_NAMES[row.competition_id] || row.competition_name;
@@ -55,7 +53,7 @@ function getSchedule(req, res) {
                 if (!allGames[date]) {
                     allGames[date] = [];
                 }
-                allGames[date].push(createMatchObject(time, teamId, homeTeamId, awayTeamId, homeTeamName, awayTeamName, player, competition, homeTeamLogo, awayTeamLogo));
+                allGames[date].push(createMatchObject(time, teamId, homeTeamName, awayTeamName, player, competition, homeTeamLogo, awayTeamLogo));
             });
             return res.status(200).send(JSON.stringify(allGames));
         });

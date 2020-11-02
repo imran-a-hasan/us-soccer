@@ -2,7 +2,7 @@ const redis = require('redis');
 const mysql = require('mysql');
 const fetch = require('node-fetch');
 const REDIS_PORT = process.env.PORT || 6379;
-const { TEAMS, TEAM_ID_TO_REGION, TEAM_ID_TO_PLAYERS, TEAM_ID_TO_NAME, REGION_TO_API_KEY, SM_API_KEY, SM_TEAMS, SM_TEAM_ID_TO_PLAYERS, SM_TEAM_ID_TO_NAME } = require('../constants/teams');
+const { SM_API_KEY, SM_TEAMS, SM_TEAM_ID_TO_PLAYERS, SM_TEAM_ID_TO_NAME } = require('../constants/teams');
 const redisClient = redis.createClient(REDIS_PORT)
 
 var connection = mysql.createConnection({
@@ -38,9 +38,6 @@ const redisGet = (key, team) => {
 }
 
 const httpGet = (key, team, resolve) => {
-  //  const regionCode = TEAM_ID_TO_REGION[team];
-   // const apiKey = REGION_TO_API_KEY[regionCode];
-    
     fetch(`https://soccer.sportmonks.com/api/v2.0/teams/${team}?api_token=${SM_API_KEY}&include=localFixtures.localTeam,localFixtures.visitorTeam,visitorFixtures.localTeam,visitorFixtures.visitorTeam,visitorFixtures.league,localFixtures.league`)
     .then(res => res.json())
     .then(json => {
@@ -121,8 +118,3 @@ Promise.all(promises).then(values => {
     });
     connection.end();
 });
-
-
-
-
-// match id, date time, month, team id, home team id, away team id, home team name, away team name, competition id, competition name, player id
