@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const redis = require('redis');
 const moment = require('moment');
 const { SM_TEAM_ID_TO_NAME, SM_API_KEY } = require('../constants/teams');
@@ -8,8 +8,9 @@ const REDIS_PORT = process.env.PORT || 6379;
 const redisClient = redis.createClient(REDIS_PORT)
 
 var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
+    host: 'ussoccerdb.cdvnopviopp5.us-east-1.rds.amazonaws.com',
+    port: '3306',
+    user: 'admin',
     password: 'password',
     database: 'us_soccer'
 });
@@ -49,8 +50,9 @@ const TIMEOUT = false;
 const currUtc = moment.utc();
 const cutoff = currUtc.hour(currUtc.hour() - 2).format('YYYY-MM-DD HH:mm:ss');
 matches = [];
-connection.query(`SELECT * FROM Schedule2 WHERE date_time <= \"${cutoff}\"
+connection.query(`SELECT * FROM Schedule WHERE date_time <= \"${cutoff}\"
     ORDER BY date_time ASC`, function(err, results, fields) {
+        console.log(err);
     results.forEach(row => {
         matches.push([row.match_id, row.team_id, row.player_name]);
     });
@@ -115,7 +117,7 @@ connection.query(`SELECT * FROM Schedule2 WHERE date_time <= \"${cutoff}\"
                     });
                 }
             }
-            connection.query(`INSERT INTO Results2 VALUES(\"${matchId}\", \"${dateTime}\", ${matchMonth}, \"${teamId}\", \"${homeTeamId}\", \"${awayTeamId}\",
+            connection.query(`INSERT INTO Results VALUES(\"${matchId}\", \"${dateTime}\", ${matchMonth}, \"${teamId}\", \"${homeTeamId}\", \"${awayTeamId}\",
             \"${homeTeamName}\", \"${awayTeamName}\", ${homeTeamGoals}, ${awayTeamGoals}, \"${competitionId}\", \"${competitionName}\", \"${playerName}\",
             ${playerMinutes}, ${playerGoals}, ${playerAssists}, \"${homeTeamLogo}\", \"${awayTeamLogo}\", ${inSquad})`, function(err, rows, fields) { });
         });

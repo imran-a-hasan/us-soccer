@@ -1,13 +1,14 @@
 const redis = require('redis');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const fetch = require('node-fetch');
 const REDIS_PORT = process.env.PORT || 6379;
 const { SM_API_KEY, SM_TEAMS, SM_TEAM_ID_TO_PLAYERS, SM_TEAM_ID_TO_NAME } = require('../constants/teams');
 const redisClient = redis.createClient(REDIS_PORT)
 
 var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
+    host: 'ussoccerdb.cdvnopviopp5.us-east-1.rds.amazonaws.com',
+    port: '3306',
+    user: 'admin',
     password: 'password',
     database: 'us_soccer'
 });
@@ -86,7 +87,7 @@ Promise.all(promises).then(values => {
                     const homeTeamLogo = matchJson.localTeam.data.logo_path;
                     const awayTeamLogo = matchJson.visitorTeam.data.logo_path;
                     players.forEach(player => {
-                        connection.query(`INSERT INTO Schedule2 VALUES(\"${matchId}\", \"${dateTime}\", ${matchMonth}, \"${teamId}\", \"${homeTeamId}\",
+                        connection.query(`INSERT INTO Schedule VALUES(\"${matchId}\", \"${dateTime}\", ${matchMonth}, \"${teamId}\", \"${homeTeamId}\",
                             \"${awayTeamId}\", \"${homeTeamName}\", \"${awayTeamName}\", \"${competitionId}\", \"${competition}\", \"${player}\", \"${homeTeamLogo}\", \"${awayTeamLogo}\")`, function(error, rows, fields) {});
                     });
                 }
@@ -109,7 +110,7 @@ Promise.all(promises).then(values => {
                     const homeTeamLogo = matchJson.localTeam.data.logo_path;
                     const awayTeamLogo = matchJson.visitorTeam.data.logo_path;
                     players.forEach(player => {
-                        connection.query(`INSERT INTO Schedule2 VALUES(\"${matchId}\", \"${dateTime}\", ${matchMonth}, \"${teamId}\", \"${homeTeamId}\",
+                        connection.query(`INSERT INTO Schedule VALUES(\"${matchId}\", \"${dateTime}\", ${matchMonth}, \"${teamId}\", \"${homeTeamId}\",
                             \"${awayTeamId}\", \"${homeTeamName}\", \"${awayTeamName}\", \"${competitionId}\", \"${competition}\", \"${player}\", \"${homeTeamLogo}\", \"${awayTeamLogo}\")`, function(error, rows, fields) {});
                     });
                 }

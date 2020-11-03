@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const moment = require('moment');
 const { TOURNAMENT_NAMES } = require('../constants/tournaments');
 const { SM_TEAM_ID_TO_NAME } = require('../constants/teams');
@@ -8,8 +8,9 @@ const { PLAYER_NAME_TO_IMAGE_ID } = require('../constants/players');
 
 
 var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
+    host: 'ussoccerdb.cdvnopviopp5.us-east-1.rds.amazonaws.com',
+    port: '3306',
+    user: 'admin',
     password: 'password',
     database: 'us_soccer'
 });
@@ -37,7 +38,7 @@ function getSchedule(req, res) {
         const allGames = {};
         const currUtc = moment.utc();
         const cutoff = currUtc.hour(currUtc.hour() - 2).format('YYYY-MM-DD HH:mm:ss');
-        connection.query(`SELECT * FROM Schedule2 WHERE month=${month} AND date_time >= \"${cutoff}\"
+        connection.query(`SELECT * FROM Schedule WHERE month=${month} AND date_time >= \"${cutoff}\"
         ORDER BY date_time ASC`, function(err, results, fields) {
             results.forEach(row => {
                 const dateTime = moment.utc(row.date_time);
