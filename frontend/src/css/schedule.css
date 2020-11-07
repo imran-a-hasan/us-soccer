@@ -42,10 +42,6 @@
     background-color: rgb(248, 249, 250)
 }
 
-.month-button {
-    border: 1px solid black;
-}
-
 .month-title {
     height: fit-content;
     width: fit-content;
