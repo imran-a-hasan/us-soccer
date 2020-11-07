@@ -28,11 +28,12 @@ function Schedule({month}) {
             const matchTime = matchMoment.minutes(matchMoment.minutes() - offset).format('h:mm A');
             const matchDateTimeZone = moment(date + " " + match.time).format('YYYY-MM-DD')
             const matchDate = date === matchDateTimeZone ? date : matchDateTimeZone;
+            console.log(`${match.imageId}.png`);
             matchDays[matchDate].push(
                 <ListGroup.Item> 
                     <div className='match-competition'><Badge pill variant='dark'>{match.competition}</Badge></div>
                     <div>
-                        <Image className='player-img' src={`data:image/png;base64,${match.playerImage}`} roundedCircle />
+                        <Image className='player-img' src={`/images/${match.imageId}.png`} roundedCircle />
                         <span className='match-info'> 
                             <span className='home-team'>
                                 <span className='home-team-name'>{match.homeTeam === match.team ? <b>{match.homeTeam}</b> : match.homeTeam}</span>
