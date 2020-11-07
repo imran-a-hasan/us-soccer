@@ -4,14 +4,15 @@ import '../css/schedule.css';
 const moment = require('moment');
 
 function Results({month}) {
-    const [results, setResults] = useState(null);
-
+    const[results, setResults] = useState(null);
     useEffect(() => {
-        fetch(`http://localhost:9000/results?month=${month}`)
-        .then(res => res.json())
-        .then(res => {
-            setResults(res);
-        });
+        if (Number.isInteger(month)) {
+            fetch(`https://f07ibfl0dg.execute-api.us-east-1.amazonaws.com/GetResults?month=${month}`)
+            .then(res => res.json())
+            .then(res => {
+                setResults(res);
+            });
+        }
     }, [month]);
 
     function getGoals(count) {
@@ -39,6 +40,7 @@ function Results({month}) {
                 }
                 const matchDateTimeZone = moment(date + " " + match.time).format('YYYY-MM-DD')
                 const matchDate = date === matchDateTimeZone ? date : matchDateTimeZone;    
+                console.log(match.imageId);
                 matchDays[matchDate].push(
                     <ListGroup.Item> 
                         <div className='match-competition'><Badge pill variant='dark'>{match.competition}</Badge></div>

@@ -5,14 +5,15 @@ const moment = require('moment');
 
 function Schedule({month}) {
   
-    const [schedule, setSchedule] = useState(null);    
-
-    useEffect(() => {     
-        fetch(`http://localhost:9000/schedule?month=${month}`)
-        .then(res => res.json())
-        .then(res => {
-            setSchedule(res);
-        });
+    const[schedule, setSchedule] = useState(null);
+    useEffect(() => {   
+        if (Number.isInteger(month)) {
+            fetch(`https://f07ibfl0dg.execute-api.us-east-1.amazonaws.com/GetSchedule?month=${month}`)
+            .then(res => res.json())
+            .then(res => {
+                setSchedule(res);
+            });
+        }
     }, [month]);
 
   function generateMatchDays() {

@@ -52,7 +52,6 @@ const cutoff = currUtc.hour(currUtc.hour() - 2).format('YYYY-MM-DD HH:mm:ss');
 matches = [];
 connection.query(`SELECT * FROM Schedule WHERE date_time <= \"${cutoff}\"
     ORDER BY date_time ASC`, function(err, results, fields) {
-        console.log(err);
     results.forEach(row => {
         matches.push([row.match_id, row.team_id, row.player_name]);
     });
@@ -73,41 +72,30 @@ connection.query(`SELECT * FROM Schedule WHERE date_time <= \"${cutoff}\"
     }
     Promise.all(promises).then(values => {
         values.forEach(value => {
-            const teamId = value[0];
-            const matchJson = JSON.parse(value[1]);
-            const playerName = value[2];
-            const matchId = matchJson.id;
-            const dateTime = matchJson.time.starting_at.date_time;
-            const matchMonth = new Date(dateTime).getMonth() + 1;
-            const homeTeamId = matchJson.localteam_id;
-            const awayTeamId = matchJson.visitorteam_id;
-            const homeTeamName = SM_TEAM_ID_TO_NAME[homeTeamId] || matchJson.localTeam.data.name;
-            const awayTeamName = SM_TEAM_ID_TO_NAME[awayTeamId] || matchJson.visitorTeam.data.name;
-            const homeTeamGoals = matchJson.stats.data[0].goals;
-            const awayTeamGoals = matchJson.stats.data[1].goals;
-            const competitionId = matchJson.league.data.id;
-            const competitionName = matchJson.league.data.name;
-            const homeTeamLogo = matchJson.localTeam.data.logo_path;
-            const awayTeamLogo = matchJson.visitorTeam.data.logo_path;
-            let playerMinutes = 0;
-            let playerGoals = 0;
-            let playerAssists = 0;
-            let inSquad = false;
-            const startingLineupStats = matchJson.lineup.data;
-            if (startingLineupStats) {    
-                startingLineupStats.forEach(playerJson => {
-                    if(playerJson.player_id === PLAYER_NAME_TO_MATCH_ID[playerName]) {
-                        playerMinutes = playerJson.stats.other.minutes_played ?? 0;
-                        playerGoals = playerJson.stats.goals.scored ?? 0;
-                        playerAssists = playerJson.stats.goals.assists ?? 0;
-                        inSquad = true;
-                    }
-                });
-            }
-            if (!inSquad) {
-                const benchStats = matchJson.bench.data;
-                if (benchStats) {
-                    benchStats.forEach(playerJson => {
+            try {
+                const teamId = value[0];
+                const matchJson = JSON.parse(value[1]);
+                const playerName = value[2];
+                const matchId = matchJson.id;
+                const dateTime = matchJson.time.starting_at.date_time;
+                const matchMonth = new Date(dateTime).getMonth() + 1;
+                const homeTeamId = matchJson.localteam_id;
+                const awayTeamId = matchJson.visitorteam_id;
+                const homeTeamName = SM_TEAM_ID_TO_NAME[homeTeamId] || matchJson.localTeam.data.name;
+                const awayTeamName = SM_TEAM_ID_TO_NAME[awayTeamId] || matchJson.visitorTeam.data.name;
+                const homeTeamGoals = matchJson.stats.data[0].goals;
+                const awayTeamGoals = matchJson.stats.data[1].goals;
+                const competitionId = matchJson.league.data.id;
+                const competitionName = matchJson.league.data.name;
+                const homeTeamLogo = matchJson.localTeam.data.logo_path;
+                const awayTeamLogo = matchJson.visitorTeam.data.logo_path;
+                let playerMinutes = 0;
+                let playerGoals = 0;
+                let playerAssists = 0;
+                let inSquad = false;
+                const startingLineupStats = matchJson.lineup.data;
+                if (startingLineupStats) {    
+                    startingLineupStats.forEach(playerJson => {
                         if(playerJson.player_id === PLAYER_NAME_TO_MATCH_ID[playerName]) {
                             playerMinutes = playerJson.stats.other.minutes_played ?? 0;
                             playerGoals = playerJson.stats.goals.scored ?? 0;
@@ -116,10 +104,25 @@ connection.query(`SELECT * FROM Schedule WHERE date_time <= \"${cutoff}\"
                         }
                     });
                 }
+                if (!inSquad) {
+                    const benchStats = matchJson.bench.data;
+                    if (benchStats) {
+                        benchStats.forEach(playerJson => {
+                            if(playerJson.player_id === PLAYER_NAME_TO_MATCH_ID[playerName]) {
+                                playerMinutes = playerJson.stats.other.minutes_played ?? 0;
+                                playerGoals = playerJson.stats.goals.scored ?? 0;
+                                playerAssists = playerJson.stats.goals.assists ?? 0;
+                                inSquad = true;
+                            }
+                        });
+                    }
+                }
+                connection.query(`INSERT INTO Results VALUES(\"${matchId}\", \"${dateTime}\", ${matchMonth}, \"${teamId}\", \"${homeTeamId}\", \"${awayTeamId}\",
+                \"${homeTeamName}\", \"${awayTeamName}\", ${homeTeamGoals}, ${awayTeamGoals}, \"${competitionId}\", \"${competitionName}\", \"${playerName}\",
+                ${playerMinutes}, ${playerGoals}, ${playerAssists}, \"${homeTeamLogo}\", \"${awayTeamLogo}\", ${inSquad})`, function(err, rows, fields) { });
+            } catch (error) {
+
             }
-            connection.query(`INSERT INTO Results VALUES(\"${matchId}\", \"${dateTime}\", ${matchMonth}, \"${teamId}\", \"${homeTeamId}\", \"${awayTeamId}\",
-            \"${homeTeamName}\", \"${awayTeamName}\", ${homeTeamGoals}, ${awayTeamGoals}, \"${competitionId}\", \"${competitionName}\", \"${playerName}\",
-            ${playerMinutes}, ${playerGoals}, ${playerAssists}, \"${homeTeamLogo}\", \"${awayTeamLogo}\", ${inSquad})`, function(err, rows, fields) { });
         });
     });
 });

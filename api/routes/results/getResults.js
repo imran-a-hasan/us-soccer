@@ -2,26 +2,17 @@ const fs = require('fs');
 const path = require('path');
 const mysql = require('mysql2');
 const moment = require('moment');
-const { TOURNAMENT_NAMES } = require('../constants/tournaments');
-const { SM_TEAM_ID_TO_NAME } = require('../constants/teams');
-const { PLAYER_NAME_TO_IMAGE_ID } = require('../constants/players');
 
-var connection = mysql.createConnection({
-    host: 'ussoccerdb.cdvnopviopp5.us-east-1.rds.amazonaws.com',
-    port: '3306',
-    user: 'admin',
-    password: 'password',
-    database: 'us_soccer'
-});
-
-connection.connect();
+const { TOURNAMENT_NAMES } = require('./constants/tournaments');
+const { SM_TEAM_ID_TO_NAME } = require('./constants/teams');
+const { PLAYER_NAME_TO_IMAGE_ID } = require('./constants/players');
+const { IMAGE_ID_TO_ENCODING } = require('./constants/images');
 
 const createResultObject = (time, teamId, homeTeamName, awayTeamName, homeTeamScore, awayTeamScore, competition, minutes, goals, assists, player, homeTeamLogo, awayTeamLogo, inSquad) => {
     return {
         time: time,
         player: player,
-        imageId: PLAYER_NAME_TO_IMAGE_ID[player],
-        playerImage: fs.readFileSync(path.resolve(`images/players/${PLAYER_NAME_TO_IMAGE_ID[player]}.png`), 'base64'),
+        playerImage: IMAGE_ID_TO_ENCODING[PLAYER_NAME_TO_IMAGE_ID[player]],
         team: SM_TEAM_ID_TO_NAME[teamId],
         homeTeam: homeTeamName,
         awayTeam: awayTeamName,
@@ -34,11 +25,19 @@ const createResultObject = (time, teamId, homeTeamName, awayTeamName, homeTeamSc
         goals: goals,
         assists: assists,
         inSquad: inSquad
-    }
-}
+    };
+};
 
-function getResults(req, res) {
-    const month = Number(req.query.month);
+exports.handler = (event, context, callback) => {
+    var connection = mysql.createConnection({
+        host: 'ussoccerdb.cdvnopviopp5.us-east-1.rds.amazonaws.com',
+        port: '3306',
+        user: 'admin',
+        password: 'password',
+        database: 'us_soccer'
+    });
+    connection.connect();
+    const month = Number(event["queryStringParameters"]["month"]);
     if (month >= 1 && month <= 12) {
         const allGames = {};
         connection.query(`SELECT * FROM Results WHERE month=${month}
@@ -65,15 +64,15 @@ function getResults(req, res) {
                 }
                 allGames[date].push(createResultObject(time, teamId, homeTeamName, awayTeamName, homeTeamScore, awayTeamScore, competition, minutes, goals, assists, player, homeTeamLogo, awayTeamLogo, inSquad));
             });
-            return res.status(200).send(JSON.stringify(allGames));
+            connection.end();
+            var response = {
+                "statusCode": 200,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": JSON.stringify(allGames)
+            };
+            callback(null, response);
         });
     }
-
-   
-                
-
-    
-    
-}
-
-module.exports = getResults;
+};
