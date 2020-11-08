@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import moment from 'moment';
 import Schedule from './Schedule';
 import MonthNav from '../MonthNav';
 
@@ -10,7 +11,7 @@ function SchedulePage() {
 
     return (
         <div>
-            <MonthNav onMonthChange={onMonthChange} nextDisabled={5}/>
+            <MonthNav onMonthChange={onMonthChange} prevDisabled={moment().month() + 1} nextDisabled={5}/>
             <div className='content-container'>
                 <Schedule month={month}/>
             </div>          
