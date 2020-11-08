@@ -38,7 +38,7 @@ const SM_BOAVISTA_ID = '960';
 const SM_BARCELONA_ID = '83';
 const SM_LILLE_ID = '690';
 const SM_BESIKTAS_ID = '554';
-const SM_CAEN_ID = '';
+const SM_CAEN_ID = '1393';
 const SM_SUNDERLAND_ID = '3';
 const SM_DERBY_COUNTY_ID = '24';
 const SM_INTERNACIONAL_ID = '2696';
@@ -51,6 +51,9 @@ const SM_SC_TELSTAR_ID = '1550';
 const SM_BURTON_ALBION_ID = '150';
 const SM_ANDERLECHT_ID = '2555';
 const SM_QPR_ID = '47';
+const SM_BAYERN_ID = '503';
+const SM_VALENCIA_ID = '214';
+const SM_PSV_ID = '682';
 
 const REGION_EU = 'eu';
 const REGION_AM = 'am';
@@ -99,7 +102,7 @@ const SM_TEAMS = [
     SM_WERDER_BREMEN_ID,
     SM_MANCHESTER_CITY_ID,
     SM_BESIKTAS_ID,
-//    SM_CAEN_ID,
+    SM_CAEN_ID,
     SM_SUNDERLAND_ID,
     SM_DERBY_COUNTY_ID,
     SM_INTERNACIONAL_ID,
@@ -111,7 +114,10 @@ const SM_TEAMS = [
     SM_SC_TELSTAR_ID,
     SM_BURTON_ALBION_ID,
     SM_ANDERLECHT_ID,
-    SM_QPR_ID
+    SM_QPR_ID,
+    SM_BAYERN_ID,
+    SM_VALENCIA_ID,
+    SM_PSV_ID
 ];
 
 const TEAM_ID_TO_NAME = {
@@ -121,7 +127,7 @@ const TEAM_ID_TO_NAME = {
     [WOLFSBURG_ID]: 'Wolfsburg',
     [RB_LEIPZIG_ID]: 'RB Leipzig',
     [NEWCASTLE_UNITED_ID]: 'Newcastle United',
-    [FRANKFURT_ID]: 'Frankfurt',
+    [FRANKFURT_ID]: 'Eintracht Frankfurt',
     [FULHAM_ID]: 'Fulham',
     [BOAVISTA_ID]: 'Boavista',
     [BARCELONA_ID]: 'FC Barcelona',
@@ -169,7 +175,10 @@ const SM_TEAM_ID_TO_NAME = {
     [SM_SC_TELSTAR_ID]: 'SC Telstar',
     [SM_BURTON_ALBION_ID]: 'Burton Albion',
     [SM_ANDERLECHT_ID]: 'Anderlecht',
-    [SM_QPR_ID]: 'Queens Park Rangers'
+    [SM_QPR_ID]: 'Queens Park Rangers',
+    [SM_BAYERN_ID]: 'Bayern Munich',
+    [SM_PSV_ID]: 'PSV',
+    [SM_VALENCIA_ID]: 'Valencia'
 };
 
 const TEAM_ID_TO_REGION = {
@@ -238,7 +247,7 @@ const SM_TEAM_ID_TO_PLAYERS = {
     [SM_FRANKFURT_ID]: ['Timothy Chandler'],
     [SM_FULHAM_ID]: ['Tim Ream', 'Antonee Robinson'],
     [SM_BOAVISTA_ID]: ['Reggie Cannon'],
-    [SM_BARCELONA_ID]: ['Sergino Dest'],
+    [SM_BARCELONA_ID]: ['Sergino Dest', 'Konrad de la Fuente'],
     [SM_LILLE_ID]: ['Timothy Weah'],
     [SM_WERDER_BREMEN_ID]: ['Josh Sargent'],
     [SM_MANCHESTER_CITY_ID]: ['Zack Steffen'],
@@ -255,7 +264,10 @@ const SM_TEAM_ID_TO_PLAYERS = {
     [SM_SC_TELSTAR_ID]: ['Sebastian Soto'],
     [SM_BURTON_ALBION_ID]: ['Indiana Vassilev'],
     [SM_ANDERLECHT_ID]: ['Matt Miazga'],
-    [SM_QPR_ID]: ['Charlie Kelman']
+    [SM_QPR_ID]: ['Charlie Kelman'],
+    [SM_BAYERN_ID]: ['Chris Richards'],
+    [SM_PSV_ID]: ['Richard Ledezma'],
+    [SM_VALENCIA_ID]: ['Yunus Musah']
 };
 
 const REGION_TO_API_KEY = {

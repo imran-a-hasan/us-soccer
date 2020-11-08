@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Badge, Card, Image, ListGroup} from 'react-bootstrap';
 import '../css/schedule.css';
+import PlayerImage from '../PlayerImage';
 const moment = require('moment');
 
 function Results({month}) {
@@ -35,29 +36,30 @@ function Results({month}) {
         const matchDays = {};
         for (let [date, matches] of Object.entries(results)) {
             matches.forEach(match => {
-                if (!matchDays[date]) {
-                    matchDays[date] = [];
-                }
+                console.log(match);
                 const matchDateTimeZone = moment(date + " " + match.time).format('YYYY-MM-DD')
                 const matchDate = date === matchDateTimeZone ? date : matchDateTimeZone;    
+                if (!matchDays[matchDate]) {
+                    matchDays[matchDate] = [];
+                }
                 matchDays[matchDate].push(
                     <ListGroup.Item> 
                         <div className='match-competition'><Badge pill variant='dark'>{match.competition}</Badge></div>
                         <div>
-                            <Image className='player-img' src={`/images/${match.imageId}.png`} roundedCircle />
+                            <PlayerImage imageId={match.imageId} />
                             <span className='match-info'> 
                                 <span className='home-team'>
-                                    <span className='home-team-name'>{match.homeTeam === match.team ? <b>{match.homeTeam}</b> : match.homeTeam}</span>
+                                    <span className='home-team-name'>{match.atHome ? <b>{match.homeTeam}</b> : match.homeTeam}</span>
                                     <Image className='home-team-img' src={match.homeTeamImage} />
                                 </span>
                                 <span className='match-score'>{match.homeTeamScore} - {match.awayTeamScore}</span>
                                 <span className='away-team'>
                                     <Image className='away-team-img' src={match.awayTeamImage} />
-                                    <span className='away-team-name'>{match.awayTeam === match.team ? <b>{match.awayTeam}</b> : match.awayTeam}</span>                      
+                                    <span className='away-team-name'>{!match.atHome ? <b>{match.awayTeam}</b> : match.awayTeam}</span>                      
                                 </span> 
                             </span>
-                            {match.minutes !== 0 ? <span className='minutes'>{match.minutes}</span> : null}
-                            {match.minutes === 0 && match.inSquad ? <span className='bench' role='img' aria-label='bench'>&#x1FA91;</span> : null}
+                            {match.minutes && match.minutes !== 0 ? <span className='minutes'>{match.minutes}</span> : null}
+                            {(match.minutes === null || match.minutes === 0) && match.inSquad ? <span className='bench' role='img' aria-label='bench'>&#x1FA91;</span> : null}
                             {!match.inSquad ? <span className='not-in-squad' role='img' aria-label='not in squad'>&#x274C;</span> : null}
                             <span className='goals'>{getGoals(match.goals)}</span>
                             <span className='assists'>{getAssists(match.assists)}</span>

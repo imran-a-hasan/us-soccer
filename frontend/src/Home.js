@@ -6,9 +6,11 @@ import MonthNav from './MonthNav';
 function Home() { 
     const scheduleRef = useRef(null);
     useEffect(() => {
-        setTimeout(() => {
-            scheduleRef.current.scrollIntoView({behavior: 'smooth'});
-        }, 500);
+        if (scheduleRef && scheduleRef.current) {
+            setTimeout(() => {
+                scheduleRef.current.scrollIntoView({behavior: 'smooth'});
+            }, 500);
+        }
     });
 
     const[month, setMonth] = useState(null);

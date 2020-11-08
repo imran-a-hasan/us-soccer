@@ -26,7 +26,11 @@ const PLAYER_NAME_TO_IMAGE_ID = {
     'Sebastian Soto': 1037036,
     'Indiana Vassilev': 1101144,
     'Matt Miazga': 458324,
-    'Charlie Kelman': 982745
+    'Charlie Kelman': 982745,
+    'Konrad de la Fuente': 1054033,
+    'Richard Ledezma': 942980,
+    'Chris Richards': 950829,
+    'Yunus Musah': 1137272
 };
 
 const PLAYER_NAME_TO_MATCH_ID = {
