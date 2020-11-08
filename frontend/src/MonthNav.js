@@ -3,7 +3,7 @@ import { Button, ButtonToolbar } from 'react-bootstrap';
 import MONTHS from './constants/months';
 import useDate from './hooks/useDate';
 
-function MonthNav({onMonthChange, prevDisabled = 9, nextDisabled}) {
+function MonthNav({onMonthChange, prevDisabled = 8, nextDisabled}) {
     const {month, setMonth, year, prevMonth, nextMonth } = useDate();
 
     useEffect(() => {
