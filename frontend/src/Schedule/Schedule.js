@@ -19,7 +19,9 @@ function Schedule({month}) {
   function generateMatchDays() {
       const matchDays = {};
       let key = 0;
-      for (let [date, matches] of Object.entries(schedule)) {
+      schedule.forEach(scheduleObj => {
+          const date = scheduleObj.date;
+          const matches = scheduleObj.matches;
           matches.forEach(match => {
             var offset = new Date(date).getTimezoneOffset();
             const matchMoment = moment(match.time.toLowerCase(), 'hh:mm:ss a');
@@ -50,9 +52,8 @@ function Schedule({month}) {
                     </div>
                 </ListGroup.Item>);
             key++;
-          });
-          
-      }
+          }); 
+      });
       const res = [];
       Object.keys(matchDays).forEach(date => {
           const dateObj = new Date(date);

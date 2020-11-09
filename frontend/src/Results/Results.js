@@ -35,7 +35,9 @@ function Results({month}) {
     function generateResults() {
         const matchDays = {};
         let key = 0;
-        for (let [date, matches] of Object.entries(results)) {
+        results.forEach(resultsObj => {
+            const date = resultsObj.date;
+            const matches = resultsObj.matches;  
             matches.forEach(match => {
                 const matchDateTimeZone = moment(date + " " + match.time).format('YYYY-MM-DD')
                 const matchDate = date === matchDateTimeZone ? date : matchDateTimeZone;    
@@ -68,7 +70,7 @@ function Results({month}) {
                 );
                 key++;
             });
-        }
+        });
         const res = [];
         Object.keys(matchDays).forEach(date => {
             const dateObj = new Date(date);
