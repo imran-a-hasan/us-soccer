@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Badge, Card, Image, ListGroup} from 'react-bootstrap';
-import '../css/schedule.css';
+//import '../css/schedule.css';
 import PlayerImage from '../PlayerImage';
 const moment = require('moment');
 
@@ -16,36 +16,36 @@ function Results({month}) {
         }
     }, [month]);
 
-    function getGoals(count) {
+    function getGoals(key, count) {
         let res = [];
         for (let i = 0; i < count; i++) {
-            res.push(<span role='img' aria-label='goal'>&#9917;</span>);
+            res.push(<span key={`goal-${key}-${count}`} role='img' aria-label='goal'>&#9917;</span>);
         }
         return res;
     }
 
-    function getAssists(count) {
+    function getAssists(key, count) {
         let res = [];
         for (let i = 0; i < count; i++) {
-            res.push(<span role='img' aria-label='assist'>&#x1F170;</span>);
+            res.push(<span key={`assist-${key}-${count}`}role='img' aria-label='assist'>&#x1F170;</span>);
         }
         return res;
     }
 
     function generateResults() {
         const matchDays = {};
+        let key = 0;
         for (let [date, matches] of Object.entries(results)) {
             matches.forEach(match => {
-                console.log(match);
                 const matchDateTimeZone = moment(date + " " + match.time).format('YYYY-MM-DD')
                 const matchDate = date === matchDateTimeZone ? date : matchDateTimeZone;    
                 if (!matchDays[matchDate]) {
                     matchDays[matchDate] = [];
                 }
                 matchDays[matchDate].push(
-                    <ListGroup.Item> 
+                    <ListGroup.Item key={`result-${key}`}> 
                         <div className='match-competition'><Badge pill variant='dark'>{match.competition}</Badge></div>
-                        <div>
+                        <div className='match-info-container'>
                             <PlayerImage imageId={match.imageId} />
                             <span className='match-info'> 
                                 <span className='home-team'>
@@ -61,11 +61,12 @@ function Results({month}) {
                             {match.minutes && match.minutes !== 0 ? <span className='minutes'>{match.minutes}</span> : null}
                             {(match.minutes === null || match.minutes === 0) && match.inSquad ? <span className='bench' role='img' aria-label='bench'>&#x1FA91;</span> : null}
                             {!match.inSquad ? <span className='not-in-squad' role='img' aria-label='not in squad'>&#x274C;</span> : null}
-                            <span className='goals'>{getGoals(match.goals)}</span>
-                            <span className='assists'>{getAssists(match.assists)}</span>
+                            <span className='goals'>{getGoals(key, match.goals)}</span>
+                            <span className='assists'>{getAssists(key, match.assists)}</span>
                         </div>
                     </ListGroup.Item>
-                )
+                );
+                key++;
             });
         }
         const res = [];
@@ -73,7 +74,7 @@ function Results({month}) {
             const dateObj = new Date(date);
             if (matchDays[date].length !== 0) {
                 res.push(
-                    <Card>
+                    <Card key={date}>
                         <Card.Header className='date-header'>
                             {`${dateObj.getUTCMonth() + 1}/${dateObj.getUTCDate()}/${dateObj.getFullYear()}`}
                         </Card.Header>

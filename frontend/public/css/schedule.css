@@ -136,10 +136,14 @@ display: inline-block;;
 .goals {
     margin-right: 5px;
     font-size: 25px;
+    position: relative;
+    top: 3px;
 }
 
 .assists {
     font-size: 25px;
+    position: relative;
+    top: 3px;
 }
 
 .minutes {
@@ -157,4 +161,12 @@ display: inline-block;;
 
 .not-in-squad {
     font-size: 25px;
+}
+
+.badge-pill {
+    width: fit-content;
+}
+
+.match-info-container {
+    position: relative;
 }

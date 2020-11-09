@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {Badge, Card,  Image, ListGroup} from 'react-bootstrap';
-import '../css/schedule.css';
 import PlayerImage from '../PlayerImage';
 const moment = require('moment');
 
@@ -19,6 +18,7 @@ function Schedule({month}) {
 
   function generateMatchDays() {
       const matchDays = {};
+      let key = 0;
       for (let [date, matches] of Object.entries(schedule)) {
           matches.forEach(match => {
             var offset = new Date(date).getTimezoneOffset();
@@ -29,8 +29,9 @@ function Schedule({month}) {
             if (!matchDays[matchDate]) {
                 matchDays[matchDate] = [];
             }
+            
             matchDays[matchDate].push(
-                <ListGroup.Item> 
+                <ListGroup.Item key={`schedule-${key}`}> 
                     <div className='match-competition'><Badge pill variant='dark'>{match.competition}</Badge></div>
                     <div>
                         <PlayerImage imageId={match.imageId} />
@@ -47,7 +48,8 @@ function Schedule({month}) {
                         </span>
                         <Badge className='match-time' pill variant='info'>{matchTime}</Badge>
                     </div>
-                </ListGroup.Item>)
+                </ListGroup.Item>);
+            key++;
           });
           
       }
@@ -55,7 +57,7 @@ function Schedule({month}) {
       Object.keys(matchDays).forEach(date => {
           const dateObj = new Date(date);
           res.push(
-            <Card>
+            <Card key={date}>
                 <Card.Header className='date-header'>
                     {`${dateObj.getUTCMonth() + 1}/${dateObj.getUTCDate()}/${dateObj.getFullYear()}`}
                 </Card.Header>
