@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Results from './Results';
 import MonthNav from '../MonthNav';
+import EmojiKey from '../EmojiKey';
 
 function ResultsPage() {
     const[month, setMonth] = useState(null);
@@ -16,6 +17,7 @@ function ResultsPage() {
             <div className='content-container'>
                 <Results month={month}/>
             </div>            
+            <EmojiKey />
         </div>
 );
 }

@@ -151,6 +151,14 @@
     .not-in-squad {
         font-size: 20px;
     }
+
+    .emoji-key {
+        display: none;
+    }
+
+    .minutes-key {
+        display: none;
+    }
 }
 
 @media only screen and (min-device-width: 481px) {
@@ -321,6 +329,26 @@
     
     .match-info-container {
         position: relative;
+    }
+
+    .emoji-key {
+        position: absolute;
+        top: 50%;
+        right: 10%;
+        border: 1px solid gray;
+        width: fit-content;
+        height: fit-content;
+        padding: 5px;
+        margin-bottom: auto;
+        margin-top: auto;
+    }
+
+    .minutes-key {
+        background-color: #14a3b8;
+        border-radius: 5px;
+        width: 15px;
+        height: 15px;
+        display: inline-block;
     }
 }
 
