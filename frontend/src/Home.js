@@ -3,8 +3,6 @@ import Schedule from './Schedule/Schedule';
 import Results from './Results/Results';
 import MonthNav from './MonthNav';
 import EmojiKey from './EmojiKey';
-import { useSwipeable } from 'react-swipeable';
-import useDate from './hooks/useDate';
 
 function Home() { 
     const scheduleRef = useRef(null);
@@ -16,12 +14,6 @@ function Home() {
         }
     });
 
-    const {prevMonth, nextMonth} = useDate();
-
-    const handlers = useSwipeable({
-        onSwipedLeft: () => setMonth(nextMonth(month)),
-        onSwipedRight: () => setMonth(prevMonth(month))
-    });
 
     const[month, setMonth] = useState(null);
     const onMonthChange = newMonth => {
