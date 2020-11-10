@@ -12,15 +12,15 @@ function App() {
   return (
     <div>   
       <Router>
-        <Navbar bg='dark' variant='dark'>
+        <Navbar bg='dark' variant='dark' expand>
           <Navbar.Brand>Americans Abroad</Navbar.Brand>
-          <LinkContainer to='/'>
+          <LinkContainer className='link-container' to='/'>
             <Nav.Link className='header-link'>Home</Nav.Link>
           </LinkContainer>
-          <LinkContainer to='/schedule'>
+          <LinkContainer className='link-container' to='/schedule'>
             <Nav.Link className='header-link'>Schedule</Nav.Link>
           </LinkContainer>
-          <LinkContainer to='/results'>
+          <LinkContainer className='link-container' to='/results'>
             <Nav.Link className='header-link'>Results</Nav.Link>
           </LinkContainer>
         </Navbar>

@@ -2,171 +2,326 @@
     box-sizing: border-box;
 }
 
-.header-link {
-    color: white;
+@media only screen and (max-device-width: 480px) {
+    .header-link {
+        color: orange;
+    }
+
+    .content-container {
+        overflow: scroll;
+        height: 85vh;
+        padding-bottom: 2%;
+    }
+
+    .date-header {
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .match-info {
+        position: relative;
+        text-align: center;
+        display: inline-block;
+        width: 65%;
+        margin-left: 10%;
+    }
+
+    .month-container {
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1%;
+        margin-bottom: 1%;
+        position: sticky;
+        top: 20px;
+        height: 100%;
+    }
+
+    .results-container {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+
+    .schedule-container {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    .player-img {
+        width: 25px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    
+    .home-team-img {
+        margin-left: 5px;
+        margin-right: 5px;
+        width: 25px;
+    }
+
+    .away-team-img {
+        margin-right: 5px;
+        margin-left: 5px;
+        width: 25px;
+    }
+
+    .results-container .home-team {
+        position: absolute;
+        right: 58%;
+    }
+    
+    .results-container .away-team {
+        position: absolute;
+        left: 58%;
+    }
+
+    .schedule-container .home-team {
+        position: absolute;
+        right: 56%;
+    }
+    
+    .schedule-container .away-team {
+        position: absolute;
+        left: 56%;
+    }
+
+    .match-competition {
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 1%;
+    }
+
+    .home-team-name {
+        display: none;
+    }
+
+    .away-team-name {
+        display: none;
+    }
+
+    .link-container {
+        display: none !important;
+    }
+
+    .minutes {
+        font-size: 12px;
+        margin-right: 2%;
+        background-color: #14a3b8;
+        border-radius: 5px;
+        padding: 5px;
+        color: white;
+    }
+
+    .match-vs {
+        display: inline-block;
+    }
+    
+    .match-score {
+        display: inline-block;
+    }
+
+    .match-time {
+        font-size: 8.5px !important;
+    }
+
+    .goals {
+        margin-right: 3px;
+        font-size: 15px;
+        position: relative;
+        top: 3px;
+    }
+    
+    .assists {
+        font-size: 15px;
+        position: relative;
+        top: 3px;
+    }
+
+    .bench {
+        font-size: 20px;
+    }
+    
+    .not-in-squad {
+        font-size: 20px;
+    }
 }
 
-.content-container {
-    overflow: scroll;
-    height: 85vh;
-    padding-bottom: 2%;
+@media only screen and (min-device-width: 481px) {
+    .header-link {
+        color: white;
+    }
+    
+    .content-container {
+        overflow: scroll;
+        height: 85vh;
+        padding-bottom: 2%;
+    }
+    
+    .month-container {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1%;
+        margin-bottom: 1%;
+        position: sticky;
+        top: 20px;
+        height: 100%;
+    }
+    
+    .results-container {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+    
+    .month-nav {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        display: flex;
+        border: 1px solid gray;
+        border-radius: 25px;
+        width: 25%;
+        background-color: rgb(248, 249, 250)
+    }
+    
+    .month-title {
+        height: fit-content;
+        width: fit-content;
+        margin: auto;
+    }
+    
+    .date-header {
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .schedule-container {
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+    
+    .matches-container {
+        margin-top: 15px;
+    }
+    
+    .match-competition {
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 1%;
+    }
+    
+    .player-img {
+        height: 5%;
+        width: 5%;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    
+    .home-team-img {
+        margin-left: 5px;
+        margin-right: 5px;
+        width: 25px;
+    }
+    
+    .schedule-container .home-team {
+        position: absolute;
+        right: 52%;
+    }
+    
+    .schedule-container .away-team {
+        position: absolute;
+        left: 52%;
+    }
+    
+    .away-team-img {
+        margin-right: 5px;
+        margin-left: 5px;
+        width: 25px;
+    }
+    
+    .match-info {
+        position: relative;
+        text-align: center;
+        display: inline-block;
+        width: 70%;
+        margin-left: 10%;
+    }
+    
+    .match-time {
+        width: 10%;
+        vertical-align: text-bottom;
+    }
+    
+    .match-vs {
+        display: inline-block;
+    }
+    
+    .match-score {
+        display: inline-block;
+    }
+    
+    .results-container .home-team {
+        position: absolute;
+        right: 54%;
+    }
+    
+    .results-container .away-team {
+        position: absolute;
+        left: 54%;
+    }
+    
+    .goals {
+        margin-right: 5px;
+        font-size: 25px;
+        position: relative;
+        top: 3px;
+    }
+    
+    .assists {
+        font-size: 25px;
+        position: relative;
+        top: 3px;
+    }
+    
+    .minutes {
+        font-size: 15px;
+        margin-right: 2%;
+        background-color: #14a3b8;
+        border-radius: 5px;
+        padding: 5px;
+        color: white;
+    }
+    
+    .bench {
+        font-size: 30px;
+    }
+    
+    .not-in-squad {
+        font-size: 25px;
+    }
+    
+    .badge-pill {
+        width: fit-content;
+    }
+    
+    .match-info-container {
+        position: relative;
+    }
 }
 
-.month-container {
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    position: sticky;
-    top: 20px;
-    height: 100%;
-}
-
-.results-container {
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1%;
-    margin-bottom: 1%;
-}
-
-.month-nav {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    display: flex;
-    border: 1px solid gray;
-    border-radius: 25px;
-    width: 25%;
-    background-color: rgb(248, 249, 250)
-}
-
-.month-title {
-    height: fit-content;
-    width: fit-content;
-    margin: auto;
-}
-
-.date-header {
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-.schedule-container {
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-}
-
-.matches-container {
-    margin-top: 15px;
-}
-
-.match-competition {
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 1%;
-}
-
-.player-img {
-    height: 5%;
-    width: 5%;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-.home-team-img {
-    margin-left: 5px;
-    margin-right: 5px;
-    width: 25px;
-}
-
-.schedule-container .home-team {
-    position: absolute;
-    right: 52%;
-}
-
-.schedule-container .away-team {
-    position: absolute;
-    left: 52%;
-}
-
-.away-team-img {
-    margin-right: 5px;
-    margin-left: 5px;
-    width: 25px;
-}
-
-.match-info {
-    position: relative;
-    text-align: center;
-    display: inline-block;
-    width: 70%;
-    margin-left: 10%;
-}
-
-.match-time {
-    width: 10%;
-    vertical-align: text-bottom;
-}
-
-.match-vs {
-    display: inline-block;
-}
-
-.match-score {
-display: inline-block;;
-}
-
-.results-container .home-team {
-    position: absolute;
-    right: 54%;
-}
-
-.results-container .away-team {
-    position: absolute;
-    left: 54%;
-}
-
-.goals {
-    margin-right: 5px;
-    font-size: 25px;
-    position: relative;
-    top: 3px;
-}
-
-.assists {
-    font-size: 25px;
-    position: relative;
-    top: 3px;
-}
-
-.minutes {
-    font-size: 15px;
-    margin-right: 2%;
-    background-color: #14a3b8;
-    border-radius: 5px;
-    padding: 5px;
-    color: white;
-}
-
-.bench {
-    font-size: 30px;
-}
-
-.not-in-squad {
-    font-size: 25px;
-}
-
-.badge-pill {
-    width: fit-content;
-}
-
-.match-info-container {
-    position: relative;
-}
