@@ -71,6 +71,10 @@
         width: 25px;
     }
 
+    .player-team-img {
+        filter: drop-shadow(0px 0px 5px gray);
+    }
+
     .results-container .home-team {
         position: absolute;
         right: 58%;

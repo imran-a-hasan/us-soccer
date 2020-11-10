@@ -21,7 +21,7 @@ function Home() {
     }
 
     return (
-        <div {...handlers}>
+        <div>
             <MonthNav onMonthChange={onMonthChange} nextDisabled={5} />
             <div className='content-container'>
                 <Results month={month}/>

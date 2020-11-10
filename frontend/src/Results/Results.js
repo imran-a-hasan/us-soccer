@@ -52,11 +52,11 @@ function Results({month}) {
                             <span className='match-info'> 
                                 <span className='home-team'>
                                     <span className='home-team-name'>{match.atHome ? <b>{match.homeTeam}</b> : match.homeTeam}</span>
-                                    <Image className='home-team-img' src={match.homeTeamImage} />
+                                    <Image className={`home-team-img ${match.atHome ? 'player-team-img' : null}`} src={match.homeTeamImage} />
                                 </span>
                                 <span className='match-score'>{match.homeTeamScore} - {match.awayTeamScore}</span>
                                 <span className='away-team'>
-                                    <Image className='away-team-img' src={match.awayTeamImage} />
+                                    <Image className={`away-team-img ${!match.atHome ? 'player-team-img' : null}`} src={match.awayTeamImage} />
                                     <span className='away-team-name'>{!match.atHome ? <b>{match.awayTeam}</b> : match.awayTeam}</span>                      
                                 </span> 
                             </span>
