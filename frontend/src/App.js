@@ -36,6 +36,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
+      <a href='https://buymeacoffee.com/usmntio' class='donate-button'>Help pay for server costs?</a>
     </div>
   );
 }
