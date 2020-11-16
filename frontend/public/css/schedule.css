@@ -163,6 +163,10 @@
     .minutes-key {
         display: none;
     }
+
+    .donate-button {
+        display: none;
+    }
 }
 
 @media only screen and (min-device-width: 481px) {
@@ -353,6 +357,22 @@
         width: 15px;
         height: 15px;
         display: inline-block;
+    }
+
+    .donate-button {
+        -webkit-appearance: button;
+        -moz-appearance: button;
+        appearance: button;
+        position: absolute;
+        padding: 5px;
+        background-color: rgb(53, 58, 63);
+        color: white;
+        border: 1px solid gray;
+        border-radius: 5px;
+    }
+
+    .donate-button:hover {
+        color: white;
     }
 }
 
