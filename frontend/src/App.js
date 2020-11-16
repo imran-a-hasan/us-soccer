@@ -1,8 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import {Button, Nav, Navbar} from 'react-bootstrap';
+import {Nav, Navbar} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
-import {Helmet} from 'react-helmet';
 import Home from './Home';
 import SchedulePage from './Schedule/SchedulePage';
 import ResultsPage from './Results/ResultsPage';
@@ -37,7 +36,6 @@ function App() {
           </Route>
         </Switch>
       </Router>
-      <a href='https://buymeacoffee.com/usmntio' class='donate-button'>Help pay for server costs?</a>
     </div>
   );
 }
