@@ -24,33 +24,43 @@ function Schedule({month}) {
           const matches = scheduleObj.matches;
           matches.forEach(match => {
             var offset = new Date(date).getTimezoneOffset();
-            const matchMoment = moment(match.time.toLowerCase(), 'hh:mm:ss a');
-            const matchTime = matchMoment.minutes(matchMoment.minutes() - offset).format('h:mm A');
+            const matchTimeMoment = moment(match.time.toLowerCase(), 'hh:mm:ss a');
+            const matchTime = matchTimeMoment.minutes(matchTimeMoment.minutes() - offset).format('h:mm A');
             const matchDateTimeZone = moment(date + " " + match.time).format('YYYY-MM-DD')
             const matchDate = date === matchDateTimeZone ? date : matchDateTimeZone;
             if (!matchDays[matchDate]) {
                 matchDays[matchDate] = [];
             }
-            
-            matchDays[matchDate].push(
-                <ListGroup.Item key={`schedule-${key}`}> 
-                    <div className='match-competition'><Badge pill variant='dark'>{match.competition}</Badge></div>
-                    <div>
-                        <PlayerImage imageId={match.imageId} />
-                        <span className='match-info'> 
-                            <span className='home-team'>
-                                <span className='home-team-name'>{match.atHome ? <b>{match.homeTeam}</b> : match.homeTeam}</span>
-                                <Image className={`home-team-img ${match.atHome ? 'player-team-img' : null}`} src={match.homeTeamImage} />
+
+            const matchDateMoment = (moment(matchDate).hours(matchTimeMoment.hours()).minutes(matchTimeMoment.minutes()));
+            const minutesDiff = moment().diff(matchDateMoment, 'minutes');
+
+            let isLive = false;
+            if (minutesDiff >= 0) {
+                isLive = true;
+            }
+            if (minutesDiff < 120) {
+                matchDays[matchDate].push(
+                    <ListGroup.Item key={`schedule-${key}`}> 
+                        <div className='match-competition'><Badge pill variant='dark'>{match.competition}</Badge></div>
+                        <div>
+                            <PlayerImage imageId={match.imageId} />
+                            <span className='match-info'> 
+                                <span className='home-team'>
+                                    <span className='home-team-name'>{match.atHome ? <b>{match.homeTeam}</b> : match.homeTeam}</span>
+                                    <Image className={`home-team-img ${match.atHome ? 'player-team-img' : null}`} src={match.homeTeamImage} />
+                                </span>
+                                <span className='match-vs'>vs.</span>   
+                                <span className='away-team'>
+                                    <Image className={`away-team-img ${!match.atHome ? 'player-team-img' : null}`} src={match.awayTeamImage} />
+                                    <span className='away-team-name'>{!match.atHome ? <b>{match.awayTeam}</b> : match.awayTeam}</span>                      
+                                </span> 
                             </span>
-                            <span className='match-vs'>vs.</span>   
-                            <span className='away-team'>
-                                <Image className={`away-team-img ${!match.atHome ? 'player-team-img' : null}`} src={match.awayTeamImage} />
-                                <span className='away-team-name'>{!match.atHome ? <b>{match.awayTeam}</b> : match.awayTeam}</span>                      
-                            </span> 
-                        </span>
-                        <Badge className='match-time' pill variant='info'>{matchTime}</Badge>
-                    </div>
-                </ListGroup.Item>);
+                            {!isLive ? <Badge pill variant='dark'>LIVE</Badge> : <Badge className='match-time' pill variant='info'>{matchTime}</Badge>}
+                        </div>
+                    </ListGroup.Item>
+                );
+            }
             key++;
           }); 
       });

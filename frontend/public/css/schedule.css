@@ -135,6 +135,10 @@
         font-size: 8.5px !important;
     }
 
+    .match-live {
+        font-size: 8.5px !important;
+    }
+
     .goals {
         margin-right: 3px;
         font-size: 15px;
@@ -283,7 +287,12 @@
         vertical-align: text-bottom;
     }
     
-    .match-vs {
+    .match-live {
+        width: 10%;
+        vertical-align: text-bottom;
+    }
+
+    .match-vs{
         display: inline-block;
     }
     
