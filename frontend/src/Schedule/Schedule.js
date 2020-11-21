@@ -56,7 +56,7 @@ function Schedule({month}) {
                                     <span className='away-team-name'>{!match.atHome ? <b>{match.awayTeam}</b> : match.awayTeam}</span>                      
                                 </span> 
                             </span>
-                            {!isLive ? <Badge pill variant='dark'>LIVE</Badge> : <Badge className='match-time' pill variant='info'>{matchTime}</Badge>}
+                            {isLive ? <Badge pill variant='dark'>LIVE</Badge> : <Badge className='match-time' pill variant='info'>{matchTime}</Badge>}
                         </div>
                     </ListGroup.Item>
                 );
