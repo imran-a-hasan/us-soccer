@@ -16,7 +16,7 @@ const PLAYER_TOOLTIPS = {
     396757: 'Tyler Boyd | 25 | Winger',
     1099663: 'Nicholas Gioacchini | 20 | ST',
     620124: 'Lynden Gooch | 24 | AM',
-    480787: 'Duane Holmes | 26| AM',
+    480787: 'Duane Holmes | 26 | AM',
     1173678: 'Johnny | 19 | DM',
     937938: 'Uly Llanez | 19 | Winger',
     461356: 'Julian Green | 25 | AM',
