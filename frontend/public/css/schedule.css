@@ -385,5 +385,55 @@
     .donate-button:hover {
         color: white;
     }
+
+    .player-stats-container {
+        display: flex;
+        justify-content: space-between;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+    }
+
+    .stat-header {
+        font-weight: bold;
+    }
+
+    .stat-data {
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        
+    }
+
+    .player-bio-header-container {
+        display: flex;
+    }
+
+    .player-bio-name {
+        width: fit-content;
+        margin: auto;
+        font-weight: bold;
+        font-size: 25px;
+    }
+
+    .player-bio-team-container {
+        float: right;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .player-bio-team-img {
+        width: 5vw;
+        height: 5vw;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .player-bio-team-name {
+        margin-top: 5%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 

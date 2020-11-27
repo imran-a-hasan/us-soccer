@@ -48,7 +48,7 @@ function Results({month}) {
                     <ListGroup.Item key={`result-${key}`}> 
                         <div className='match-competition'><Badge pill variant='dark'>{match.competition}</Badge></div>
                         <div className='match-info-container'>
-                            <PlayerImage imageId={match.imageId} />
+                            <PlayerImage imageId={match.imageId} matchId={match.playerId} />
                             <span className='match-info'> 
                                 <span className='home-team'>
                                     <span className='home-team-name'>{match.atHome ? <b>{match.homeTeam}</b> : match.homeTeam}</span>
