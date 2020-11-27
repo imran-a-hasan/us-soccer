@@ -108,7 +108,7 @@ function PlayerBio() {
                     <td>
                         <Image className='home-team-img' src={result.opponentLogo} />
                     </td>
-                    <td>{result.homeTeamScore}-{result.awayTeamScore}</td>
+                    <td>{result.teamScore}-{result.opponentScore}</td>
                     <td>{result.goals}</td>
                     <td>{result.assists}</td>
                     <td>{result.minutesPlayed ?? 0}</td>
