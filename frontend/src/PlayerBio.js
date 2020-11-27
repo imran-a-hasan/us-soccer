@@ -1,16 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
-import { Badge, Image } from 'react-bootstrap';
+import { Badge, Image, Table } from 'react-bootstrap';
 
 function PlayerBio() {
     let { id } = useParams();
 
     const[stats, setStats] = useState(null);
+    const[results, setResults] = useState(null);
+
     useEffect(() => {   
         fetch(`https://f07ibfl0dg.execute-api.us-east-1.amazonaws.com/GetPlayer?player=${id}`)
         .then(res => res.json())
         .then(res => {
             setStats(res);
+        });
+    }, [id]);
+
+    useEffect(() => {   
+        fetch(`https://f07ibfl0dg.execute-api.us-east-1.amazonaws.com/GetPlayerResults?player=${id}`)
+        .then(res => res.json())
+        .then(res => {
+            setResults(res);
         });
     }, [id]);
 
@@ -63,9 +73,56 @@ function PlayerBio() {
         );
     }
 
+    const createTable = rows => {
+        return (
+            <Table className='results-table'>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Opponent</th>
+                        <th>Result</th>
+                        <th>
+                            <span role='img' aria-label='goal'>&#9917;</span>
+                        </th>
+                        <th>
+                            <span role='img' aria-label='assist'>&#x1F170;</span>
+                        </th>
+                        <th><span role='img' aria-label='minutes played'>&#x23F1;</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {rows}
+                </tbody>
+            </Table>
+        );
+    }
+
+    function showResults() {
+        const rows = [];
+        let count = 0;
+        results.forEach(result => {
+            const matchDate = new Date(result.date);
+            rows.push(
+                <tr key={`result-${id}-${count}`}>
+                    <td>{`${matchDate.getUTCMonth() + 1}/${matchDate.getUTCDate()}/${matchDate.getFullYear()}`}</td>
+                    <td>
+                        <Image className='home-team-img' src={result.opponentLogo} />
+                    </td>
+                    <td>{result.homeTeamScore}-{result.awayTeamScore}</td>
+                    <td>{result.goals}</td>
+                    <td>{result.assists}</td>
+                    <td>{result.minutesPlayed ?? 0}</td>
+                </tr>
+            )
+            count++;
+        });
+        return createTable(rows);
+    }
+
     return (
         <div>
             {stats && showStats()}
+            {results && showResults()}
         </div>
     );
 }

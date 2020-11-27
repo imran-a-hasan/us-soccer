@@ -171,6 +171,62 @@
     .donate-button {
         display: none;
     }
+
+    .player-stats-container {
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+    }
+
+    .stat-header {
+        font-weight: bold;
+    }
+
+    .stat-data {
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        
+    }
+
+    .player-bio-header-container {
+        margin-top: 1%;
+        display: flex;
+    }
+
+    .player-bio-name {
+        width: fit-content;
+        margin: auto;
+        font-weight: bold;
+        font-size: 25px;
+    }
+
+    .player-bio-team-container {
+        float: right;
+    }
+
+    .player-bio-team-img {
+        width: 30px;
+        height: 30px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .player-bio-team-name {
+        display: none !important;
+    }
+
+    .results-table {
+        margin-top: 2.5%;
+        margin-bottom: 2.5% !important;
+    }
+
+    .table thead th, td {
+        text-align: center;
+    }
 }
 
 @media only screen and (min-device-width: 481px) {
@@ -377,7 +433,7 @@
         color: white;
         border: 1px solid gray;
         border-radius: 5px;
-        position: absolute;
+        position: fixed;
         bottom: 0;
         left: 0;
     }
@@ -407,6 +463,7 @@
     }
 
     .player-bio-header-container {
+        margin-top: 1%;
         display: flex;
     }
 
@@ -434,6 +491,15 @@
         margin-top: 5%;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .results-table {
+        margin-top: 2.5%;
+        margin-bottom: 2.5% !important;
+    }
+
+    .table thead th, td {
+        text-align: center;
     }
 }
 
