@@ -32,8 +32,6 @@ function Schedule({month}) {
                 matchDays[matchDate] = [];
             }
 
-            console.log(scheduleObj);
-
             const matchDateMoment = (moment(matchDate).hours(matchTimeMoment.hours()).minutes(matchTimeMoment.minutes()));
             const minutesDiff = moment().diff(matchDateMoment, 'minutes');
 

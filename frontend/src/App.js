@@ -5,10 +5,10 @@ import {LinkContainer} from 'react-router-bootstrap';
 import Home from './Home';
 import SchedulePage from './Schedule/SchedulePage';
 import ResultsPage from './Results/ResultsPage';
+import PlayerBio from './PlayerBio';
 
 function App() {
   
-
   return (
     <div>   
       <Router>
@@ -33,6 +33,9 @@ function App() {
           </Route>
           <Route exact path ='/results'>
             <ResultsPage />
+          </Route>
+          <Route path = '/players/:id'>
+            <PlayerBio />
           </Route>
         </Switch>
       </Router>
