@@ -44,7 +44,7 @@ function Schedule({month}) {
                     <ListGroup.Item key={`schedule-${key}`}> 
                         <div className='match-competition'><Badge pill variant='dark'>{match.competition}</Badge></div>
                         <div>
-                            <PlayerImage imageId={match.imageId} matchId={match.playerId} />
+                            <PlayerImage imageId={match.imageId} matchId={match.playerId} playerName={match.player}/>
                             <span className='match-info'> 
                                 <span className='home-team'>
                                     <span className='home-team-name'>{match.atHome ? <b>{match.homeTeam}</b> : match.homeTeam}</span>

@@ -143,13 +143,11 @@
         margin-right: 3px;
         font-size: 15px;
         position: relative;
-        top: 3px;
     }
     
     .assists {
         font-size: 15px;
         position: relative;
-        top: 3px;
     }
 
     .bench {
@@ -226,6 +224,10 @@
 
     .table thead th, td {
         text-align: center;
+    }
+
+    .table td, .table th {
+        padding: 0.6rem !important;
     }
 }
 

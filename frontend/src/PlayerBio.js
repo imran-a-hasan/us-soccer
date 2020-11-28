@@ -46,6 +46,14 @@ function PlayerBio() {
                     </span>
                     <span>
                         <div className='stat-header'>
+                            Minutes
+                        </div>
+                        <div className='stat-data'>
+                            {stats.minutesPlayed}
+                        </div>
+                    </span>
+                    <span>
+                        <div className='stat-header'>
                             Goals
                         </div>
                         <div className='stat-data'>
@@ -58,14 +66,6 @@ function PlayerBio() {
                         </div>
                         <div className='stat-data'>
                             {stats.assists}
-                        </div>
-                    </span>
-                    <span>
-                        <div className='stat-header'>
-                            Minutes
-                        </div>
-                        <div className='stat-data'>
-                            {stats.minutesPlayed}
                         </div>
                     </span>
                 </div>   
@@ -81,13 +81,13 @@ function PlayerBio() {
                         <th>Date</th>
                         <th>Opponent</th>
                         <th>Result</th>
+                        <th><span role='img' aria-label='minutes played'>&#x23F1;</span></th>
                         <th>
                             <span role='img' aria-label='goal'>&#9917;</span>
                         </th>
                         <th>
                             <span role='img' aria-label='assist'>&#x1F170;</span>
                         </th>
-                        <th><span role='img' aria-label='minutes played'>&#x23F1;</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -109,9 +109,9 @@ function PlayerBio() {
                         <Image className='home-team-img' src={result.opponentLogo} />
                     </td>
                     <td>{result.teamScore}-{result.opponentScore}</td>
+                    <td>{result.minutesPlayed ?? 0}</td>
                     <td>{result.goals}</td>
                     <td>{result.assists}</td>
-                    <td>{result.minutesPlayed ?? 0}</td>
                 </tr>
             )
             count++;
