@@ -28,7 +28,7 @@ function PlayerBio() {
         return (
             <div>
                 <div className='player-bio-header-container'>
-                    <Image className='player-img' src={`/images/${stats.imageId}.png`} roundedCircle />
+                    <Image className='player-img player-bio-img' src={`/images/${stats.imageId}.png`} roundedCircle />
                     <span className='player-bio-name'>{stats.playerName}</span>
                     <span className='player-bio-team-container'>
                         <Badge pill variant='dark' className='player-bio-team-name'>{stats.teamName}</Badge>
