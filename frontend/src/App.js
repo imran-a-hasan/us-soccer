@@ -6,6 +6,7 @@ import Home from './Home';
 import SchedulePage from './Schedule/SchedulePage';
 import ResultsPage from './Results/ResultsPage';
 import PlayerBio from './PlayerBio';
+import Players from './Players';
 
 function App() {
   
@@ -17,6 +18,9 @@ function App() {
           <LinkContainer className='link-container' to='/'>
             <Nav.Link className='header-link'>Home</Nav.Link>
           </LinkContainer>
+          <LinkContainer className='link-container' to='/players'>
+            <Nav.Link className='header-link'>Players</Nav.Link>
+          </LinkContainer>
           <LinkContainer className='link-container' to='/schedule'>
             <Nav.Link className='header-link'>Schedule</Nav.Link>
           </LinkContainer>
@@ -27,6 +31,9 @@ function App() {
         <Switch>
           <Route exact path = '/'>
             <Home />
+          </Route>
+          <Route exact path = '/players'>
+            <Players />
           </Route>
           <Route exact path='/schedule'>
             <SchedulePage />
