@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Badge, Card, Image, ListGroup} from 'react-bootstrap';
-//import '../css/schedule.css';
 import PlayerImage from '../PlayerImage';
 const moment = require('moment');
 
-function Results({month}) {
+function Results({month, date}) {
     const[results, setResults] = useState(null);
     useEffect(() => {
         if (Number.isInteger(month)) {
@@ -13,8 +12,14 @@ function Results({month}) {
             .then(res => {
                 setResults(res);
             });
+        } else if (date) {
+            fetch(encodeURI(`https://f07ibfl0dg.execute-api.us-east-1.amazonaws.com/GetResultsByDate?timestamp=${date.format('YYYY-MM-DD HH:mm:ssZ')}`))
+            .then(res => res.json())
+            .then(res => {
+                setResults(res);
+            });
         }
-    }, [month]);
+    }, [month, date]);
 
     function getGoals(key, count) {
         let res = [];
@@ -75,29 +80,40 @@ function Results({month}) {
         Object.keys(matchDays).forEach(date => {
             const dateObj = new Date(date);
             if (matchDays[date].length !== 0) {
-                res.push(
-                    <Card key={date}>
-                        <Card.Header className='date-header'>
-                            {`${dateObj.getUTCMonth() + 1}/${dateObj.getUTCDate()}/${dateObj.getFullYear()}`}
-                        </Card.Header>
-                        <ListGroup className='matches-container'>
+                if (Number.isInteger(month)) {
+                    res.push(
+                        <Card key={date}>
+                            <Card.Header className='date-header'>
+                                {`${dateObj.getUTCMonth() + 1}/${dateObj.getUTCDate()}/${dateObj.getFullYear()}`}
+                            </Card.Header>
+                            <ListGroup className='matches-container'>
+                                {matchDays[date]}
+                            </ListGroup>
+                        </Card>
+                    );
+                } else {
+                    res.push(
+                        <ListGroup className='matches-container' key={date}>
                             {matchDays[date]}
                         </ListGroup>
-                    </Card>
-                );
+                    );
+                }
+                
             }
         });
         return res;   
-    
     }
 
-    return (
-        <div>
+    if (results && results.length !== 0) {
+        return (
             <div className='results-container'>
                 {results && generateResults()}
             </div>
-        </div>   
-    );
+        );
+    } else {
+        return null;
+    }
+    
 }
 
 export default Results;

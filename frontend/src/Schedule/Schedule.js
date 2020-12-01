@@ -3,7 +3,7 @@ import {Badge, Card,  Image, ListGroup} from 'react-bootstrap';
 import PlayerImage from '../PlayerImage';
 const moment = require('moment');
 
-function Schedule({month}) {
+function Schedule({month, date}) {
   
     const[schedule, setSchedule] = useState(null);
     useEffect(() => {   
@@ -13,8 +13,14 @@ function Schedule({month}) {
             .then(res => {
                 setSchedule(res);
             });
+        } else if (date) {
+            fetch(encodeURI(`https://f07ibfl0dg.execute-api.us-east-1.amazonaws.com/GetScheduleByDate?timestamp=${date.format('YYYY-MM-DD HH:mm:ssZ')}`))
+            .then(res => res.json())
+            .then(res => {
+                setSchedule(res);
+            });
         }
-    }, [month]);
+    }, [month, date]);
 
   function generateMatchDays() {
       const matchDays = {};
@@ -67,25 +73,38 @@ function Schedule({month}) {
       const res = [];
       Object.keys(matchDays).forEach(date => {
           const dateObj = new Date(date);
-          res.push(
-            <Card key={date}>
-                <Card.Header className='date-header'>
-                    {`${dateObj.getUTCMonth() + 1}/${dateObj.getUTCDate()}/${dateObj.getFullYear()}`}
-                </Card.Header>
-                <ListGroup className='matches-container'>
+          if (Number.isInteger(month)) {
+            res.push(
+                <Card key={date}>
+                    <Card.Header className='date-header'>
+                        {`${dateObj.getUTCMonth() + 1}/${dateObj.getUTCDate()}/${dateObj.getFullYear()}`}
+                    </Card.Header>
+                    <ListGroup className='matches-container'>
+                        {matchDays[date]}
+                    </ListGroup>
+                </Card>
+              );
+          } else {
+            res.push(
+                <ListGroup className='matches-container' key={date}>
                     {matchDays[date]}
                 </ListGroup>
-            </Card>
-          );
+            );
+          }
       });
       return res;
   }
 
-  return (
-    <div className='schedule-container'>
-        {schedule && generateMatchDays()}
-    </div>
-  );
+  if (schedule && schedule.length !== 0) {
+    return (
+        <div className='schedule-container'>
+            {schedule && generateMatchDays()}
+        </div>
+      );
+  } else {
+      return null;
+  }
+  
 }
 
 export default Schedule;

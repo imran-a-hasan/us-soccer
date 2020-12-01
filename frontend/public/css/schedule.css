@@ -232,6 +232,21 @@
     .table td, .table th {
         padding: 0.6rem !important;
     }
+
+    .no-games {
+        color: #333b3f;
+        margin-left: auto;
+        width: fit-content;
+        display: block;
+        margin-right: auto;
+        margin-top: 20%;
+    }
+
+    .loading {
+        position: absolute;
+        bottom: 50%;
+        right: 48%;
+    }
 }
 
 @media only screen and (min-device-width: 481px) {
@@ -505,6 +520,21 @@
 
     .table thead th, td {
         text-align: center;
+    }
+
+    .no-games {
+        color: #333b3f;
+        margin-left: auto;
+        width: fit-content;
+        display: block;
+        margin-right: auto;
+        margin-top: 20%;
+    }
+
+    .loading {
+        position: absolute;
+        bottom: 50%;
+        right: 50%;
     }
 }
 
