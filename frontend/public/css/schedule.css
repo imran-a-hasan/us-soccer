@@ -8,8 +8,8 @@
     }
 
     .content-container {
-        height: 85vh;
-        padding-bottom: 2%;
+        height: fit-content;
+        padding-bottom: 10%;
     }
 
     .date-header {
@@ -172,7 +172,22 @@
     }
 
     .donate-button {
-        display: none;
+        -webkit-appearance: none;
+        -moz-appearance: button;
+        appearance: button;
+        padding: 5px;
+        background-color: rgb(53, 58, 63);
+        font-size: 14px;
+        color: white;
+        border: 1px solid gray;
+        border-radius: 5px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+
+    .donate-button:hover {
+        color: white;
     }
 
     .player-stats-container {
@@ -542,4 +557,3 @@
         right: 50%;
     }
 }
-
