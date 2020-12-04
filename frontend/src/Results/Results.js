@@ -50,7 +50,6 @@ function Results({month, date}) {
                 if (!matchDays[matchDate]) {
                     matchDays[matchDate] = [];
                 }
-                console.log(match);
                 matchDays[matchDate].push(
                     <ListGroup.Item key={`result-${key}`}> 
                         <div className='match-competition'><Badge pill variant='dark'>{match.competition}</Badge></div>
@@ -73,7 +72,7 @@ function Results({month, date}) {
                             <span className='goals'>{getGoals(key, match.goals)}</span>
                             <span className='assists'>{getAssists(key, match.assists)}</span>
                         </div>
-                        <MatchVideos matchId={match.matchId} />
+                        <MatchVideos matchId={match.matchId} playerName={match.player} homeTeamName={match.homeTeam} awayTeamName={match.awayTeam} />
                     </ListGroup.Item>
                 );
                 key++;
