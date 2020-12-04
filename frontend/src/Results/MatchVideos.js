@@ -82,7 +82,6 @@ function MatchVideos({matchId, playerName, homeTeamName, awayTeamName}) {
                 </Form>
             </div>}       
         </span>
-        
     );
 }
 
