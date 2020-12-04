@@ -1,7 +1,7 @@
 const PLAYER_TOOLTIPS = {
     688295: 'Christian Pulisic | 22 | Winger',
     848266: 'Weston McKennie | 22 | CM',
-    1071179: 'Gio Reyna | 17 | AM',
+    1071179: 'Gio Reyna | 18 | AM',
     278831: 'John Brooks | 27 | CB',
     729769: 'Tyler Adams | 21 | DM',
     432040: 'DeAndre Yedlin | 27 | RB',
@@ -30,7 +30,7 @@ const PLAYER_TOOLTIPS = {
     1054033: 'Konrad | 19 | Winger',
     942980: 'Richie Ledezma | 20 | AM',
     950829: 'Chris Richards | 20 | CB',
-    1137272: 'Yunus Musah | 17 | Winger/Midfielder'
+    1137272: 'Yunus Musah | 18 | Winger/Midfielder'
 };
 
 export default PLAYER_TOOLTIPS;
