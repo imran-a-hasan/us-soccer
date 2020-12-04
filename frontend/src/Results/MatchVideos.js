@@ -66,24 +66,21 @@ function MatchVideos({matchId, playerName, homeTeamName, awayTeamName}) {
             <Button className='match-videos' onClick={() => setShowForm(!showForm)}>
                 <span role='img' aria-label='highlights'>&#127909;</span>
             </Button>
-            <div className='match-videos-container'>
-                {showForm && links && showLinks()}
-                {showForm && 
-                    <Form ref={formRef} className='match-videos-form' onSubmit={submitLink}>
-                        <span className='match-videos-form-title'>Have a link to a goal/assist/highlight video? Send it in here!</span>
-                        <Form.Group>
-                            <Form.Control name='title' className='match-videos-form-text' required placeholder={`Title (e.g. 1st goal [27'])`} />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Control name='link' className='match-videos-form-text' required placeholder='Link' />
-                        </Form.Group>
-                        <Button className='match-videos-form-text' variant="dark" type="submit">
-                            {submitted ? 'Thanks!' : 'Submit'}
-                        </Button>
-                    </Form>
-                }
-            </div>
-            
+            {showForm && <div className='match-videos-container'>
+                {links && showLinks()}
+                <Form ref={formRef} className='match-videos-form' onSubmit={submitLink}>
+                    <span className='match-videos-form-title'>Have a link to a goal/assist/highlight video? Send it in here!</span>
+                    <Form.Group>
+                        <Form.Control name='title' className='match-videos-form-text' required placeholder={`Title (e.g. 1st goal [27'])`} />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Control name='link' className='match-videos-form-text' required placeholder='Link' />
+                    </Form.Group>
+                    <Button className='match-videos-form-text' variant="dark" type="submit">
+                        {submitted ? 'Thanks!' : 'Submit'}
+                    </Button>
+                </Form>
+            </div>}       
         </span>
         
     );
