@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Badge, Card, Image, ListGroup} from 'react-bootstrap';
 import PlayerImage from '../PlayerImage';
+import MatchVideos from './MatchVideos';
 const moment = require('moment');
 
 function Results({month, date}) {
@@ -49,6 +50,7 @@ function Results({month, date}) {
                 if (!matchDays[matchDate]) {
                     matchDays[matchDate] = [];
                 }
+                console.log(match);
                 matchDays[matchDate].push(
                     <ListGroup.Item key={`result-${key}`}> 
                         <div className='match-competition'><Badge pill variant='dark'>{match.competition}</Badge></div>
@@ -71,6 +73,7 @@ function Results({month, date}) {
                             <span className='goals'>{getGoals(key, match.goals)}</span>
                             <span className='assists'>{getAssists(key, match.assists)}</span>
                         </div>
+                        <MatchVideos matchId={match.matchId} />
                     </ListGroup.Item>
                 );
                 key++;
