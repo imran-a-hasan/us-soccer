@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Badge, Card, Image, ListGroup} from 'react-bootstrap';
 import PlayerImage from '../PlayerImage';
+import MatchVideos from './MatchVideos';
 const moment = require('moment');
 
 function Results({month, date}) {
@@ -71,6 +72,7 @@ function Results({month, date}) {
                             <span className='goals'>{getGoals(key, match.goals)}</span>
                             <span className='assists'>{getAssists(key, match.assists)}</span>
                         </div>
+                        <MatchVideos matchId={match.matchId} playerName={match.player} homeTeamName={match.homeTeam} awayTeamName={match.awayTeam} />
                     </ListGroup.Item>
                 );
                 key++;
