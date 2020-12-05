@@ -74,7 +74,7 @@ function Results({month, date}) {
                             <span className='goals'>{getGoals(key, match.goals)}</span>
                             <span className='assists'>{getAssists(key, match.assists)}</span>
                         </div>
-                        <MatchVideos matchId={match.matchId} playerName={match.player} homeTeamName={match.homeTeam} awayTeamName={match.awayTeam} />
+                        {match.minutes && match.minutes !== 0 ? <MatchVideos matchId={match.matchId} playerName={match.player} homeTeamName={match.homeTeam} awayTeamName={match.awayTeam} /> : null}
                     </ListGroup.Item>
                 );
                 key++;
