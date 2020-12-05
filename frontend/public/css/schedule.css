@@ -13,6 +13,7 @@
     }
 
     .date-header {
+        width: -moz-fit-content;
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
@@ -29,6 +30,7 @@
     }
 
     .month-container {
+        width: -moz-fit-content;
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
@@ -101,6 +103,7 @@
     }
 
     .match-competition {
+        width: -moz-fit-content;
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
@@ -204,6 +207,7 @@
     }
 
     .stat-data {
+        width: -moz-fit-content;
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
@@ -220,6 +224,7 @@
     }
 
     .player-bio-name {
+        width: -moz-fit-content;
         width: fit-content;
         font-weight: bold;
         font-size: 25px;
@@ -256,6 +261,7 @@
     .no-games {
         color: #333b3f;
         margin-left: auto;
+        width: -moz-fit-content;
         width: fit-content;
         display: block;
         margin-right: auto;
@@ -280,6 +286,7 @@
     .match-videos-container {
         border-radius: .4em;
         border: 1px solid rgb(53, 58, 63);;
+        width: -moz-fit-content;
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
@@ -356,11 +363,13 @@
     
     .month-title {
         height: fit-content;
+        width: -moz-fit-content;
         width: fit-content;
         margin: auto;
     }
     
     .date-header {
+        width: -moz-fit-content;
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
@@ -379,6 +388,7 @@
     }
     
     .match-competition {
+        width: -moz-fit-content;
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
@@ -481,6 +491,7 @@
     }
     
     .badge-pill {
+        width: -moz-fit-content;
         width: fit-content;
     }
     
@@ -493,6 +504,7 @@
         top: 50%;
         right: 10%;
         border: 1px solid gray;
+        width: -moz-fit-content;
         width: fit-content;
         height: fit-content;
         padding: 5px;
@@ -540,6 +552,7 @@
     }
 
     .stat-data {
+        width: -moz-fit-content;
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
@@ -552,6 +565,7 @@
     }
 
     .player-bio-name {
+        width: -moz-fit-content;
         width: fit-content;
         margin: auto;
         font-weight: bold;
@@ -589,6 +603,7 @@
     .no-games {
         color: #333b3f;
         margin-left: auto;
+        width: -moz-fit-content;
         width: fit-content;
         display: block;
         margin-right: auto;
@@ -612,7 +627,8 @@
 
     .match-videos-container {
         border-radius: .4em;
-        border: 1px solid rgb(53, 58, 63);;
+        border: 1px solid rgb(53, 58, 63);
+        width: -moz-fit-content;
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
