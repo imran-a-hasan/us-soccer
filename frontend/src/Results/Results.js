@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Badge, Card, Image, ListGroup} from 'react-bootstrap';
 import PlayerImage from '../PlayerImage';
+import MatchStats from './MatchStats';
 import MatchVideos from './MatchVideos';
 const moment = require('moment');
 
@@ -66,7 +67,8 @@ function Results({month, date}) {
                                     <span className='away-team-name'>{!match.atHome ? <b>{match.awayTeam}</b> : match.awayTeam}</span>                      
                                 </span> 
                             </span>
-                            {match.minutes && match.minutes !== 0 ? <span className='minutes'>{match.minutes}</span> : null}
+                            {match.minutes && match.minutes !== 0 ? <span data-tip data-for={`${match.playerId}-${match.matchId}-stats`} className='minutes'>{match.minutes}</span> : null}
+                            {match.minutes && match.minutes !== 0 ? <MatchStats match={match} /> : null}
                             {(match.minutes === null || match.minutes === 0) && match.inSquad ? <span className='bench' role='img' aria-label='bench'>&#x1FA91;</span> : null}
                             {!match.inSquad ? <span className='not-in-squad' role='img' aria-label='not in squad'>&#x274C;</span> : null}
                             <span className='goals'>{getGoals(key, match.goals)}</span>
