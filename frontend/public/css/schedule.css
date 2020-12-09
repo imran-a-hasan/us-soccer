@@ -660,4 +660,8 @@
     .match-video-link {
         color: #14a3b8;
     }
+
+    .team-tooltip-mobile {
+        display: none !important;
+    }
 }

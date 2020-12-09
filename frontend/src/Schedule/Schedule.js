@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Badge, Card,  Image, ListGroup} from 'react-bootstrap';
+import ReactTooltip from 'react-tooltip';
 import PlayerImage from '../PlayerImage';
 const moment = require('moment');
 
@@ -54,11 +55,17 @@ function Schedule({month, date}) {
                             <span className='match-info'> 
                                 <span className='home-team'>
                                     <span className='home-team-name'>{match.atHome ? <b>{match.homeTeam}</b> : match.homeTeam}</span>
-                                    <Image className={`home-team-img ${match.atHome ? 'player-team-img' : null}`} src={match.homeTeamImage} />
+                                    <Image data-tip data-for={`team-img-${match.homeTeam}`} className={`home-team-img ${match.atHome ? 'player-team-img' : null}`} src={match.homeTeamImage} />
+                                    <ReactTooltip className='team-tooltip-mobile' id={`team-img-${match.homeTeam}`} place='bottom' effect='solid'>
+                                        {match.homeTeam}
+                                    </ReactTooltip>
                                 </span>
                                 <span className='match-vs'>vs.</span>   
                                 <span className='away-team'>
-                                    <Image className={`away-team-img ${!match.atHome ? 'player-team-img' : null}`} src={match.awayTeamImage} />
+                                    <Image data-tip data-for={`team-img-${match.awayTeam}`} className={`away-team-img ${!match.atHome ? 'player-team-img' : null}`} src={match.awayTeamImage} />
+                                    <ReactTooltip className='team-tooltip-mobile' id={`team-img-${match.awayTeam}`} place='bottom' effect='solid'>
+                                        {match.awayTeam}
+                                    </ReactTooltip>
                                     <span className='away-team-name'>{!match.atHome ? <b>{match.awayTeam}</b> : match.awayTeam}</span>                      
                                 </span> 
                             </span>

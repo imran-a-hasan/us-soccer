@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { Badge, Image, Table } from 'react-bootstrap';
+import ReactTooltip from 'react-tooltip';
 
 function PlayerBio() {
     let { id } = useParams();
@@ -106,7 +107,10 @@ function PlayerBio() {
                 <tr key={`result-${id}-${count}`}>
                     <td>{`${matchDate.getUTCMonth() + 1}/${matchDate.getUTCDate()}/${matchDate.getFullYear()}`}</td>
                     <td>
-                        <Image className='home-team-img' src={result.opponentLogo} />
+                        <ReactTooltip id={`team-img-${result.opponentTeamName}`} place='bottom' effect='solid'>
+                            {result.opponentTeamName}
+                        </ReactTooltip>
+                        <Image data-tip data-for={`team-img-${result.opponentTeamName}`} className='home-team-img' src={result.opponentLogo} />
                     </td>
                     <td>{result.teamScore}-{result.opponentScore}</td>
                     <td>{result.minutesPlayed ?? 0}</td>
