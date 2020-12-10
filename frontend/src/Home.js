@@ -1,33 +1,37 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Schedule from './Schedule/Schedule';
 import Results from './Results/Results';
-import MonthNav from './MonthNav';
 import EmojiKey from './EmojiKey';
+import DateNav from './DateNav';
+import { Spinner } from 'react-bootstrap';
 
 function Home() { 
-    const scheduleRef = useRef(null);
-    useEffect(() => {
-        if (scheduleRef && scheduleRef.current) {
-            setTimeout(() => {
-                scheduleRef.current.scrollIntoView({behavior: 'smooth'});
-            }, 500);
-        }
-    });
 
-
-    const[month, setMonth] = useState(null);
-    const onMonthChange = newMonth => {
-        setMonth(newMonth);
+    const [date, setDate] = useState(null);
+    const onDateChange = newDate => {
+        setDate(newDate);
     }
+
+    const [waitToShowNoGames, setWaitToShowNoGames] = useState(false);
+
+    useEffect(() => {
+         setTimeout(() => {
+             setWaitToShowNoGames(true);
+         }, 1500);
+     }, []);
+
+    const results = Results({date});
+    const schedule = Schedule({date});
+
+    
 
     return (
         <div>
-            <MonthNav onMonthChange={onMonthChange} nextDisabled={5} />
+            <DateNav onDateChange={onDateChange}/>
             <div className='content-container'>
-                <Results month={month}/>
-                <div ref={scheduleRef}>
-                    <Schedule month={month}/>
-                </div>
+                {results}
+                {schedule}
+                {!results && !schedule && (waitToShowNoGames ? <span className='no-games'>No games today :(</span> : <Spinner className='loading' animation='border' />)}
             </div>
             <EmojiKey />
         </div>

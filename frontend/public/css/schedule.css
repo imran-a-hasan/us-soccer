@@ -8,11 +8,12 @@
     }
 
     .content-container {
-        height: 85vh;
-        padding-bottom: 2%;
+        height: fit-content;
+        padding-bottom: 10%;
     }
 
     .date-header {
+        width: -moz-fit-content;
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
@@ -29,14 +30,20 @@
     }
 
     .month-container {
+        width: -moz-fit-content;
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
         margin-top: 1%;
         margin-bottom: 1%;
-        position: sticky;
         top: 20px;
         height: 100%;
+    }
+
+    .month-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .results-container {
@@ -96,6 +103,7 @@
     }
 
     .match-competition {
+        width: -moz-fit-content;
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
@@ -143,13 +151,11 @@
         margin-right: 3px;
         font-size: 15px;
         position: relative;
-        top: 3px;
     }
     
     .assists {
         font-size: 15px;
         position: relative;
-        top: 3px;
     }
 
     .bench {
@@ -169,7 +175,22 @@
     }
 
     .donate-button {
-        display: none;
+        -webkit-appearance: none;
+        -moz-appearance: button;
+        appearance: button;
+        padding: 5px;
+        background-color: rgb(53, 58, 63);
+        font-size: 14px;
+        color: white;
+        border: 1px solid gray;
+        border-radius: 5px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+
+    .donate-button:hover {
+        color: white;
     }
 
     .player-stats-container {
@@ -178,7 +199,7 @@
         width: 80%;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 50px;
+        margin-top: 25px;
     }
 
     .stat-header {
@@ -186,20 +207,25 @@
     }
 
     .stat-data {
+        width: -moz-fit-content;
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
         
-    }
+    } 
 
     .player-bio-header-container {
         margin-top: 1%;
-        display: flex;
+        text-align: center;
+    }
+
+    .player-bio-img {
+        float: left;
     }
 
     .player-bio-name {
+        width: -moz-fit-content;
         width: fit-content;
-        margin: auto;
         font-weight: bold;
         font-size: 25px;
     }
@@ -209,8 +235,8 @@
     }
 
     .player-bio-team-img {
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 25px;
         margin-left: auto;
         margin-right: auto;
     }
@@ -226,6 +252,71 @@
 
     .table thead th, td {
         text-align: center;
+    }
+
+    .table td, .table th {
+        padding: 0.6rem !important;
+    }
+
+    .no-games {
+        color: #333b3f;
+        margin-left: auto;
+        width: -moz-fit-content;
+        width: fit-content;
+        display: block;
+        margin-right: auto;
+        margin-top: 20%;
+    }
+
+    .loading {
+        position: absolute;
+        bottom: 50%;
+        right: 48%;
+    }
+
+    .match-videos {
+        position: absolute;
+        top: 5px;
+        right: 7px;
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+    }
+
+    .match-videos-container {
+        border-radius: .4em;
+        border: 1px solid rgb(53, 58, 63);;
+        width: -moz-fit-content;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 3%;
+    }
+
+    .match-videos-form {
+        position: relative;
+        background: transparent;
+        padding: 8px;
+    }
+
+    .match-videos-form-title {
+        margin-bottom: 1%;;
+    }
+
+    .match-videos-form-text {
+        font-size: 12px !important;
+    }
+
+    .match-video-links-list {
+        padding: 8px;
+    }
+
+    .match-video-link-container {
+        text-align: center;
+    }
+
+    .match-video-link {
+        color: #14a3b8;
     }
 }
 
@@ -272,11 +363,13 @@
     
     .month-title {
         height: fit-content;
+        width: -moz-fit-content;
         width: fit-content;
         margin: auto;
     }
     
     .date-header {
+        width: -moz-fit-content;
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
@@ -295,6 +388,7 @@
     }
     
     .match-competition {
+        width: -moz-fit-content;
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
@@ -397,6 +491,7 @@
     }
     
     .badge-pill {
+        width: -moz-fit-content;
         width: fit-content;
     }
     
@@ -409,6 +504,7 @@
         top: 50%;
         right: 10%;
         border: 1px solid gray;
+        width: -moz-fit-content;
         width: fit-content;
         height: fit-content;
         padding: 5px;
@@ -456,6 +552,7 @@
     }
 
     .stat-data {
+        width: -moz-fit-content;
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
@@ -468,6 +565,7 @@
     }
 
     .player-bio-name {
+        width: -moz-fit-content;
         width: fit-content;
         margin: auto;
         font-weight: bold;
@@ -501,5 +599,69 @@
     .table thead th, td {
         text-align: center;
     }
-}
 
+    .no-games {
+        color: #333b3f;
+        margin-left: auto;
+        width: -moz-fit-content;
+        width: fit-content;
+        display: block;
+        margin-right: auto;
+        margin-top: 20%;
+    }
+
+    .loading {
+        position: absolute;
+        bottom: 50%;
+        right: 50%;
+    }
+
+    .match-videos {
+        position: absolute;
+        top: 5px;
+        right: 7px;
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+    }
+
+    .match-videos-container {
+        border-radius: .4em;
+        border: 1px solid rgb(53, 58, 63);
+        width: -moz-fit-content;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1.5%;
+    }
+
+    .match-videos-form {
+        position: relative;
+        background: transparent;
+        padding: 8px;
+    }
+
+    .match-videos-form-title {
+        margin-bottom: 1%;;
+    }
+
+    .match-videos-form-text {
+        font-size: 12px !important;
+    }
+
+    .match-video-links-list {
+        padding: 8px;
+    }
+
+    .match-video-link-container {
+        text-align: center;
+    }
+
+    .match-video-link {
+        color: #14a3b8;
+    }
+
+    .team-tooltip-mobile {
+        display: none !important;
+    }
+}
