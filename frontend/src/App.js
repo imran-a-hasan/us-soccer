@@ -15,16 +15,16 @@ function App() {
       <Router>
         <Navbar bg='dark' variant='dark' expand>
           <Navbar.Brand>Americans Abroad</Navbar.Brand>
-          <LinkContainer className='link-container' to='/'>
+          <LinkContainer className='show-link-container' to='/'>
             <Nav.Link className='header-link'>Home</Nav.Link>
           </LinkContainer>
-          <LinkContainer className='link-container' to='/players'>
+          <LinkContainer className='show-link-container' to='/players'>
             <Nav.Link className='header-link'>Players</Nav.Link>
           </LinkContainer>
-          <LinkContainer className='link-container' to='/schedule'>
+          <LinkContainer className='hide-link-container' to='/schedule'>
             <Nav.Link className='header-link'>Schedule</Nav.Link>
           </LinkContainer>
-          <LinkContainer className='link-container' to='/results'>
+          <LinkContainer className='hide-link-container' to='/results'>
             <Nav.Link className='header-link'>Results</Nav.Link>
           </LinkContainer>
         </Navbar>
