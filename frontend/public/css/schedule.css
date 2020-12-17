@@ -4,7 +4,12 @@
 
 @media only screen and (max-device-width: 480px) {
     .header-link {
-        color: orange;
+        color: white;
+    }
+
+    .header-link:hover {
+        color: white;
+        text-decoration: underline !important;
     }
 
     .content-container {
@@ -118,8 +123,12 @@
         display: none;
     }
 
-    .link-container {
+    .hide-link-container {
         display: none !important;
+    }
+
+    .show-link-container {
+        display: inline-block !important;
     }
 
     .minutes {
@@ -256,6 +265,7 @@
 
     .table td, .table th {
         padding: 0.6rem !important;
+        vertical-align: middle !important;
     }
 
     .no-games {
@@ -318,11 +328,28 @@
     .match-video-link {
         color: #14a3b8;
     }
+
+    .players-table {
+        margin-bottom: 8% !important;
+    }
+
+    .players-table-img {
+        width: 25%;
+    }
+
+    .players-table-name {
+        display: none;
+    }
 }
 
 @media only screen and (min-device-width: 481px) {
     .header-link {
         color: white;
+    }
+
+    .header-link:hover {
+        color: white;
+        text-decoration: underline !important;
     }
     
     .content-container {
@@ -600,6 +627,10 @@
         text-align: center;
     }
 
+    .table td, .table th {
+        vertical-align: middle !important;
+    }
+
     .no-games {
         color: #333b3f;
         margin-left: auto;
@@ -663,5 +694,21 @@
 
     .team-tooltip-mobile {
         display: none !important;
+    }
+
+    .players-table {
+        margin-bottom: 8% !important;
+    }
+
+    .players-table-img {
+        width: 2.5%;
+        float: left;
+    }
+
+    .players-table-name {
+        color: black;
+        display: block;
+        margin: auto;
+        width: fit-content;
     }
 }
