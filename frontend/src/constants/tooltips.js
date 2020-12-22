@@ -30,7 +30,8 @@ const PLAYER_TOOLTIPS = {
     1054033: 'Konrad | 19 | Winger',
     942980: 'Richie Ledezma | 20 | AM',
     950829: 'Chris Richards | 20 | CB',
-    1137272: 'Yunus Musah | 18 | Winger/Midfielder'
+    1137272: 'Yunus Musah | 18 | Winger/Midfielder',
+    1096372: 'Owen Otasowie | 19 | CM/CB'
 };
 
 export default PLAYER_TOOLTIPS;
