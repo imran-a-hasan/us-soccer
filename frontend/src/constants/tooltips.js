@@ -31,7 +31,11 @@ const PLAYER_TOOLTIPS = {
     942980: 'Richie Ledezma | 20 | AM',
     950829: 'Chris Richards | 20 | CB',
     1137272: 'Yunus Musah | 18 | Winger/Midfielder',
-    1096372: 'Owen Otasowie | 19 | CM/CB'
+    1096372: 'Owen Otasowie | 19 | CM/CB',
+    1202104: 'Matthew Hoppe | 19 | ST',
+    924485: 'Mark McKenzie | 21 | CB' ,
+    952322: 'Brenden Aaronson | 20 | AM',
+    941151: 'Matthew Olosunde | 22 | RB'
 };
 
 export default PLAYER_TOOLTIPS;
