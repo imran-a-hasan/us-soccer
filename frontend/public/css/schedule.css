@@ -156,9 +156,13 @@
         font-size: 8.5px !important;
     }
 
+    .list-group-item {
+        padding: 0.75rem 0.25rem !important;
+    }
+
     .goals {
         margin-right: 3px;
-        font-size: 15px;
+        font-size: 10px;
         position: relative;
     }
     
@@ -489,7 +493,7 @@
     
     .goals {
         margin-right: 5px;
-        font-size: 25px;
+        font-size: 20px;
         position: relative;
         top: 3px;
     }
