@@ -9,13 +9,13 @@ const PLAYER_TOOLTIPS = {
     198444: 'Tim Ream | 33 | CB',
     825603: 'Reggie Cannon | 22 | RB',
     892816: 'Sergiño Dest | 20 | RB',
-    889536: 'Tim Weah | 20 | ST',
+    889536: 'Tim Weah | 20 | Attacker',
     848011: 'Josh Sargent | 20 | ST',
     662428: 'Antonee Robinson | 23 | LB',
     533127: 'Zack Steffen | 25 | GK',
-    396757: 'Tyler Boyd | 25 | Winger',
+    396757: 'Tyler Boyd | 26 | Winger',
     1099663: 'Nicholas Gioacchini | 20 | ST',
-    620124: 'Lynden Gooch | 24 | AM',
+    620124: 'Lynden Gooch | 25 | AM',
     480787: 'Duane Holmes | 26 | AM',
     1173678: 'Johnny | 19 | DM',
     937938: 'Uly Llanez | 19 | Winger',
@@ -31,11 +31,13 @@ const PLAYER_TOOLTIPS = {
     942980: 'Richie Ledezma | 20 | AM',
     950829: 'Chris Richards | 20 | CB',
     1137272: 'Yunus Musah | 18 | Winger/Midfielder',
-    1096372: 'Owen Otasowie | 19 | CM/CB',
+    1096372: 'Owen Otasowie | 20 | CM/CB',
     1202104: 'Matthew Hoppe | 19 | ST',
     924485: 'Mark McKenzie | 21 | CB' ,
     952322: 'Brenden Aaronson | 20 | AM',
-    941151: 'Matthew Olosunde | 22 | RB'
+    941151: 'Matthew Olosunde | 22 | RB',
+    643589: 'Cameron Carter-Vickers | 23 | CB',
+    578643: 'Jordan Morris | 26 | Winger'
 };
 
 export default PLAYER_TOOLTIPS;
