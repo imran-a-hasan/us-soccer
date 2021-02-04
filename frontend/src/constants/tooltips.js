@@ -37,7 +37,10 @@ const PLAYER_TOOLTIPS = {
     952322: 'Brenden Aaronson | 20 | AM',
     941151: 'Matthew Olosunde | 22 | RB',
     643589: 'Cameron Carter-Vickers | 23 | CB',
-    578643: 'Jordan Morris | 26 | Winger'
+    578643: 'Jordan Morris | 26 | Winger',
+    924446: 'Bryan Reynolds | 19 | RB',
+    462244: 'Paul Arriola | 26 | Winger',
+    1136396: 'Daryl Dike | 20 | ST'
 };
 
 export default PLAYER_TOOLTIPS;
