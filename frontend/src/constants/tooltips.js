@@ -3,7 +3,7 @@ const PLAYER_TOOLTIPS = {
     848266: 'Weston McKennie | 22 | CM',
     1071179: 'Gio Reyna | 18 | AM',
     278831: 'John Brooks | 27 | CB',
-    729769: 'Tyler Adams | 21 | DM',
+    729769: 'Tyler Adams | 22 | DM',
     432040: 'DeAndre Yedlin | 27 | RB',
     158234: 'Timmy Chandler | 30 | RB',
     198444: 'Tim Ream | 33 | CB',
@@ -40,7 +40,9 @@ const PLAYER_TOOLTIPS = {
     578643: 'Jordan Morris | 26 | Winger',
     924446: 'Bryan Reynolds | 19 | RB',
     462244: 'Paul Arriola | 26 | Winger',
-    1136396: 'Daryl Dike | 20 | ST'
+    1136396: 'Daryl Dike | 20 | ST',
+    924454: 'Brandon Servania | Midfielder | 21',
+    1159539: 'Taylor Booth | Midfielder | 19'
 };
 
 export default PLAYER_TOOLTIPS;
